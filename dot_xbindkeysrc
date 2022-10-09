@@ -1,0 +1,76 @@
+###########################
+# xbindkeys configuration #
+###########################
+
+# To specify a key, you can use 'xbindkeys --key' or
+# 'xbindkeys --multikey' and put one of the two lines in this file.
+
+# List of modifier:
+#   Release, Control, Shift, Mod1 (Alt), Mod2 (NumLock),
+#   Mod3 (CapsLock), Mod4, Mod5 (Scroll).
+#
+# The release modifier is not a standard X modifier, but you can
+# use it if you want to catch release events instead of press events
+
+# By defaults, xbindkeys does not pay attention with the modifiers
+# NumLock, CapsLock and ScrollLock.
+# Uncomment the lines above if you want to pay attention to them.
+#keystate_numlock = enable
+#keystate_capslock = enable
+#keystate_scrolllock= enable
+
+# Start Terminal
+#"alacritty --working-directory $HOME"
+"$TERMINAL"
+  Mod1 + Return
+
+# Capture screen with mouse with a 2 sec delay and copy to clipboard
+# Print
+"flameshot screen -r -c -d 2000"
+  c:107
+
+# Select screen section
+# Shift Print
+"flameshot gui"
+  m:0x11 + c:107
+
+# Start launcher
+# "rofi -combi-modi window,run,ssh,drun -show combi -sidebar-mode -cycle"
+  # Mod1 + d
+
+# Start custom launcher
+# "xterm -T fzf-nova -geometry 90x25+350+200 -fs 16 -e fzf-nova"
+"alacritty -o shell.program=bash -t fzf-nova -e fzf-nova"
+  Mod1 + space
+
+# Start file manager
+"alacritty -t files -e /bin/zsh --login -c lfrun"
+  Mod4 + e
+
+# Start Mail
+"alacritty -o window.startup_mode=Maximized -e neomutt"
+  Mod4 + shift + m
+
+# Start rss
+"alacritty -o window.startup_mode=Maximized -e newsboat"
+  Mod4 + shift + n
+
+# Start accounting
+"alacritty -e nvim $LEDGER_FILE"
+  Mod4 + shift + l
+
+# Start ledger
+"alacritty -e hledger add -f $LEDGER_FILE"
+  Mod4 + shift + h
+
+# Start bottom
+"alacritty -o window.startup_mode=Maximized -e htop"
+  Mod4 + shift + t
+
+# Start xfce settings
+"xfce4-settings-manager"
+  Mod4 + shift + s
+
+# Start chromarks
+"chromarks"
+  Mod1 + shift + c
