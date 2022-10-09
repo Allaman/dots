@@ -1,0 +1,7 @@
+#!/bin/sh
+clipmenud &
+keepassxc &
+sync-mail.sh &
+sync-pim.sh &
+xbanish &
+xbindkeys &
