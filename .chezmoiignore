@@ -1,16 +1,23 @@
+# ignore on all systems
 LICENSE
 bootstrap.sh
+# my main editor is Neovim; keeping only for historic purposes
 .vimrc
+# my main terminal is kitty; keeping only for historic purposes
+.wezterm.lua
+.config/alacritty/alacritty.yml
 
-{{- if eq .chezmoi.os "darwin" -}}
-.xbindkeysrc
+# only on darwin systems
+{{- if ne .chezmoi.os "darwin" }}
+.yabairc
+.skhdrc
+{{- end }}
+
+# only on linux systems
+{{- if ne .chezmoi.os "linux" }}
 .xinitrc
 .xprofile
 .Xresources
-{{- end }}
-
-{{- if eq .chezmoi.os "linux" -}}
-.yabairc
-.skhdrc
+.xbindkeysrc
 {{- end }}
 
