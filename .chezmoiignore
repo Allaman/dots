@@ -1,2 +1,15 @@
 LICENSE
 bootstrap.sh
+
+{{- if eq .chezmoi.os "darwin" -}}
+.xbindkeysrc
+.xinitrc
+.xprofile
+.Xresources
+{{- end }}
+
+{{- if eq .chezmoi.os "linux" -}}
+.yabairc
+.skhdrc
+{{- end }}
+
