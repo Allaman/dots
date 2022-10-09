@@ -1,6 +1,7 @@
 # ignore on all systems
 LICENSE
 bootstrap.sh
+styles
 # my main editor is Neovim; keeping only for historic purposes
 .vimrc
 # my main terminal is kitty; keeping only for historic purposes
