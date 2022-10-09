@@ -1,0 +1,7 @@
+encryption = "age"
+[age]
+    identity = "$HOME/.secrets/age_chezmoi_key"
+    recipient = "age1uhsjqq09s8tsq4w2gvz0e0qu0rttj2c40aqct23vxl4gl4mtvyes75tuce"
+[diff]
+    command = "vim"
+    args = ["-d", "{{ .Destination }}", "{{ .Target }}"]
