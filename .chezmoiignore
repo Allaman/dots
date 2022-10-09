@@ -1,5 +1,6 @@
 LICENSE
 bootstrap.sh
+.vimrc
 
 {{- if eq .chezmoi.os "darwin" -}}
 .xbindkeysrc
