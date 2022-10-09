@@ -28,7 +28,7 @@ map cmd+0        change_font_size all 0
 map ctrl+equal    change_font_size all +2.0
 map ctrl+minus    change_font_size all -2.0
 map ctrl+0        change_font_size all 0
-{{ else -}}
+{{ end -}}
 
 # copy paste
 {{- if eq .chezmoi.os "darwin" -}}
@@ -37,7 +37,7 @@ map cmd+v        paste_from_clipboard
 {{- else -}}
 map alt+c        copy_to_clipboard
 map alt+v        paste_from_clipboard
-{{ else -}}
+{{ end -}}
 copy_on_select   yes
 
 # no audio bell
