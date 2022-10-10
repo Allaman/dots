@@ -6,17 +6,28 @@ styles
 .vimrc
 # my main terminal is kitty; keeping only for historic purposes
 .wezterm.lua
-.config/alacritty/alacritty.yml
+.config/alacritty/
+# Not in use right now
+.config/procs/
+# Not in use in favour of xbindkeysrc
+.config/sxhkd
 
 # only on darwin systems
 {{- if ne .chezmoi.os "darwin" }}
 .config/kitty/macos-launch-services-cmdline
+.config/sketchybar
 .yabairc
 .skhdrc
 {{- end }}
 
 # only on linux systems
 {{- if ne .chezmoi.os "linux" }}
+.config/i3blocks
+.config/i3status
+.config/rofi
+.config/sxiv
+.config/zathura
+.config/mimeapps.list
 .urlview
 .xinitrc
 .xprofile
