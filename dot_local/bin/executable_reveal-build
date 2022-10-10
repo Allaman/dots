@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# https://github.com/jgm/pandoc/wiki/Using-pandoc-to-produce-reveal.js-slides
+
+if [ -f "./custom.css" ]; then
+  pandoc -t revealjs -s -o "$2" "$1" -V revealjs-url=https://unpkg.com/reveal.js@4.1.0/ --css=custom.css --slide-level=2 --embed-resources --standalone
+else
+  pandoc -t revealjs -s -o "$2" "$1" -V revealjs-url=https://unpkg.com/reveal.js@4.1.0/ --slide-level=2 --embed-resources --standalone
+fi

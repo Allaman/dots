@@ -1,0 +1,82 @@
+#!/bin/bash
+
+### Description: Little wrapper script for the openstack command
+### Author:      Michael Peter
+### Date:        20181107
+
+usage="$(basename "$0") [cust] [volsum|help|[srvlist [json|yaml|table]]] -- Little helper wrapper of openstack command
+
+Do not execute this file but source it for usage because it sets env variable in the parent shell
+Expects the path of your Openstack RC file in an env var named \"OS_RC_FILE\" default is $HOME/.os_rc_file
+Does pass through commands to your normal openstack client
+
+where:
+     volsum: calculates the sum of all volumes in GB
+    srvlist: lists all servers in json, yaml, table or default value format
+       help: prints this message"
+
+([[ -n $ZSH_EVAL_CONTEXT && $ZSH_EVAL_CONTEXT =~ :file$ ]] ||
+ [[ -n $KSH_VERSION && $(cd "$(dirname -- "$0")" &&
+    printf '%s' "${PWD%/}/")$(basename -- "$0") != "${.sh.file}" ]] ||
+ [[ -n $BASH_VERSION && $0 != "$BASH_SOURCE" ]]) || { echo "This script should be sourced for convenience as it sets env variables in your parent shell!"; exit 1; }
+
+if [[ "$1" == "cust" && "$2" == "help" ]]; then
+  echo "$usage"
+  return 0
+fi
+
+command -v openstack >/dev/null 2>&1 || { echo >&2 "requires openstack!"; return 1; }
+command -v jq >/dev/null 2>&1 || { echo >&2 "requires jq!"; return 1; }
+
+if [[ -z "$OS_RC_FILE" ]]; then
+  rcfile="$HOME/.os_rc_file"
+else
+  rcfile="$OS_RC_FILE"
+fi
+
+if [ ! -r $rcfile ]; then
+  echo "Your Openstack RC file is not readable or present"
+  return 1
+fi
+if [ -z "$OS_USERNAME" -o -z "$OS_PASSWORD" ]; then
+  . $rcfile
+fi
+
+if [[ "$1" == "cust" ]]; then
+  case $2 in
+    volsum)
+      echo "Wrapper: Calculating sum of all volumes in GB:"
+      openstack volume list --all-projects | awk '{print $8}' | grep "[0-9]" | paste -sd+ - | bc
+      ;;
+
+    srvlist)
+      echo "Wrapper: List servers from all projects"
+      case $3 in
+        json)
+          openstack server list --all-projects -f json | jq '.'
+          ;;
+        yaml)
+          openstack server list --all-projects -f yaml
+          ;;
+        table)
+          openstack server list --all-projects -f table
+          ;;
+        *)
+          openstack server list --all-projects -f value
+          ;;
+      esac
+      ;;
+
+    *)
+      echo "Command not known!"
+      return 1
+      ;;
+  esac
+else
+  echo "Wrapper: Pass through openstack command"
+  (
+    exec openstack $@
+  )
+fi
+
+# vim: set ft=sh:

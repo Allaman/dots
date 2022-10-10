@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+  echo "Missing argument(s)"
+  echo "Usage: $(basename "$0") command to measure without quotes"
+  exit 1
+fi
+
+/usr/bin/time -f "{\"cmd\": \"%C\", \"real\": \"%es\", \"user\": \"%Us\", \"sys\": \"%Ss\", \"memory\": \"%MKB\", \"cpu\": \"%P\"}" "$@"

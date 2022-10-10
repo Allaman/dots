@@ -1,0 +1,23 @@
+#!/bin/bash
+
+source notify.sh
+
+case "$1" in
+  "firefox")
+    BROWSER=/usr/bin/firefox
+    ;;
+  "chromium")
+    BROWSER=/usr/bin/chromium
+    ;;
+  *)
+    notify "Browser not specified"
+esac
+
+search=$(sr -elvi | awk -F'-' '{print $1}' | sed '/:/d' | awk '{$1=$1};1' | rofi -kb-row-select "Tab" -kb-row-tab "Control+space" -dmenu -mesg ">>> Tab = Autocomplete" -i -p "websearch: ")
+
+if [ "$search" != "" ]
+then
+  sr -browser=$BROWSER
+else
+  notify "User cancelled"
+fi

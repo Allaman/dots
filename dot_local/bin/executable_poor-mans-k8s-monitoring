@@ -1,0 +1,17 @@
+#!/bin/bash
+# Prints CPU usage of a Kubernetes container for the specified INTERVALL
+# $1: name of the pod
+# $2: namespace of the pod
+
+LOG_PATH="$1".log
+INTERVALL=10
+
+echo > $LOG_PATH
+echo "TIME;MILLICORES" >> $LOG_PATH
+while true
+do
+  DATE=$(date -u +"%Y-%m-%dT%H:%M:%S")
+  CPU=$(kubectl top pod "$1" -n "$2" | awk '{if(NR>1)print}' | awk '{print $2}')
+  echo "$DATE;$CPU" >> $LOG_PATH
+  sleep $INTERVALL
+done

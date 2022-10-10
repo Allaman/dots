@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Switches between opened keepass databases
+# Requires the shortcut to close a window for the current window manager!
+
+source notify.sh
+
+command -v keepassxc >/dev/null 2>&1 || { notify >&2 "require keepassxc"; exit 1; }
+command -v xdotool >/dev/null 2>&1 || { notify >&2 "require xdotool"; exit 1; }
+
+if [ $# -eq 0 ]; then
+    echo "Requires shortcut to close window as argument"
+    exit 1
+fi
+
+notify "Switching keepassxc database"
+# send Ctrl+tab to switch database tab
+# send window close shortcut to minimize
+keepassxc >/dev/null 2>&1 && xdotool key --window keepassxc ctrl+0xff09 && xdotool key --window keepassxc "$1"

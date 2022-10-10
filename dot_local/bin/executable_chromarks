@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Open Chrome(ium) bookmarks from
+
+source notify.sh
+
+BOOKMARKS="$HOME/.config/chromium/Default/Bookmarks"
+
+pgrep -x chromium >/dev/null || { notify "Chromium is not running"; exit 1; }
+
+url=$(python $HOME/.local/bin/chromarks-rofi.py $BOOKMARKS bookmark_bar)
+
+if [ $? -eq 0 ]
+then
+  chromium $url
+else
+  notify "Cancelled"
+fi

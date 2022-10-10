@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ "$OSTYPE" =~ "darwin"* ]]
+then
+  pbcopy
+else
+  xclip -selection clipboard
+fi
