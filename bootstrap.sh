@@ -25,6 +25,7 @@ get_arch() {
 get_os () {
   if [[ "$OSTYPE" =~ "darwin"* ]]; then
     OS="darwin"
+    log "Running on Darwin"
   elif [[ "$OSTYPE" =~ "linux" ]]; then
     OS="linux"
     log "Running on Linux"
@@ -32,13 +33,15 @@ get_os () {
 }
 
 get_chezmoi() {
-  wget "https://github.com/twpayne/chezmoi/releases/download/v2.24.0/chezmoi-${OS}-${ARCH}" -O "$USER_BIN/chezmoi"
+  log "Get chezmoi"
+  wget -q "https://github.com/twpayne/chezmoi/releases/download/v2.24.0/chezmoi-${OS}-${ARCH}" -O "$USER_BIN/chezmoi"
   chmod +x "$USER_BIN/chezmoi"
 }
 
 get_age() {
+  log "Get age"
   # TODO: gunzip and tar might not be available...
-  wget https://github.com/FiloSottile/age/releases/download/v1.0.0/age-v1.0.0-${OS}-${ARCH}.tar.gz -O /tmp/age.tar.gz
+  wget -q https://github.com/FiloSottile/age/releases/download/v1.0.0/age-v1.0.0-${OS}-${ARCH}.tar.gz -O /tmp/age.tar.gz
   gunzip /tmp/age.tar.gz
   tar -xC /tmp -f /tmp/age.tar
   mv /tmp/age/age* "$USER_BIN/"
