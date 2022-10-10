@@ -8,7 +8,11 @@ Successor of my [dotfiles](https://github.com/allaman/dotfiles) repo
 
 [bootstrap](./bootstrap.sh) is an all-in-one script to download [chezmoi](https://www.chezmoi.io/) and [age](https://github.com/FiloSottile/age) and initialize chezmoi with this repository.
 
-It can be downloaded on a fresh system with `wget -q https://raw.githubusercontent.com/Allaman/dots/main/bootstrap.sh -O /tmp/bootstrap.sh` and automatically configure my dotfiles.
+```sh
+wget -q https://raw.githubusercontent.com/Allaman/dots/main/bootstrap.sh -O /tmp/bootstrap.sh
+chmod +x /tmp/bootstrap.sh
+bash -c /tmp/./bootstrap.sh
+```
 
 Tested with Arch Linux and macOS on Apple Silicone. Should work with most Linux variants.
 

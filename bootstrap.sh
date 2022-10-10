@@ -58,12 +58,21 @@ get_age() {
 
 run_chezmoi() {
   log "Running chezmoi"
-  chezmoi init --apply --verbose git@github.com/allaman/dots.git
+  chezmoi init --apply --verbose git@github.com:allaman/dots.git
 }
 
 main() {
   for program in wget gunzip tar command chmod rm printf mv mkdir; do
     command -v "$program" > /dev/null 2>&1 || { echo "Not found: $program"; exit 1; }
+  done
+  log """This will download chezmoi and age and
+run chezmoi init --apply --verbose git@github.com:allaman/dots.git!
+Continue only when you know what you are doing"""
+  select choice in "Continue" "Abort"; do
+    case $choice in
+      Continue ) echo "Going on"; break;;
+      Abort ) exit;;
+    esac
   done
   get_arch
   get_os
