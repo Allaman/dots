@@ -58,7 +58,7 @@ get_age() {
 
 run_chezmoi() {
   log "Running chezmoi"
-  chezmoi init --apply --verbose git@github.com:allaman/dots.git
+  chezmoi init --apply git@github.com:allaman/dots.git
 }
 
 main() {
