@@ -1,0 +1,24 @@
+# vim: set ft=zsh:
+
+## Keybindings section
+bindkey "^[[3~" delete-char                                  # Delete key
+bindkey '^[[2~' overwrite-mode                               # Insert key
+bindkey "^[[H"  beginning-of-line                            # Home
+bindkey "^[[F"  end-of-line                                  # End
+bindkey '^P' history-beginning-search-backward               # CTRL+p
+bindkey '^N' history-beginning-search-forward                # CTRL+n
+bindkey -s '^f' 'nova^M'                                     # Run nova with CTRL-f
+bindkey -s '^s' 'tmux-sessionizer.sh^M'                                     # Run nova with CTRL-f
+# Use vim keys to select autocompletion
+_comp_options+=(globdots)		# Include hidden files.
+bindkey -M menuselect '^h' vi-backward-char
+bindkey -M menuselect '^k' vi-up-line-or-history
+bindkey -M menuselect '^l' vi-forward-char
+bindkey -M menuselect '^j' vi-down-line-or-history
+# edit command in editor
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
+bindkey '^ ' autosuggest-accept                                 # zsh autosuggestions completion
+

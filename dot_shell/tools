@@ -1,0 +1,20 @@
+# vim: set ft=zsh:
+
+export _ZO_FZF_OPTS="$_FZF_DEFAULT_OPTS --select-1 --exit-0 --height=25% --reverse --no-sort --cycle"
+export _ZO_DATA_DIR=$HOME/.zoxide
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
+command -v fuck > /dev/null 2>&1 && eval "$(thefuck --alias)"
+command -v direnv > /dev/null 2>&1 && eval "$(direnv hook zsh)"
+command -v flux > /dev/null 2>&1 && eval "$(flux completion zsh)"
+command -v go >/dev/null 2>&1 && export GOPATH=$HOME/.local/share/go && export PATH=$PATH:$(go env GOPATH)/bin
+command -v dyff > /dev/null 2>&1 && export KUBECTL_EXTERNAL_DIFF="dyff between --omit-header --set-exit-code"
+command -v paru >/dev/null 2>&1 && export AUR_MANAGER=paru
+[ -d $HOME/.cargo/bin ] && export PATH=$PATH:~/.cargo/bin
+[ -d $HOME/.luarocks/bin ] && export PATH=$PATH:$HOME/.luarocks/bin
+[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+[ -d $HOME/.shell/forgit ] && source $HOME/.shell/forgit/forgit.plugin.zsh
+[ -d $HOME/.shell/kube-fzf ] && export PATH=$PATH:$HOME/.shell/kube-fzf/
+# command -v brew >/dev/null 2>&1 && FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH # TODO: completions in this path do not work even more break path completion, e.g. kustomize!
+# [ -d $HOME/.local/sdkman/ ] && export SDKMAN_DIR="$HOME/.local/sdkman" && source $HOME/.local/sdkman/bin/sdkman-init.sh
+# [ -d $HOME/.jenv/bin ] && export PATH=$PATH:$HOME/.jenv/bin
+# command -v jenv >/dev/null 2>&1 && eval "$(jenv init -)"

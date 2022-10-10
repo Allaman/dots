@@ -1,0 +1,391 @@
+# vim: ft=sh
+
+#-------- Virtualbox CLI {{{
+#------------------------------------------------------
+# DESC: Virtualbox is a general-purpose full virtualizer for x86 hardware, targeted at server, desktop and embedded use
+# https://www.howtoforge.com/tutorial/running-virtual-machines-with-virtualbox-5.1-on-a-headless-ubuntu-16.04-lts-server/
+
+vbx-list() {
+  echo "===Available VM==="
+  vboxmanage list vms
+  echo "\n===Running VM====="
+  vboxmanage list runningvms
+}
+
+vbx-dvdrom() {
+  if [ $# -lt 2 ]; then
+    echo -e "Mount an ISO Image as a DVDROM/CDROM Image on a Running Virtualbox VM"
+    echo -e "\nUsage: $0 <vmname> <iso_image>"
+    echo -e "\nExample: $0 'Windows 7' 'foobar.iso'"
+    echo "\n===Running VM====="
+    vboxmanage list runningvms
+    return 1
+  fi
+
+  vboxmanage storageattach "$1" --storagectl IDE --port 1 --device 0 --type dvddrive --medium "$2"
+}
+
+vbx-start() {
+  # Set to endless loop
+  while true
+  do
+    # Set the prompt for the select command
+    PS3="Type a number to select or 'Ctrl+C' to quit: "
+
+    # Create a list to display on menu
+    IFS=$'\n'
+    fileList=($(vboxmanage list vms | cut -d '{' -f1 | sed 's/ *$//'))
+    unset IFS
+
+    # Show a menu and ask for input. If the user entered a valid choice then execute command
+    select fileName in $fileList; do
+      if [ -n "$fileName" ]; then
+        # remove quotes from filename
+        vm_name=($(echo "${fileName}" | sed 's:\"::g' ))
+		if [ "$1" = "headless" ]
+		then
+			vboxmanage startvm "$vm_name" --type headless
+		else
+			vboxmanage startvm "$vm_name"
+		fi
+        echo -e "${Green} $vm_name Has Been Started ${Color_Off}"
+      fi
+      break
+    done
+  done
+}
+
+vbx-quit() {
+  # Set to endless loop
+  while true
+  do
+    # Set the prompt for the select command
+    PS3="Type a number to select or 'Ctrl+C' to quit: "
+
+    # Create a list to display on menu
+    IFS=$'\n'
+    fileList=($(vboxmanage list runningvms | cut -d '{' -f1 | sed 's/ *$//'))
+    unset IFS
+
+    # Show a menu and ask for input. If the user entered a valid choice then execute command
+    select fileName in $fileList; do
+      if [ -n "$fileName" ]; then
+        # remove quotes from filename
+        vm_name=($(echo "${fileName}" | sed 's:\"::g' ))
+        vboxmanage controlvm "$vm_name" acpipowerbutton
+        echo -e "${Yellow} $vm_name Is Shutting Down ${Color_Off}"
+      fi
+      break
+    done
+  done
+}
+
+vbx-forcequit() {
+  # Set to endless loop
+  while true
+  do
+    # Set the prompt for the select command
+    PS3="Type a number to select or 'Ctrl+C' to quit: "
+
+    # Create a list to display on menu
+    IFS=$'\n'
+    fileList=($(vboxmanage list runningvms | cut -d '{' -f1 | sed 's/ *$//'))
+    unset IFS
+
+    # Show a menu and ask for input. If the user entered a valid choice then execute command
+    select fileName in $fileList; do
+      if [ -n "$fileName" ]; then
+        # remove quotes from filename
+        vm_name=($(echo "${fileName}" | sed 's:\"::g' ))
+        vboxmanage controlvm "$vm_name" poweroff
+        echo -e "${Red} $vm_name Power Cable Has Been Pulled ${Color_Off}"
+      fi
+      break
+    done
+  done
+}
+#}}}
+
+#-------- listing functions CLI {{{
+#------------------------------------------------------
+# list and grep with file permissions
+lsg() {
+  keyword=$(echo "$@" |  sed 's/ /.*/g')
+  \ls -hlA --color=yes \
+  | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/)*2^(8-i));if(k)printf(" %0o ",k);print}' \
+  | \grep -iE $keyword
+}
+
+# ls recent items at bottom with green TODAY yellow YESTERDAY substituted with file permission also
+# https://www.reddit.com/r/archlinux/comments/41s1w4/what_is_your_favorite_one_liner_to_use/cz50y1m
+# http://askubuntu.com/a/152005
+lst() {
+  \ls -vAFq --color=yes -got --si --time-style=long-iso "$@" \
+  | sed "s/$(date +%Y-%m-%d)/\x1b[32m     TODAY\x1b[m/;s/$(date +'%Y-%m-%d' -d yesterday)/\x1b[33m YESTERDAY\x1b[m/" \
+  | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/)*2^(8-i));if(k)printf(" %0o ",k);print}' | tac
+}
+
+lsl() {
+  \ls -hl --color=yes "$@" \
+  | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/)*2^(8-i));if(k)printf(" %0o ",k);print}'
+}
+#}}}
+
+#-------- lazy git function {{{
+lg() {
+  git status 2> /dev/null
+  if [ $? -ne 0 ]; then
+    echo "Not in a git repo"
+    return 1
+  fi
+  echo "Continue to commit and push every change?"
+  select choice in "Yes" "No"; do
+    case $choice in
+      Yes ) git commit -am "$*" && git push; break;;
+      No ) exit;;
+    esac
+  done
+}
+#}}}
+
+#-------- gitag function {{{
+gtag() {
+  git status 2>& /dev/null
+  if [ $? -ne 0 ]; then
+    echo "Not in a git repo"
+    return 1
+  fi
+  echo "Continue to tag with '$1' and push '$1' to origin?"
+  select choice in "Yes" "No"; do
+    case $choice in
+      Yes ) git tag "$1" && git push origin "$1"; break;;
+      No ) exit;;
+    esac
+  done
+}
+#}}}
+
+#-------- docker exec into container {{{
+docker-attach() {
+  docker exec -it $1 bash
+}
+#}}}
+
+#-------- set permissisons recursively {{{
+dirs_permissions() {
+  find . -Type d -exec chmod $1 {} \;
+}
+files_permissions() {
+  find . -type f -exec chmod $1 {} \;
+}
+#}}}
+
+#-------- misc functions{{{
+installdate() {
+  ls --sort=t / -l | tail -n1 | awk '{print $8 " " $7 " " $6}'
+}
+
+freq_commands() {
+  history | awk '{print $2};' | sort | uniq -c | sort -rn | head -10
+}
+
+metapdfrename() {
+  exiftool '-filename<$title.%e .'
+}
+
+getfingerprint() {
+  echo -n | openssl s_client -connect "$1" | openssl x509 -noout -fingerprint
+}
+
+unique_word_count() {
+  tr -c "[:alnum:]" "[\n*]" < $1 | sort | uniq -c | sort -n$3 | head  -$2
+}
+
+make-bak() {
+	cp -a "$1" "${1}_$(date --iso-8601=seconds)_bak"
+}
+
+# print a list of supported colors
+function print_colors {
+	((cols = $COLUMNS - 4))
+	s=$(printf %${cols}s)
+	for i in {000..$(tput colors)}; do
+		echo -e $i $(tput setaf $i; tput setab $i)${s// /=}$(tput op);
+	done
+}
+
+function printLines {
+	print ${(l:COLUMNS::=:)}
+}
+
+function timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+}
+
+groot() {
+  if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]; then
+    git rev-parse --show-toplevel
+    return 0
+  else
+    echo "Not in git directory!"
+    return 1
+  fi
+}
+
+cdgroot() {
+  cd $(groot)
+}
+
+dexec() {
+  if (( $# == 0 ))
+    then
+        echo "usage: dexec <container name | container id>"
+        return
+  fi
+  docker exec -it $1 sh
+}
+extract() {
+	local remove_archive
+	local success
+	local extract_dir
+
+	if (( $# == 0 )); then
+		cat <<-'EOF' >&2
+			Usage: extract [-option] [file ...]
+			Options:
+			    -r, --remove    Remove archive after unpacking.
+		EOF
+	fi
+
+	remove_archive=1
+	if [[ "$1" == "-r" ]] || [[ "$1" == "--remove" ]]; then
+		remove_archive=0
+		shift
+	fi
+
+	while (( $# > 0 )); do
+		if [[ ! -f "$1" ]]; then
+			echo "extract: '$1' is not a valid file" >&2
+			shift
+			continue
+		fi
+
+		success=0
+		extract_dir="${1:t:r}"
+		case "${1:l}" in
+			(*.tar.gz|*.tgz) (( $+commands[pigz] )) && { pigz -dc "$1" | tar xv } || tar zxvf "$1" ;;
+			(*.tar.bz2|*.tbz|*.tbz2) tar xvjf "$1" ;;
+			(*.tar.xz|*.txz)
+				tar --xz --help &> /dev/null \
+				&& tar --xz -xvf "$1" \
+				|| xzcat "$1" | tar xvf - ;;
+			(*.tar.zma|*.tlz)
+				tar --lzma --help &> /dev/null \
+				&& tar --lzma -xvf "$1" \
+				|| lzcat "$1" | tar xvf - ;;
+			(*.tar) tar xvf "$1" ;;
+			(*.gz) (( $+commands[pigz] )) && pigz -d "$1" || gunzip "$1" ;;
+			(*.bz2) bunzip2 "$1" ;;
+			(*.xz) unxz "$1" ;;
+			(*.lzma) unlzma "$1" ;;
+			(*.z) uncompress "$1" ;;
+			(*.zip|*.war|*.jar|*.sublime-package|*.ipsw|*.xpi|*.apk|*.aar|*.whl) unzip "$1" -d $extract_dir ;;
+			(*.rar) unrar x -ad "$1" ;;
+			(*.7z) 7za x "$1" ;;
+			(*.deb)
+				mkdir -p "$extract_dir/control"
+				mkdir -p "$extract_dir/data"
+				cd "$extract_dir"; ar vx "../${1}" > /dev/null
+				cd control; tar xzvf ../control.tar.gz
+				cd ../data; extract ../data.tar.*
+				cd ..; rm *.tar.* debian-binary
+				cd ..
+			;;
+			(*)
+				echo "extract: '$1' cannot be extracted" >&2
+				success=1
+			;;
+		esac
+
+		(( success = $success > 0 ? $success : $? ))
+		(( $success == 0 )) && (( $remove_archive == 0 )) && rm "$1"
+		shift
+	done
+}
+
+# Use lf to switch directories with lc and bind it to ctrl-o
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        \rm -f "$tmp"
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+bindkey -s '^o' 'lfcd\n'
+
+# select from all PRs and view in vim
+ghprl() {
+  local prid
+  prid=$(gh pr list -L100 | fzf | cut -f1)
+  if [[ -n $prid ]]
+  then
+    gh pr view $prid | nvim -R -c 'set ft=markdown' -c 'norm! zt' -
+  fi
+}
+
+# fkill - kill processes - list only the ones you can kill.
+fkill() {
+  local pid
+  if [ "$UID" != "0" ]; then
+    pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+  else
+    pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+  fi
+
+  if [ "x$pid" != "x" ]
+  then
+    echo $pid | xargs kill -${1:-9}
+  fi
+}
+
+fzf-git-branch() {
+    git rev-parse HEAD > /dev/null 2>&1 || return
+
+    git branch --color=always --all --sort=-committerdate |
+        grep -v HEAD |
+        fzf --height 50% --ansi --no-multi --preview-window right:65% \
+            --preview 'git log -n 50 --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed "s/.* //" <<< {})' |
+        sed "s/.* //"
+}
+
+fzf-git-checkout() {
+    git rev-parse HEAD > /dev/null 2>&1 || return
+
+    local branch
+
+    branch=$(fzf-git-branch)
+    if [[ "$branch" = "" ]]; then
+        echo "No branch selected."
+        return
+    fi
+
+    # If branch name starts with 'remotes/' then it is a remote branch. By
+    # using --track and a remote branch name, it is the same as:
+    # git checkout -b branchName --track origin/branchName
+    if [[ "$branch" = 'remotes/'* ]]; then
+        git checkout --track $branch
+    else
+        git checkout $branch;
+    fi
+}
+
+# grep for processes
+function pg { pgrep -fa "$1" | grep -E --color "$1"; }
+
+# Print kubectl_aliases alias before executing
+#function kubectl() { echo "+ kubectl $@">&2; command kubectl $@; }
+
+

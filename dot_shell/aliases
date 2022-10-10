@@ -1,0 +1,226 @@
+# vim: set ft=zsh:
+
+# brew
+alias \
+  pacup='brew upgrade' \
+  pacin='brew install' \
+  pacls='brew list' \
+  paclls='brew leaves' \
+  pacse='brew search' \
+  pacrm='brew uninstall'
+
+# Suffix alias
+alias -s txt=nvim
+alias -s {js,json}=nvim
+alias -s md=nvim
+alias -s {toml}=nvim
+alias -s {yml,yaml}=nvim
+alias -s lua=nvim
+
+# Git
+alias \
+  gst='git status' \
+  gs='git status' \
+  gc='git commit' \
+  push='git push' \
+  pull='git pull' \
+  gd='git diff' \
+  gtlist='git describe --tags --abbrev=0' \
+  gl='git log --ext-diff -u' \
+  gco='fzf-git-checkout' \
+  gcm='git checkout master' \
+  gcs='git checkout staging' \
+  gcd='git checkout develop' \
+  gcp='git checkout production' \
+  gcn='git checkout -b' \
+  gt='gitui'
+
+# Github
+alias \
+  ghweb='gh browse' \
+  ghstat='gh auth status' \
+  ghpr='gh pr list'
+
+# Shell
+alias \
+  srcbash='source $HOME/.bashrc' \
+  srczsh='source $HOME/.zshrc' \
+  cls="clear" \
+  ..='cd ..' \
+  cd3='cd ../../..' \
+  cd4='cd ../../../..' \
+  cd5='cd ../../../../../' \
+  cdl='cd /$HOME/Downloads/' \
+  tree1='tree -L 1' \
+  tree2='tree -L 2' \
+  ls='ls -hN --color=auto --group-directories-first' \
+  ll='ls -lh' \
+  lla='ls -alh' \
+  lsym='ls -l `\find . -maxdepth 1 -type l -print`'
+
+# Better options
+alias \
+  size='ncdu --color dark -rr -x' \
+  df='df -h' \
+  mount='mount | column -t' \
+  cp='cp -i' \
+  mv='mv -i' \
+  less='less -R' \
+  tfswitch='tfswitch -b ~/.local/bin/terraform'
+  mkdir='mkdir -pv'
+  grep="grep --color=auto" \
+	diff="diff --color=auto"
+
+# VI*
+alias \
+  v="$EDITOR" \
+  sv="sudo $EDITOR" \
+  v.="vim ." \
+  vy="$EDITOR -c 'set syntax=yaml'" \
+  cssh='$EDITOR ~/.ssh/config' \
+  caws='$EDITOR -p $HOME/.aws/{credentials,config}' \
+  ckube='$EDITOR $HOME/.kube/config'
+if [ "${NVIM_LISTEN_ADDRESS}." != "." ]; then
+  alias \
+    h='nvr -o' \
+    s='nvr -O' \
+    t='nvr --remote-tab'
+fi
+
+# Tmux
+alias \
+  tls='tmux ls'
+  tkill="for s in \$(tmux list-sessions | awk '{print \$1}' | rg ':' -r '' | fzf); do tmux kill-session -t \$s; done;"
+
+# CLI
+alias \
+  nb='newsboat' \
+  xo='mimeopen' \
+  nova='$HOME/workspace/git.rootknecht.net/scripts/fzf-nova/fzf-nova' \
+  slack-id="slack-term -config ~/.config/slack-term/id-config" \
+  slack-idz="slack-term -config ~/.config/slack-term/idz-config" \
+  to='zi' \
+  cm='chezmoi' \
+  vf='vifm ~' \
+  vf.='vifm .'
+
+# hledger
+alias \
+  ledger-is-yearly='hledger -f $LEDGER_DIR/all.ledger is -Y -S' \
+  ledger-is-quarterly='hledger -f $LEDGER_DIR/all.ledger is -Q -S' \
+  ledger-is-monthly-html='hledger -f $LEDGER_DIR/all.ledger is -M -S -o monthly.html' \
+  ledger-is-weekly='hledger -f $LEDGER_DIR/all.ledger is -W -S -o weekly.html' \
+  ledger-is-daily='hledger -f $LEDGER_DIR/all.ledger is -D -S -o daily.html' \
+  ledger-show-accounts='hledger -f $LEDGER_DIR/all.ledger accounts' \
+  ledger-show-stats='hledger -f $LEDGER_DIR/all.ledger stats'
+
+# Useful
+alias yt='mpv --vo=gpu --hwdec=vaapi --script-opts=ytdl_hook-ytdl_path=$HOME/.local/bin/yt-dlp'
+alias filediff='grep -v -F -x -f' # file1 file2 shows what is in 2 but not 1
+alias replace_ws_with_underscore='for f in *\ *; do mv "$f" "${f// /_}"; done'
+alias list-mailboxes='\find ~/data/pim/mail/ -type d -name cur -printf '"'"'%h '"'"' | sed -e '"'"'s_/home/michael/data/pim/mail/_+_g'"'"' | sed -e '"'"'s_ +_ \\\n+_g'"'"''
+alias agenda='khal list yesterday tomorrow'
+alias cal='notify-send "$(khal list yesterday tomorrow)"'
+alias pdfkomp='gs -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -r150 -sOutputFile=AUSGANG.pdf'
+alias pdfmerge='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf *.pdf'
+alias genhandout='pdfjam --nup 2x3 --frame true --noautoscale false --delta "0.2cm 0.3cm" --scale 0.95'
+alias svgtopng='for file in *.svg; do inkscape $file --export-width=1920 --export-height=1200 -o ${file%svg}png; done'
+alias weather-garching='curl v2.wttr.in/"Garching+b.+München"\?1\&lang=de'
+alias weather-eching='curl v2.wttr.in/"Eching"\?1\&lang=de'
+alias weather-neuburg='curl v2.wttr.in/"Neuburg+an+der+Donau"\?1\&lang=de'
+alias colorlog="awk 'BEGIN { RED=\"\033[0;31m\"; BLACK=\"\033[39m\"; YELLOW=\"\033[33m\"; LIGHT_GREEN=\"\033[1;32m\"; GREEN=\"\033[0;32m\"; reset=\"$(tput sgr0)\" }
+
+  /INFO/ {print GREEN \$0 reset; next}
+  /ERROR/ {p=1} p && /INFO|WARN|DEBUG/ {p=0};p {print RED \$0 reset; next}
+  /WARN/ {p=1} p && /INFO|ERROR|DEBUG/ {p=0};p {print YELLOW \$0 reset; next}
+  // {print; next}'
+"
+
+# Admin stuff
+alias get-ssl-cert='echo Q |openssl s_client -connect'
+alias get-ssl-fingerprint='openssl x509 -in cert.pem -sha1 -noout -fingerprint'
+alias list-fonts='fc-list | cut -d: -f2 | sort -h | uniq'
+alias rb='sudo shutdown -r now'
+alias freq='watch grep \"cpu MHz\" /proc/cpuinfo'
+alias biosversion='sudo dmidecode | grep BIOS'
+alias dstatadv='dstat -talmvf -C total'
+alias pipupgrade='pip3 install -U $(pip freeze | cut -d '=' -f 1)'
+alias dos2unix-folder='find . -type f -print0 | xargs -0 dos2unix'
+alias list-printer='lpstat -l -p'
+alias default_printer='lpoptions -d'
+alias externalip='echo $(curl -ss http://ipecho.net/plain)'
+alias SS='sudo systemctl'
+alias envs='printenv | fzf'
+
+# Docker
+alias docker-stop-all='docker stop $(docker ps -a -q)'
+alias docker-remove-all-container='docker rm $(docker ps -a -q)'
+alias docker-remove-all-images='docker rmi $(docker images -q)'
+
+# Apps
+which duf > /dev/null && alias df='duf'
+which dua > /dev/null && alias du='dua'
+which viddy > /dev/null && alias watch='viddy'
+which pretty-ping > /dev/null && alias ping='pretty-ping --nolegend'
+which neomutt > /dev/null && alias mutt='neomutt'
+which nvim > /dev/null && alias vim='nvim'
+which nvim > /dev/null && alias vimdiff="nvim -d"
+which exa > /dev/null && alias ls='exa --group-directories-first'
+which exa > /dev/null && alias lsa='exa --group-directories-first --all'
+which exa > /dev/null && alias ll='exa --group-directories-first --long --git'
+which exa > /dev/null && alias lla='exa --group-directories-first --long --all --git'
+which tokei > /dev/null && alias cloc='tokei'
+#alias rm='echo "This is not the command you are looking for."; false' # real use with \rm file
+which trash > /dev/null && alias rm='trash' # real use with \rm file
+
+# Kubernetes
+which kubectx > /dev/null && alias kx='kubectx'
+which kubens > /dev/null && alias kns='kubens'
+which kubectl > /dev/null && alias k='kubectl'
+which kubectl > /dev/null && alias srckubectl='source <(kubectl completion zsh)'
+which helm > /dev/null && alias srchelm='source <(helm completion zsh)'
+[ -f $HOME/.shell/kubectl_aliases ] && source $HOME/.shell/kubectl_aliases
+
+# Cloud
+which awless > /dev/null && alias srcawless='source <(awless completion zsh)'
+which aws_zsh_completer.sh > /dev/null && alias srcaws='source aws_zsh_completer.sh'
+
+# Linux only aliases
+if [[ ! "$OSTYPE" =~ "darwin" ]]
+then
+  # Package Management
+  version=$(cat /etc/issue)
+  if [[ $version =~ "Manjaro" || $version =~ "Arch Linux" ]]
+  then
+      alias \
+        pacup='sudo pacman -Syu' \
+        pacin='sudo pacman -S' \
+        pacls='pacman -Q' \
+        pacse='pacman -Ss' \
+        pacrm='sudo pacman -Rss' \
+        paccl='sudo pacman -Rsn $(${AUR_MANAGER:-pacman} -Qdtq)'
+  elif [[ $version =~ "SUSE" ]]
+  then
+      alias \
+        pacup='sudo zypper up' \
+        pacin='sudo zypper in' \
+        pacls='rpm -qa' \
+        pacshow='sudo rpm -qi' \
+        pacfiles='sudo rpm -ql' \
+        pacse='zypper se' \
+        pacrm='sudo zypper rm -u' \
+        pacdisup='sudo zypper dup' \
+        pacrepos='sudo zypper lr'
+  else
+      alias \
+        pacup='sudo apt-get update && sudo apt-get upgrade' \
+        pacin='sudo apt-get install' \
+        pacls='dpkg --get-selections' \
+        pacse='sudo apt-cache search' \
+        pacrm='sudo apt-get remove' \
+        pacautorm='sudo apt-get autoremove' \
+        pacdisup='sudo apt-get update && sudo apt-get dist-upgrade' \
+        pacpurge='sudo apt-get purge'
+  fi
+  alias lf='lfrun'
+fi

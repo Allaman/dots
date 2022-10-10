@@ -1,0 +1,44 @@
+# vim: set ft=zsh:
+
+## Options section
+setopt extendedglob                                             # Extended globbing. Allows using regular expressions with *
+setopt nocaseglob                                               # Case insensitive globbing
+setopt rcexpandparam                                            # Array expension with parameters
+setopt nocheckjobs                                              # Don't warn about running processes when exiting
+setopt numericglobsort                                          # Sort filenames numerically when it makes sense
+setopt nobeep                                                   # No beep
+setopt histignorealldups                                        # If a new command is a duplicate, remove the older one
+setopt autocd                                                   # if only directory path is entered, cd there.
+setopt histappend                                               # Don't erase history
+setopt inc_append_history                                       # Add immediately
+setopt share_history                                            # Share history between session/terminals
+
+# case insensitive autocompletion
+zstyle ":completion:*" matcher-list "" "m:{a-z}={A-Z}" "m:{a-zA-Z}={A-Za-z}" "r:|[._-]=* r:|=* l:|=*"
+zstyle ':completion:*' hosts off                                # ignore hosts file for ssh/scp autocompletion
+## Speed up completions
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+HISTFILE=~/.zhistory
+HISTSIZE=50000
+SAVEHIST=50000
+WORDCHARS=${WORDCHARS//\/[&.;]}                                 # Don't consider certain characters part of the word
+
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+# Change autosuggestion color see https://coderwall.com/p/pb1uzq/z-shell-colors
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=060'
+
+
+# Theming section
+autoload -U compinit colors zcalc
+zmodload zsh/complist
+zstyle ':completion:*' menu select                              # to activate the menu, press tab twice
+unsetopt menu_complete                                          # do not autoselect the first completion entry
+unsetopt nomatch                                                # allow gloobing, e.g apt update kernel*
+setopt complete_aliases                                         # autocompletion CLI switches for aliases
+zstyle ':completion:*' list-colors ''                           # show colors on menu completion
+compinit -d
+colors
+
