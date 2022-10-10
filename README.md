@@ -1,8 +1,14 @@
-**WIP repo for my holistic dotfiles using [chezmoi](https://www.chezmoi.io)**
+# Dotfiles
+
+My dotfiles for `macOS` and `Linux` (primarly Arch Linux).
+
+## Neovim
+
+My Neovim config is in its own [repo](https://github.com/Allaman/nvim)
 
 ## Karabiner
 
-Karabiner is a exception for several reasons:
+Karabiner is an exception for several reasons:
 
 1. Karabiner modifies its content
 2. Symlinking only works on the whole `.config/karabiner` folder as Karabiner creates new files as well
