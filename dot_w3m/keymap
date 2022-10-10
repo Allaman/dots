@@ -1,0 +1,331 @@
+# Ctrl  : C-, ^
+# Escape: ESC-, M-, ^[
+# Space : SPC, ' '
+# Tab   : TAB, ^i, ^I
+# Delete: DEL, ^?
+# Up    : UP, ^[[A
+# Down  : DOWN, ^[[B
+# Right : RIGHT, ^[[C
+# Left  : LEFT, ^[[D
+
+# Marks {{{
+
+# The most important
+keymap m    MARK
+keymap .    NEXT_MARK
+keymap ,    PREV_MARK
+# Mark all search terms
+keymap \"   REG_MARK
+# Mark URL-like strings as anchors
+keymap  :   NULL
+keymap ";"  MARK_URL
+# Mark current word as URL
+keymap M-";"  MARK_WORD
+keymap M-:  MARK_MID
+
+# }}}
+# Navigation, links, tabs {{{
+
+# Scroll screen up one line
+keymap C-e  UP
+keymap J    UP
+# Scroll screen down one line
+keymap K    DOWN
+keymap C-y  DOWN
+# Scroll screen left
+keymap M-,  LEFT
+# Scroll screen right
+keymap M-.  RIGHT
+
+# Movement across the page
+keymap h    MOVE_LEFT
+keymap C-p  MOVE_UP
+keymap k    MOVE_UP
+keymap C-n  MOVE_DOWN
+keymap j    MOVE_DOWN
+keymap l    MOVE_RIGHT
+keymap M-<  SHIFT_LEFT
+keymap M->  SHIFT_RIGHT
+keymap b    PREV_WORD
+keymap w    NEXT_WORD
+
+# Various ways to to proceed page by page
+keymap =    NEXT_PAGE
+keymap +    NEXT_PAGE
+keymap C-d  NEXT_PAGE
+keymap SPC  NEXT_PAGE
+keymap DOWN NEXT_PAGE
+keymap -    PREV_PAGE
+keymap C-u  PREV_PAGE
+keymap UP   PREV_PAGE
+
+keymap TAB  NEXT_LINK
+keymap M-TAB PREV_LINK
+
+# First link on page
+keymap [    LINK_BEGIN
+# Last link
+keymap ]    LINK_END
+
+keymap C-a  LINE_BEGIN
+keymap 0    LINE_BEGIN
+keymap \^   LINE_BEGIN
+keymap $    LINE_END
+
+# Top of page
+keymap g    NULL
+keymap gg   BEGIN
+# Bottom of page
+keymap G    END
+# Undo last movement/jump across the page
+keymap (    UNDO
+# Redo the same
+keymap )    REDO
+keymap M-g  GOTO_LINE
+keymap Z    CENTER_H
+keymap z    CENTER_V
+
+# }}}
+# Search {{{
+
+# Incremental search
+keymap C-r  ISEARCH_BACK
+keymap C-s  ISEARCH
+
+# Regular search
+keymap /    SEARCH
+keymap ?    SEARCH_BACK
+keymap N    SEARCH_PREV
+keymap n    SEARCH_NEXT
+
+# }}}
+# Tab operations {{{
+
+keymap {        PREV_TAB
+keymap DEL      PREV_TAB
+keymap }        NEXT_TAB
+
+# Move tabs around
+keymap M-{      TAB_LEFT
+keymap M-}      TAB_RIGHT
+
+keymap C-q      CLOSE_TAB
+keymap C-w      CLOSE_TAB
+keymap C-t      NEW_TAB
+keymap M-t      TAB_MENU
+
+# }}}
+# Links {{{
+
+# Open link in new tab
+keymap t    TAB_LINK
+keymap T    TAB_LINK
+
+keymap a    SAVE_LINK
+
+# Open current link in ext browser (application) defined in the config file
+keymap o    EXTERN_LINK
+keymap M-M  EXTERN_LINK
+
+# Custom EXTERN/EXTERN_LINK commands
+# https://github.com/gotbletu/shownotes/blob/master/w3m_extern_link.md
+# Also see https://github.com/gotbletu/dotfiles_v2 for some of the below CGIs
+
+# yank url to multiple clipboard
+keymap  yy EXTERN_LINK   "url=%s ; printf "%b" "$url" | xsel -b ; printf "%b" "$url" | tmux load-buffer -"
+keymap  YY EXTERN        "url=%s ; printf "%b" "$url" | xsel -b ; printf "%b" "$url" | tmux load-buffer -"
+
+keymap  xa EXTERN        "~/.w3m/cgi-bin/save_bookmark_surfraw.cgi"
+keymap  xB COMMAND       "EXTERN ~/.w3m/cgi-bin/fzf_bookmarks_surfraw.cgi; GOTO file:/cgi-bin/goto_tmux_clipboard.cgi"
+keymap  xb COMMAND       "EXTERN ~/.w3m/cgi-bin/fzf_bookmarks_w3m.cgi; GOTO file:/cgi-bin/goto_tmux_clipboard.cgi"
+# queue download, external media player (queued), etc
+keymap  xc EXTERN_LINK   'NQDIR=$XDG_CACHE_HOME/w3m_queue nq curl -s --output-dir ~/Downloads -O'
+keymap  xd EXTERN_LINK   'NQDIR=$XDG_CACHE_HOME/w3m_queue nq wget -q -c -P ~/Downloads'
+# Requires config option ext_image_viewer 0
+keymap  xi EXTERN_LINK   'w3m -o display_image=1 -o imgdisplay=w3mimgdisplay'
+keymap  xm EXTERN_LINK   "NQDIR=$XDG_CACHE_HOME/mpv_queue nq mpv --quiet --ytdl-format='bestvideo[height<=480]+bestaudio/best[height<=480]' >/dev/null 2>&1"
+
+# The surfraw engine too slow on Termux and not useful in common workflow
+#keymap  xf COMMAND       "SHELL ~/.w3m/cgi-bin/fzf_surfraw_tmux.cgi; GOTO file:/cgi-bin/goto_tmux_clipboard.cgi"
+
+# queue-monitoring
+keymap  xs SHELL         'watch NQDIR=$XDG_CACHE_HOME/w3m_queue fq -anq \| tail'
+keymap  xS SHELL         'watch NQDIR=$XDG_CACHE_HOME/mpv_queue fq -anq \| tail'
+
+# Display the link url
+keymap u    PEEK_LINK
+# menu of links
+keymap M-l  LIST_MENU
+# Another link list
+keymap L    LIST
+# jump to link in page (same as LIST_MENU?)
+keymap M-M  MOVE_LIST_MENU
+
+# }}}
+# Buffer operations {{{
+
+# Previous buffer, close current
+keymap B    BACK
+# Navigate back without deleting current buffer
+keymap <        PREV
+keymap LEFT     PREV
+# Navigate forward without deleting current buffer
+keymap >        NEXT
+keymap RIGHT    NEXT
+# Display current buffer URL
+keymap c    PEEK
+# Pop-up menu with open buffers
+keymap s    SELECT_MENU
+# Open current buffer in an external browser (app)
+keymap O    EXTERN
+# Open new URL
+keymap U    GOTO
+keymap M-u  GOTO_RELATIVE
+# Open local file
+keymap V    LOAD
+keymap :e   LOAD
+
+# edit buffer (the textual rendering, not the html source) in VIM (or editor)
+keymap M-e  EDIT_SCREEN
+# Edit source in VIM (or editor)
+keymap E    EDIT
+
+keymap |    PIPE_BUF
+
+# Save buffer
+keymap S    SAVE_SCREEN
+# Save html (source)
+keymap M-s  SAVE
+keymap :w   SAVE
+
+keymap C-l  REDRAW
+
+# Reload source URL
+keymap R    RELOAD
+
+# View source
+keymap v    VIEW
+
+# }}}
+# Image operations {{{
+# See /usr/share/doc/w3m/README.img
+# Hover over image placeholder to view externally
+keymap I    VIEW_IMAGE
+
+keymap M-I  SAVE_IMAGE
+# Peek at image URL while hovered over placeholder
+keymap i    PEEK_IMG
+
+# }}}
+# Misc {{{
+
+keymap gM   MAIN_MENU
+
+# Trigger input field submit action
+keymap C-c  SUBMIT
+# Current line #, total lines, cols, etc
+keymap C-g  LINE_INFO
+# Browsing history
+keymap C-h  HISTORY
+#keymap C-k COOKIE
+# Options page
+keymap C-o  OPTIONS
+# Reload config options
+keymap M-r  REINIT
+keymap M-o  SET_OPTION
+keymap C-z  SUSPEND
+keymap !    SHELL
+keymap #    PIPE_SHELL
+keymap @    READ_SHELL
+# page info, including the response HTTP header
+keymap M-+  INFO
+keymap D    DOWNLOAD_LIST
+# Toggle frames
+keymap F    FRAME
+# View the key mappings (with w3m descriptions), including the possible unassigned commands
+keymap H    HELP
+keymap M-m  MOUSE_TOGGLE
+keymap ZZ   QUIT
+keymap q    QUIT
+keymap Q    NULL
+keymap ZQ   EXIT
+keymap r    VERSION
+
+# Optionally configurable menu (~/.w3m/menu)
+keymap M    MENU
+
+keymap M-a ADD_BOOKMARK
+# Bookmark page
+keymap M-b BOOKMARK
+# Run internal command
+keymap :: COMMAND
+keymap M-c COMMAND
+keymap M-k DEFINE_KEY
+# Invoke the external dictionary with input word
+keymap M-w DICT_WORD
+# Invoke the dictionary with word under cursor
+keymap M-W DICT_WORD_AT
+
+keymap W WRAP_TOGGLE
+# }}}
+# User-defined bindings {{{
+keymap  :b       SHELL "$EDITOR ~/.config/surfraw/bookmarks"
+keymap  :c       SHELL "$EDITOR ~/.w3m/config"
+keymap  :k       SHELL "$EDITOR ~/.w3m/keymap"
+keymap  :u       SHELL "$EDITOR ~/.w3m/urimethodmap"
+# }}}
+# Scripts/cgi-bin {{{
+keymap pp GOTO file:/cgi-bin/goto_clipboard.cgi
+keymap pt GOTO file:/cgi-bin/goto_tmux_clipboard.cgi
+# }}}
+# Macros {{{
+
+# strip out extra 'pre-content' on CMS-rich or wordpress sites with id="content" tag
+#keymap  M-7        COMMAND "VIEW; PIPE_BUF \"sed -n '1,/<body/p; /id=\\\"content\\\"/,$p'\" VIEW"
+
+# Thanks to gotbletu for revealing the possibility of 2+ stroke combinations
+#   https://github.com/gotbletu/shownotes/blob/master/w3m_macros.md
+
+# Proceed straight to these user-defined commands in the help page
+keymap M-?  COMMAND "HELP; SEARCH ^User-Defined; NEXT_PAGE; CENTER_V"
+keymap \\\? COMMAND "HELP; SEARCH ^User-Defined; NEXT_PAGE; CENTER_V"
+# Treat URL strings as links
+keymap \\\u COMMAND "SET_OPTION mark_all_pages=toggle ; RELOAD"
+# Hinting mode for links: proceed with <link number> + [
+keymap \\\h COMMAND "SET_OPTION display_link_number=toggle ; RESHAPE"
+# Hinting mode for lines: proceed with <line number> + g
+keymap \\\l COMMAND "SET_OPTION show_lnum=toggle ; RESHAPE"
+keymap \\\t COMMAND "SET_OPTION display_borders=toggle ; RESHAPE"
+keymap \\\i COMMAND "SET_OPTION display_image=toggle ; RELOAD"
+keymap \\\e COMMAND "SET_OPTION user_agent='' ; RELOAD"
+keymap \\\A COMMAND "SET_OPTION user_agent='Opera/9.80 (S60; SymbOS; Opera Mobi/SYB-1107071606; U; en) Presto/2.8.149 Version/11.10' ; RELOAD"
+# Open search engine, proceed to and select the search box
+keymap M-/ COMMAND  "GOTO https://duckduckgo.com/lite/; NEXT_LINK; GOTO_LINK"
+keymap \\\s COMMAND "GOTO https://duckduckgo.com/lite/; NEXT_LINK; GOTO_LINK"
+keymap \\\g COMMAND "GOTO https://google.com; GOTO_LINE 6; NEXT_LINK; GOTO_LINK"
+keymap \\\w GOTO http://wttr.in/?lang=fr&m
+# Pipe to an external table-to-csv converter, then edit the rendered buffer
+keymap \\\T COMMAND "VIEW; PIPE_BUF tabletocsv; EDIT_SCREEN"
+keymap \\\L COMMAND "PIPE_BUF linkgrabber; BACK; REDRAW"
+# Open add-bookmark dialogue, editing bookmark title
+keymap \\\b COMMAND "ADD_BOOKMARK; LINK_END; PREV_LINK; GOTO_LINK"
+# Pass the page through the readability (readability-cli) plugin
+#   reqs: https://aur.archlinux.org/readability-cli.git, nodejs > 12
+keymap \\\r COMMAND "READ_SHELL 'readable $W3M_URL -p html-title,html-content > /tmp/readable.html' ; LOAD /tmp/readable.html; DELETE_PREVBUF"
+
+# }}}
+# Mouse Ops {{{
+
+keymap M-[E     MENU
+keymap M-[L     MENU
+keymap M-[Z     PREV_LINK
+
+keymap M-[1~    BEGIN
+keymap M-[2~    MENU
+keymap M-[4~    END
+keymap M-[5~    PREV_PAGE
+keymap M-[6~    NEXT_PAGE
+keymap M-[28~   MENU
+
+# }}}
+
