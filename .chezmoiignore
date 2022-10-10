@@ -1,4 +1,5 @@
 # ignore on all systems
+README.md
 LICENSE
 bootstrap.sh
 styles
