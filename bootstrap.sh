@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eu pipefail
+
 OS=""
 ARCH="amd64"
 USER_BIN="$HOME/.local/bin"
@@ -32,6 +34,10 @@ get_os () {
   fi
 }
 
+check_available_tool() {
+  command -v "$1" >/dev/null 2>&1 || { echo >&2 "require foo"; exit 1; }
+}
+
 get_chezmoi() {
   log "Get chezmoi"
   wget -q "https://github.com/twpayne/chezmoi/releases/download/v2.24.0/chezmoi-${OS}-${ARCH}" -O "$USER_BIN/chezmoi"
@@ -50,18 +56,23 @@ get_age() {
   rm -r /tmp/age*
 }
 
+run_chezmoi() {
+  log "Running chezmoi"
+  chezmoi init --apply --verbose git@github.com/allaman/dots.git
+}
+
 main() {
+  for program in wget gunzip tar command chmod rm printf mv mkdir; do
+    command -v "$program" > /dev/null 2>&1 || { echo "Not found: $program"; exit 1; }
+  done
   get_arch
   get_os
-  if [[ "$OS" == "linux" ]]; then
-    if [[ $ARCH == "arm64" ]]; then
-      abort "Only amd64 for Linux is supported"
-    fi
-  fi
   mkdir -p "${USER_BIN}"
-  get_chezmoi
-  get_age
+  command -v chezmoi >/dev/null 2>&1 || get_chezmoi
+  command -v age >/dev/null 2>&1 || get_age
   export PATH=~/.local/bin/:$PATH
+  run_chezmoi
+  log "Dotfiles configured!"
 }
 
 main
