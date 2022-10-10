@@ -1,9 +1,13 @@
-{{- if eq .chezmoi.os "darwin" -}}
+{{ if ne .chezmoi.os "darwin" -}}
+
 #!/usr/bin/env bash
 
 echo "Symlinking karabiner..."
 ln -fs $(chezmoi source-path)/dot_config/karabiner $HOME/.config/
-{{ end }}
+
+{{ else -}}
 
 #!/usr/bin/env bash
+echo NOT symlinking karabiner
 
+{{ end -}}
