@@ -28,6 +28,7 @@ styles
 .config/sxiv
 .config/zathura
 .config/mimeapps.list
+.i3
 .urlview
 .xinitrc
 .xprofile
