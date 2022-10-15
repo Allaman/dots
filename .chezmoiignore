@@ -18,6 +18,7 @@ styles
 # only on darwin systems
 {{- if ne .chezmoi.os "darwin" }}
 .config/kitty/macos-launch-services-cmdline
+Library
 .config/sketchybar
 .yabairc
 .skhdrc
