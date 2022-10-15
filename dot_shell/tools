@@ -15,6 +15,7 @@ command -v paru >/dev/null 2>&1 && export AUR_MANAGER=paru
 [ -d $HOME/.shell/forgit ] && source $HOME/.shell/forgit/forgit.plugin.zsh
 [ -d $HOME/.shell/kube-fzf ] && export PATH=$PATH:$HOME/.shell/kube-fzf/
 [ -d "/Applications/Sublime Text.app/Contents/SharedSupport/bin" ] && export PATH="$PATH:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
+[ -d "/Applications/Sublime Merge.app/Contents/SharedSupport/bin" ] && export PATH="$PATH:/Applications/Sublime Merge.app/Contents/SharedSupport/bin"
 # command -v brew >/dev/null 2>&1 && FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH # TODO: completions in this path do not work even more break path completion, e.g. kustomize!
 # [ -d $HOME/.local/sdkman/ ] && export SDKMAN_DIR="$HOME/.local/sdkman" && source $HOME/.local/sdkman/bin/sdkman-init.sh
 # [ -d $HOME/.jenv/bin ] && export PATH=$PATH:$HOME/.jenv/bin
