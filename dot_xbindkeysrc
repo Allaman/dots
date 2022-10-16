@@ -20,8 +20,7 @@
 #keystate_scrolllock= enable
 
 # Start Terminal
-#"alacritty --working-directory $HOME"
-"$TERMINAL"
+kitty
   Mod1 + Return
 
 # Capture screen with mouse with a 2 sec delay and copy to clipboard
@@ -44,7 +43,7 @@
   Mod1 + space
 
 # Start file manager
-"alacritty -t files -e /bin/zsh --login -c lfrun"
+"kitty -T files -e /bin/zsh --login -c lfrun"
   Mod4 + e
 
 # Start Mail
@@ -66,10 +65,6 @@
 # Start bottom
 "alacritty -o window.startup_mode=Maximized -e htop"
   Mod4 + shift + t
-
-# Start xfce settings
-"xfce4-settings-manager"
-  Mod4 + shift + s
 
 # Start chromarks
 "chromarks"
