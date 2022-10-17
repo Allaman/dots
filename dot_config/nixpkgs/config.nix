@@ -27,6 +27,7 @@
         git-filter-repo
         gitui
         glow
+        go
         goreleaser
         grip
         gron
