@@ -42,6 +42,7 @@
         #jenv
         jq
         #node
+        nodejs
         #pandoc
         #jupyterlab
         k6
