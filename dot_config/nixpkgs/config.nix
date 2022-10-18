@@ -6,6 +6,7 @@
         act
         argo
         argocd
+        atuin
         awscli2
         cmake
         codespell
@@ -86,6 +87,7 @@
         restic
         ripgrep
         s4cmd
+        shellcheck
         #showkey
         slides
         stern
