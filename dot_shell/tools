@@ -7,6 +7,7 @@ command -v fuck > /dev/null 2>&1 && eval "$(thefuck --alias)"
 command -v direnv > /dev/null 2>&1 && eval "$(direnv hook zsh)"
 command -v flux > /dev/null 2>&1 && eval "$(flux completion zsh)"
 command -v go >/dev/null 2>&1 && export GOPATH=$HOME/.local/share/go && export PATH=$PATH:$(go env GOPATH)/bin
+command -v atuin >/dev/null 2>&1 && eval "$(atuin init zsh)"
 command -v dyff > /dev/null 2>&1 && export KUBECTL_EXTERNAL_DIFF="dyff between --omit-header --set-exit-code"
 command -v paru >/dev/null 2>&1 && export AUR_MANAGER=paru
 [ -d $HOME/.cargo/bin ] && export PATH=$PATH:~/.cargo/bin
