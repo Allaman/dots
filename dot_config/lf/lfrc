@@ -13,16 +13,21 @@ set icons true
 set ignorecase true
 set period 1
 
-## Custom Functions
-#cmd open ${{
-#    case $(file --mime-type "$f" -bL) in
-#        text/*|application/json) $EDITOR "$f";;
-#        video/*|image/*/application/pdf) xdg-open "$f";;
-#        *) xdg-open "$f" ;;
-#    esac
-#}}
+# Remove some defaults
+map m
+map o
+map n
+map "'"
+map '"'
+map d
+map c
+map e
+map f
+map t
+map ":"
 
 cmd open ${{
+if [[ "$OSTYPE" =~ "linux" ]]; then
     case $(file --mime-type $f -b) in
 	      image/vnd.djvu|application/pdf|application/octet-stream) setsid -f zathura $fx >/dev/null 2>&1 ;;
         text/*) $EDITOR $fx;;
@@ -34,55 +39,24 @@ cmd open ${{
         application/vnd.*) libreoffice $f  >/dev/null 2>&1 & ;;
         *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done ;;
     esac
-}}
-
-cmd mkdir ${{
-  printf "Directory Name: "
-  read ans
-  mkdir $ans
-}}
-
-cmd mkfile ${{
-  printf "File Name: "
-  read ans
-  touch $ans
-}}
-
-cmd chmod ${{
-  printf "Mode Bits: "
-  read ans
-
-  for file in "$fx"
-  do
-    chmod $ans $file
-  done
-
-  lf -remote 'send reload'
-}}
-
-cmd sudomkfile ${{
-  printf "File Name: "
-  read ans
-  sudo touch $ans
-}}
-
-cmd bulkrename ${{
-  printf '%s\n' $fx | vidir -
-}}
-
-cmd zoxide_jump ${{
-  printf "Jump to: "
-  read ans
-  res=$( zoxide query -l $ans | fzf --query="$ans " --select-1 --exit-0 --height=25% --reverse --no-sort --cycle)
-  lf -remote "send $id cd \"$res\""
+elif [[ "$OSTYPE" =~ "darwin" ]]; then
+    case $(file --mime-type $f -b) in
+	      image/vnd.djvu|application/pdf|application/octet-stream) open $fx ;;
+        text/*) $EDITOR $fx;;
+    esac
+fi
 }}
 
 # Dragon fucntions
 cmd dragon %dragon --on-top -a -x $fx
 cmd dragon-stay %dragon --on-top -a $fx
 cmd dragon-individual %dragon --on-top $fx
+# Dragon Mapping
+# map dr dragon
+# map ds dragon-stay
+map di dragon-individual
 
-# Archive bindings
+# Archive commands
 cmd unarchive ${{
   case "$f" in
       *.zip) unzip "$f" ;;
@@ -92,13 +66,74 @@ cmd unarchive ${{
       *) echo "Unsupported format" ;;
   esac
 }}
-
 cmd zip %zip -r "$f" "$f"
 cmd tar %tar cvf "$f.tar" "$f"
 cmd targz %tar cvzf "$f.tar.gz" "$f"
 cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
+# Archive Mappings
+map az zip
+map at tar
+map ag targz
+map ab targz
+map ex unarchive
 
-# Trash cli bindings
+# File commands
+cmd yank-dirname $dirname -- "$f" | head -c-1 | ccopy
+cmd yank-path $printf '%s' "$fx" | ccopy
+cmd yank-basename $basename -a -- $fx | head -c-1 | ccopy
+cmd yank-content $cat $fx | ccopy
+cmd bulkrename ${{
+  printf '%s\n' $fx | vidir -
+}}
+# File mappings
+map fb yank-basename
+map fd yank-dirname
+map fp yank-path
+map fy yank-content
+map br bulkrename
+
+
+# Dir commands
+cmd dir-size %dua "$f"
+cmd dir-size-interactive %$TERMINAL -e dua i "$f"
+cmd open-terminal-in-dir ${{
+    if [ -f "$f" ]; then
+      dir="$(dirname -- "$(readlink -f -- "$f")")"
+    else
+      dir="$f"
+    fi
+    $TERMINAL --working-directory "$dir"
+  }}
+cmd zoxide_jump ${{
+  printf "Jump to: "
+  read ans
+  res=$( zoxide query -l $ans | fzf --query="$ans " --select-1 --exit-0 --height=25% --reverse --no-sort --cycle)
+  lf -remote "send $id cd \"$res\""
+}}
+map cf $lf -remote "send $id select '$(fd . $HOME --type d --hidden --follow | fzf)'"
+# Dir bindings
+map ds dir-size
+map da dir-size-interactive
+map do dir-open-in-terminal
+map to zoxide_jump
+map cdh cd ~
+map cdd cd ~/Downloads
+
+# File Openers
+map E $$EDITOR "$f"
+cmd open-with %"$@" $fx
+map O push <enter>open-with<space>
+
+# Git commands
+cmd git-pull ${{clear; git pull || true; echo "press ENTER"; read ENTER}}
+cmd git-status ${{clear; git status; echo "press ENTER"; read ENTER}}
+cmd git-log ${{clear; git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit}}
+# Git mappings
+map gp git-pull
+map gs git-status
+map gl git-log
+
+# Trash commands
 cmd trash ${{
   files=$(printf "$fx" | tr '\n' ';')
   while [ "$files" ]; do
@@ -117,105 +152,14 @@ cmd trash ${{
     fi
   done
 }}
-
 cmd clear_trash %trash-empty
-
 cmd restore_trash ${{
   trash-restore
 }}
-
-cmd yank-dirname $dirname -- "$f" | head -c-1 | ccopy
-cmd yank-path $printf '%s' "$fx" | ccopy
-cmd yank-basename $basename -a -- $fx | head -c-1 | ccopy
-cmd yank-content $cat $fx | ccopy
-cmd select-all :unselect; invert
-
-# both dont work
-#cmd select-files ${{
-#    { echo "$fs"; find -L "$(pwd)" -mindepth 1 -maxdepth 1 -type f; } |
-#        if [ "$lf_hidden" = "false" ]; then
-#          # remove any hidden files so you only select files you can see.
-#          grep -v '/\.[^/]\+$'
-#        else
-#          cat
-#        fi |
-#        sed '/^$/d' | sort | uniq -u |
-#        xargs -d '\n' -r -I{} lf -remote "send $id toggle {}"
-#}}
-#cmd select-dirs ${{
-#    { echo "$fs"; find -L "$(pwd)" -mindepth 1 -maxdepth 1 -type d; } |
-#        if [ "$lf_hidden" = "false" ]; then
-#          grep -v '/\.[^/]\+$'
-#        else
-#          cat
-#        fi |
-#        sed '/^$/d' | sort | uniq -u |
-#        xargs -d '\n' -r -I{} lf -remote "send $id toggle {}"
-#}}
-
-cmd open-with %"$@" $fx
-
-cmd dir-size %dua "$f"
-cmd dir-size-interactive %$TERMINAL -e dua i "$f"
-cmd open-terminal-in-dir ${{
-    if [ -f "$f" ]; then
-      dir="$(dirname -- "$(readlink -f -- "$f")")"
-    else
-      dir="$f"
-    fi
-    $TERMINAL --working-directory "$dir"
-  }}
-
-# Bindings
-# Remove some defaults
-map m
-map o
-map n
-map "'"
-map '"'
-map d
-map c
-map e
-map f
-map t
-
-# File Openers
-map ee $$EDITOR "$f"
-map O push :open-with<space>
-
-map ds dir-size
-map da dir-size-interactive
-map do dir-open-in-terminal
-
-# Git
-cmd git-pull ${{clear; git pull || true; echo "press ENTER"; read ENTER}}
-cmd git-status ${{clear; git status; echo "press ENTER"; read ENTER}}
-cmd git-log ${{clear; git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit}}
-
-map gp git-pull
-map gs git-status
-map gl git-log
-
-# Archive Mappings
-map az zip
-map at tar
-map ag targz
-map ab targz
-map au unarchive
-
-# Trash Mappings
+# Trash mappings
 map dd trash
 map tc clear_trash
 map tr restore_trash
-
-# Fuzzy finder
-map cd $lf -remote "send $id select '$(fd . $HOME --type d --hidden --follow | fzf)'"
-map to zoxide_jump
-
-# Dragon Mapping
-# map dr dragon
-# map ds dragon-stay
-map di dragon-individual
 
 # Basic Functions
 map . set hidden!
@@ -224,21 +168,12 @@ map p paste
 map x cut
 map y copy
 map o open
-map mf mkfile
-map mr sudomkfile
-map md mkdir
-map ms $mkscript
-map ch chmod
 map r rename
-map br bulkrename
 map H top
 map L bottom
-map fd yank-dirname
-map fp yank-path
-map fb yank-basename
-map fc yank-content
 map R reload
 map C clear
 map U unselect
 map A select-all
-map <enter> shell
+map ":" shell
+map <enter> read
