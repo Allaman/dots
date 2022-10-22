@@ -314,8 +314,8 @@ extract() {
 	done
 }
 
-# Use lf to switch directories with lc and bind it to ctrl-o
-lfcd () {
+# Use lf to switch directories with lf and bind it to ctrl-o
+cdlf () {
     tmp="$(mktemp)"
     lf -last-dir-path="$tmp" "$@"
     if [ -f "$tmp" ]; then
@@ -324,7 +324,6 @@ lfcd () {
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
     fi
 }
-bindkey -s '^o' 'lfcd\n'
 
 # select from all PRs and view in vim
 ghprl() {
