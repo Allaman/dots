@@ -10,7 +10,6 @@ ITEM_DIR="$HOME/.config/sketchybar/items" # Directory where all the items are st
 BAR_COLOR=0xff2a2f38 # Black bar
 PADDINGS=3 # All paddings use this value (icon, label, background and bar paddings)
 FONT="Hack Nerd Font" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
-BAR_COLOR=0xff2a2f38 # Black bar
 ICON_COLOR=0xffe1e3e4 # Color of all icons
 LABEL_COLOR=0xffe1e3e4 # Color of all labels
 CONTRAST_COLOR=$ICON_COLOR #0xff2a2f38 # The color of elements in front of a background
@@ -50,7 +49,6 @@ sketchybar --bar                height=25                                       
                                 notch_width=0                                                     \
                                                                                                   \
            --default            drawing=on                                                        \
-                                lazy=off                                                          \
                                 updates=when_shown                                                \
                                 label.font="$FONT:Semibold:13.0"                                  \
                                 icon.font="$FONT:Bold:14.0"                                       \
@@ -111,7 +109,7 @@ sketchybar --bar                height=25                                       
 
 HAS_BATTERY=$(if [ "$(pmset -g batt | grep "Battery")" = "" ]; then echo "false"; else echo "true"; fi)
 
-##### Adding Right left #####
+##### Adding Left Items #####
 source $ITEM_DIR/apple.sh
 source $ITEM_DIR/spaces.sh
 source $ITEM_DIR/title.sh
