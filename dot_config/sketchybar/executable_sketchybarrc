@@ -7,7 +7,7 @@
 
 PLUGIN_DIR="$HOME/.config/sketchybar/plugins" # Directory where all the plugin scripts are stored
 ITEM_DIR="$HOME/.config/sketchybar/items" # Directory where all the items are stored
-BAR_COLOR=0xff2a2f38 # Black bar
+BAR_COLOR=0xff000000 # Black bar
 PADDINGS=3 # All paddings use this value (icon, label, background and bar paddings)
 FONT="Hack Nerd Font" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
 ICON_COLOR=0xffe1e3e4 # Color of all icons
