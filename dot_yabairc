@@ -57,6 +57,7 @@ yabai -m rule --add app="^Font Book$" sticky=off layer=normal manage=off
 yabai -m rule --add app="^System Preferences$" sticky=off layer=normal manage=off
 yabai -m rule --add app="^TinkerTool$" sticky=off layer=normal manage=off
 yabai -m rule --add app="^Docker Desktop$" sticky=off layer=normal manage=off
+yabai -m rule --add app="^Karabiner-Elements$" sticky=off layer=normal manage=off
 yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
 yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
 yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
