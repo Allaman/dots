@@ -15,6 +15,7 @@
 # yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
 # global settings
+# if mouse_modifier is set to 'cmd' this prevents cmd + right mouse to select!
 yabai -m config mouse_follows_focus          off \
                 focus_follows_mouse          off \
                 window_origin_display        default \
@@ -33,7 +34,7 @@ yabai -m config mouse_follows_focus          off \
                 insert_feedback_color        0xffd75f5f \
                 split_ratio                  0.50 \
                 auto_balance                 off \
-                mouse_modifier               alt \ # if this is cmd this prevents cmd + right mouse to select!
+                mouse_modifier               alt \
                 mouse_action1                move \
                 mouse_action2                resize \
                 mouse_drop_action            swap \
