@@ -20,4 +20,25 @@ cmd - 1 : yabai -m space --focus prev
 cmd - 2 : yabai -m space --focus next
 
 cmd + shift - 1  : yabai -m window --space prev; yabai -m space --focus prev
+
 cmd + shift - 2  : yabai -m window --space next; yabai -m space --focus next
+
+# WARNING: IRGENDEIN MAPPING hier LÄSST ALTGR+q nicht mehr @ schreiben
+
+# alt - h : yabai -m window --focus west
+# alt - j : yabai -m window --focus south
+# alt - k : yabai -m window --focus north
+# alt - l : yabai -m window --focus east
+#
+# alt - r : yabai -m space --rotate 90
+#
+# # Fullscreen
+# alt - f : yabai -m window --toggle zoom-fullscreen
+#
+# # Toggle padding and gap
+# alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
+#
+# # float / unfloat window and center on screen
+# alt - t : yabai -m window --toggle float;\
+#           yabai -m window --grid 4:4:1:1:2:2
+#
