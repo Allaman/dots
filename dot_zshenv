@@ -66,6 +66,7 @@ then
     # alias ssh='kitty +kitten ssh'
     export TERMINAL=kitty
     export TERM=xterm-kitty
+    alias ssh='kitty +kitten ssh'
   fi
   export BROWSER="open -a firefox"
 fi
