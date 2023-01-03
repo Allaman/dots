@@ -54,9 +54,12 @@ command -v fd >/dev/null 2>&1 && export FZF_DEFAULT_COMMAND='fd --type file --fo
 command -v fd >/dev/null 2>&1 && export FZF_ALT_C_COMMAND='fd --type directory --follow --hidden'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+
+
 if [[ "$OSTYPE" =~ "darwin" ]]
 then
   export LC_CTYPE=UTF-8
+  export GPG_TTY=$(tty)
   if [[ x"$KITTY_PID" == "x" ]]
   then # not kitty
     export TERMINAL=xterm
