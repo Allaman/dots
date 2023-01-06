@@ -1,10 +1,10 @@
 (
     selected_tab: Reset,
     command_fg: White,
-    selection_bg: Blue,
+    selection_bg: DarkGray,
     selection_fg: White,
-    cmdbar_bg: Blue,
-    cmdbar_extra_lines_bg: Blue,
+    cmdbar_bg: Black,
+    cmdbar_extra_lines_bg: Black,
     disabled_fg: DarkGray,
     diff_line_add: Green,
     diff_line_delete: Red,
