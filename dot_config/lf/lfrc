@@ -117,6 +117,7 @@ map da dir-size-interactive
 map do dir-open-in-terminal
 map to zoxide_jump
 map cdh cd ~
+map cdc cd ~/.config
 map cdd cd ~/Downloads
 
 # File Openers
