@@ -22,6 +22,7 @@ Library
 .config/sketchybar
 .yabairc
 .skhdrc
+.gnupg
 {{- end }}
 
 # only on linux systems
