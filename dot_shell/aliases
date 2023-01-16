@@ -80,12 +80,6 @@ alias \
   cssh='$EDITOR ~/.ssh/config' \
   caws='$EDITOR -p $HOME/.aws/{credentials,config}' \
   ckube='$EDITOR $HOME/.kube/config'
-if [ "${NVIM_LISTEN_ADDRESS}." != "." ]; then
-  alias \
-    h='nvr -o' \
-    s='nvr -O' \
-    t='nvr --remote-tab'
-fi
 
 # Tmux
 alias \
