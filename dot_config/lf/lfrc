@@ -16,7 +16,6 @@ set period 1
 # Remove some defaults
 map m
 map o
-map n
 map "'"
 map '"'
 map d
