@@ -166,6 +166,7 @@ which exa > /dev/null && alias lla='exa --group-directories-first --long --all -
 which tokei > /dev/null && alias cloc='tokei'
 #alias rm='echo "This is not the command you are looking for."; false' # real use with \rm file
 which trash > /dev/null && alias rm='trash' # real use with \rm file
+[ -f /Applications/Skim.app/Contents/MacOS/Skim ] && alias skim='open -a skim'
 
 # Kubernetes
 which kubectx > /dev/null && alias kx='kubectx'
