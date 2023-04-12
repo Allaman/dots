@@ -16,7 +16,6 @@ set period 1
 # Remove some defaults
 map m
 map o
-map n
 map "'"
 map '"'
 map d
@@ -117,6 +116,7 @@ map da dir-size-interactive
 map do dir-open-in-terminal
 map to zoxide_jump
 map cdh cd ~
+map cdc cd ~/.config
 map cdd cd ~/Downloads
 
 # File Openers
