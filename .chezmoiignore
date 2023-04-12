@@ -40,5 +40,6 @@ Library
 .xprofile
 .Xresources
 .xbindkeysrc
+default.nix
 {{- end }}
 
