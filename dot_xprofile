@@ -1,4 +1,7 @@
 #!/bin/sh
+
+xset r rate 200 25
+
 clipmenud &
 keepassxc &
 sync-mail.sh &
