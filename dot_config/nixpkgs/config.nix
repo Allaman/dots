@@ -8,6 +8,7 @@
         argocd
         atuin
         awscli2
+        clifm
         cmake
         codespell
         direnv
@@ -45,7 +46,7 @@
         jq
         #node
         nodejs
-        #pandoc
+        pandoc
         #jupyterlab
         k6
         k9s
