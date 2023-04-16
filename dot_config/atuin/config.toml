@@ -1,7 +1,7 @@
 ## where to store your database, default is your system data directory
 ## mac: ~/Library/Application Support/com.elliehuxtable.atuin/history.db
 ## linux: ~/.local/share/atuin/history.db
-# db_path = "~/.history.db"
+db_path = "~/backups/atuin/history.db"
 
 ## where to store your encryption key, default is your system data directory
 # key_path = "~/.key"
@@ -29,3 +29,7 @@ search_mode = "fuzzy"
 
 # auto, compact, full
 style = "compact"
+
+inline_height = 30
+
+show_preview = true
