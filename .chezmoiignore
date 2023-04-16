@@ -5,8 +5,7 @@ bootstrap.sh
 styles
 # my main editor is Neovim; keeping only for historic purposes
 .vimrc
-# my main terminal is kitty; keeping only for historic purposes
-.wezterm.lua
+# keeping only for historic purposes
 .config/alacritty/
 # Not in use right now
 .config/procs/
@@ -40,6 +39,7 @@ Library
 .xprofile
 .Xresources
 .xbindkeysrc
+.wezterm.lua
 default.nix
 {{- end }}
 

@@ -4,7 +4,14 @@ local config = {}
 
 config.color_scheme = "Dracula"
 
+{{- if eq .chezmoi.os "darwin" -}}
+config.font = wezterm.font("Comic Code Ligatures")
+config.dpi = 192
+config.use_ime = false
+{{ else -}}
 config.font = wezterm.font("Source Code Pro")
+{{ end -}}
+config.debug_key_events = true
 
 config.line_height = 1.1
 
@@ -16,6 +23,8 @@ config.window_padding = {
   bottom = 0,
 }
 
+config.window_decorations = "NONE"
+
 config.enable_tab_bar = false
 config.scrollback_lines = 10000
 config.enable_scroll_bar = false
@@ -25,7 +34,7 @@ config.use_dead_keys = false
 
 config.keys = {
   { key = "c", mods = "ALT", action = act.CopyTo("ClipboardAndPrimarySelection") },
-  { key = "v", mods = "ALT", action = act.PasteFrom("Clipboard") },
+  -- { key = "v", mods = "ALT", action = act.PasteFrom("Clipboard") },
   { key = "PageUp", mods = "SHIFT", action = act.ScrollByPage(-1) },
   { key = "PageDown", mods = "SHIFT", action = act.ScrollByPage(1) },
   { key = "+", mods = "CTRL", action = act.IncreaseFontSize },
@@ -53,3 +62,6 @@ config.mouse_bindings = {
 }
 
 return config
+
+
+-- vim: set ft=lua:
