@@ -34,7 +34,7 @@ config.use_dead_keys = false
 
 config.keys = {
   { key = "c", mods = "ALT", action = act.CopyTo("ClipboardAndPrimarySelection") },
-  -- { key = "v", mods = "ALT", action = act.PasteFrom("Clipboard") },
+  { key = "v", mods = "ALT", action = act.PasteFrom("Clipboard") },
   { key = "PageUp", mods = "SHIFT", action = act.ScrollByPage(-1) },
   { key = "PageDown", mods = "SHIFT", action = act.ScrollByPage(1) },
   { key = "+", mods = "CTRL", action = act.IncreaseFontSize },
