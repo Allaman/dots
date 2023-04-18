@@ -5,8 +5,6 @@ bootstrap.sh
 styles
 # my main editor is Neovim; keeping only for historic purposes
 .vimrc
-# keeping only for historic purposes
-.config/alacritty/
 # Not in use right now
 .config/procs/
 # Not in use in favour of xbindkeysrc

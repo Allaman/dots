@@ -3,6 +3,7 @@
 env:
   TERM: xterm-256color
 window:
+  # option_as_alt: true
   padding:
     x: 0
     y: 0
@@ -15,8 +16,12 @@ window:
   #
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
-  #     - buttonless: Title bar, transparent background, but no title bar buttons
+  #     - buttonless: Title bar, transparent background, but no title bar
+  {{ if eq .chezmoi.os "darwin" -}}
   decorations: buttonless
+  {{ else -}}
+  decorations: none
+  {{ end -}}
   # Window title
   title: Alacritty
   # Window class (Linux/BSD only):
@@ -30,14 +35,14 @@ scrolling:
 # Font configuration
 font:
   normal:
-    family: "Hack Nerd Font Mono"
+    family: "Comic Code Ligatures"
   bold:
-    family: "Hack Nerd Font Mono"
+    family: "Comic Code Ligatures"
   italic:
-    family: "Hack Nerd Font Mono"
+    family: "Comic Code Ligatures"
   bold_italic:
-    family: "Hack Nerd Font Mono"
-  size: 13
+    family: "Comic Code Ligatures"
+  size: 16
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
@@ -54,7 +59,7 @@ cursor:
   unfocused_hollow: true # If this is `true`, the cursor will be rendered as a hollow box when the window is not focused.
 # Send ESC (\x1b) before characters when alt is pressed.
 # fixes not being able type @ and | with altgr
-alt_send_esc: false
+# alt_send_esc: false
 hints:
   alphabet: "jfkdlsahgurieowpq"
   enabled:
