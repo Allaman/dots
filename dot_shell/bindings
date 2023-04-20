@@ -5,8 +5,12 @@ bindkey "^[[3~" delete-char                                  # Delete key
 bindkey '^[[2~' overwrite-mode                               # Insert key
 bindkey "^[[H"  beginning-of-line                            # Home
 bindkey "^[[F"  end-of-line                                  # End
-bindkey '^P' history-beginning-search-backward               # CTRL+p
-bindkey '^N' history-beginning-search-forward                # CTRL+n
+# https://unix.stackexchange.com/a/97844
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey '^P' history-beginning-search-backward-end           # CTRL+p
+bindkey '^N' history-beginning-search-forward-end            # CTRL+n
 bindkey -s '^f' 'nova^M'                                     # Run nova with CTRL-f
 bindkey -s '^s' 'tmux-sessionizer.sh^M'                                     # Run nova with CTRL-f
 # Use vim keys to select autocompletion
