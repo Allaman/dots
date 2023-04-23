@@ -29,6 +29,8 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 # Change autosuggestion color see https://coderwall.com/p/pb1uzq/z-shell-colors
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=060'
+# https://github.com/zsh-users/zsh-autosuggestions/issues/619
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-beginning-search-backward-end history-beginning-search-forward-end)
 
 
 # Theming section
