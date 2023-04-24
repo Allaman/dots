@@ -5,6 +5,7 @@ bindkey "^[[3~" delete-char                                  # Delete key
 bindkey '^[[2~' overwrite-mode                               # Insert key
 bindkey "^[[H"  beginning-of-line                            # Home
 bindkey "^[[F"  end-of-line                                  # End
+bindkey '^[[Z' reverse-menu-complete                         # Shift-Tab
 # https://unix.stackexchange.com/a/97844
 autoload -U history-search-end
 zle -N history-beginning-search-backward-end history-search-end
