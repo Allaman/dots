@@ -29,7 +29,7 @@ trap_exit_tmux ()
 {
   # switch only when current session has only one window and one pane
   if [ $(tmux list-panes | wc -l) -eq 1 ] && [ $(tmux list-windows | wc -l) -eq 1 ]; then
-    tmux switch-client -t 0
+    tmux switch-client -t default
   fi
 }
 
