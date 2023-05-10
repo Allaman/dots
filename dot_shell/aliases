@@ -76,7 +76,7 @@ alias \
   v="$EDITOR" \
   sv="sudo $EDITOR" \
   v.="vim ." \
-  vy="$EDITOR -c 'set syntax=yaml' -c 'nnoremap q :quit!<CR>'" \
+  vy="$EDITOR -c 'set filetype=yaml' -c 'nnoremap q :quit!<CR>'" \
   cssh='$EDITOR ~/.ssh/config' \
   caws='$EDITOR -p $HOME/.aws/{credentials,config}' \
   ckube='$EDITOR $HOME/.kube/config'
