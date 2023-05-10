@@ -818,7 +818,7 @@
 
   # typeset -g POWERLEVEL9K_KUBECONTEXT_PREFIX='%244Fat '
   # Only show kubecontext when one of the specified commands is typed
-  typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='k|kubectl|helm|kubens|kubeseal|kubectx|oc|istioctl|kogito|kx|kns|k9s|telepresence'
+  typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='k|kubectl|helm|kubens|kubeseal|kubectx|oc|istioctl|kogito|kx|kns|k9s|telepresence|flux'
 
   # Only show terraform version when one of the specified commands is typed
   typeset -g POWERLEVEL9K_TERRAFORM_VERSION_SHOW_ON_COMMAND='terraform'
