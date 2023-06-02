@@ -44,10 +44,6 @@ C-j = "shrink_selection"
 C-k = "expand_selection"
 C-l = "select_next_sibling"
 
-# Personal preference
-o = ["open_below", "normal_mode"]
-O = ["open_above", "normal_mode"]
-
 # Muscle memory
 "{" = ["goto_prev_paragraph", "collapse_selection"]
 "}" = ["goto_next_paragraph", "collapse_selection"]
