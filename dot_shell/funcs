@@ -204,6 +204,18 @@ gtag() {
 }
 #}}}
 
+#-------- Checkout main or master {{{
+git_checkout_main_or_master() {
+    if git rev-parse --verify --quiet main > /dev/null; then
+        git checkout main
+    elif git rev-parse --verify --quiet master > /dev/null; then
+        git checkout master
+    else
+        echo "Neither main nor master branch found."
+    fi
+}
+#}}}
+
 #-------- docker exec into container {{{
 docker-attach() {
   docker exec -it $1 bash

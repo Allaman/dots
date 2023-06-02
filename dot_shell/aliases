@@ -28,7 +28,7 @@ alias \
   gtlist='git describe --tags --abbrev=0' \
   gl='git log --ext-diff -u' \
   gco='fzf-git-checkout' \
-  gcm='git checkout master' \
+  gcm='git_checkout_main_or_master' \
   gcs='git checkout staging' \
   gcd='git checkout develop' \
   gcp='git checkout production' \
