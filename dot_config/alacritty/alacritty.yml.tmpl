@@ -20,7 +20,7 @@ window:
   {{ if eq .chezmoi.os "darwin" -}}
   decorations: buttonless
   {{ else -}}
-  decorations: none
+  decorations: full
   {{ end -}}
   # Window title
   title: Alacritty
@@ -34,6 +34,7 @@ scrolling:
   history: 5000 # Specifying '0' will disable scrolling.
 # Font configuration
 font:
+  {{ if eq .chezmoi.os "darwin" -}}
   normal:
     family: "Comic Code Ligatures"
   bold:
@@ -43,6 +44,20 @@ font:
   bold_italic:
     family: "Comic Code Ligatures"
   size: 16
+  {{ end -}}
+  normal:
+    family: "MesloLGS Nerd Font Mono"
+    style: "Regular"
+  bold:
+    family: "MesloLGS Nerd Font Mono"
+    style: "Bold"
+  italic:
+    family: "MesloLGS Nerd Font Mono"
+    style: "Italic"
+  bold_italic:
+    family: "MesloLGS Nerd Font Mono"
+    style: "Bold Italic"
+  size: 14
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
