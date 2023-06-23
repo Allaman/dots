@@ -9,6 +9,11 @@ alias \
   pacse='brew search' \
   pacrm='brew uninstall'
 
+# nix
+alias \
+  nconf='sudo $EDITOR /etc/nixos/configuration.nix' \
+  nrebuild='sudo nixos-rebuild switch'
+
 # Suffix alias
 alias -s txt=nvim
 alias -s {js,json}=nvim
