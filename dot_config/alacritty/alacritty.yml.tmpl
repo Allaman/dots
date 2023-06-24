@@ -44,7 +44,7 @@ font:
   bold_italic:
     family: "Comic Code Ligatures"
   size: 16
-  {{ end -}}
+  {{ else -}}
   normal:
     family: "MesloLGS Nerd Font Mono"
     style: "Regular"
@@ -58,6 +58,7 @@ font:
     family: "MesloLGS Nerd Font Mono"
     style: "Bold Italic"
   size: 14
+  {{ end -}}
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
