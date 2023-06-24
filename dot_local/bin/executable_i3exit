@@ -5,7 +5,7 @@
 
 case "$1" in
 lock)
-	blurlock
+	i3lock-fancy -p
 	;;
 logout)
 	i3-msg exit
