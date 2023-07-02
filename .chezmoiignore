@@ -11,6 +11,8 @@ styles
 .config/sxhkd
 # is managed via symlink
 .config/karabiner
+# no need to be put in a specific path - little hacky
+.nixos
 
 # only on darwin systems
 {{- if ne .chezmoi.os "darwin" }}
@@ -26,7 +28,6 @@ Library
 {{- if ne .chezmoi.os "linux" }}
 .config/i3blocks
 .config/i3status
-.config/nixpkgs
 .config/rofi
 .config/sxiv
 .config/zathura
@@ -34,10 +35,8 @@ Library
 .i3
 .urlview
 .xinitrc
-.xprofile
 .Xresources
 .xbindkeysrc
 .wezterm.lua
-default.nix
 {{- end }}
 

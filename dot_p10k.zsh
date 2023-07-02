@@ -42,7 +42,7 @@
     # os_icon                   # os identifier
     vpn_ip                    # virtual private network indicator
     status                    # exit code of the last command
-    #context                  # user@hostname
+    context                  # user@hostname
     dir                       # current directory
     vcs                       # git status
     # =========================[ Line #2 ]=========================
@@ -64,7 +64,7 @@
     #nodeenv                  # node.js environment (https://github.com/ekalinin/nodeenv)
     # node_version            # node.js version
     go_version                # go version (https://golang.org)
-    gcloud                    # gcloud project
+    # gcloud                    # gcloud project
     # rust_version            # rustc version (https://www.rust-lang.org)
     # dotnet_version          # .NET version (https://dotnet.microsoft.com)
     #rbenv                    # ruby version from rbenv (https://github.com/rbenv/rbenv)
@@ -121,9 +121,9 @@
   # Context format when root: user@host. The first part white, the rest grey.
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE="%F{$white}%n%f%F{$grey}@%m%f"
   # Context format when not root: user@host. The whole thing grey.
-  typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE="%F{$grey}%n@%m%f"
+  # typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE="%F{$grey}%n@%m%f"
   # Don't show context unless root or in SSH.
-  typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_CONTENT_EXPANSION=
+  # typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_CONTENT_EXPANSION=
 
   # Show previous command duration only if it's >= 5s.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=5
@@ -491,8 +491,8 @@
   # Default context color.
   typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=180
   # Default context format: %n is username, %m is hostname.
-  #typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE='%n%244F at %180F%m'
-  typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE='%n%244F'
+  # typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE='%n%244F at %180F%m'
+  typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE='%m%244F'
 
   # Context color when running with privileges.
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=178
