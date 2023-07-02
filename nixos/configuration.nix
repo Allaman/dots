@@ -8,6 +8,11 @@
       ./hardware-configuration.nix
     ];
 
+  # Enable experimental features
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -40,8 +45,6 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-
-
   # https://nixos.wiki/wiki/I3#i3blocks
   environment.pathsToLink = [ "/libexec" ];
   # Enable the X11 windowing system.
@@ -55,13 +58,14 @@
         i3status # gives you the default i3 status bar
         i3lock #default i3 screen locker
         i3blocks #if you are planning on using i3blocks over i3status
-	i3lock-fancy # screen locking with blur effect
+	      i3lock-fancy # screen locking with blur effect
      ];
     };
     displayManager.defaultSession = "none+i3";
     # Configure keymap in X11
     layout = "de";
     xkbVariant = "nodeadkeys";
+    # Set caps lock to escape
     xkbOptions = "caps:escape";
   };
 
@@ -71,7 +75,7 @@
   # Enable CUPS to print documents.
   services.printing.enable = false;
 
-  # Enable bluetooth
+  # Enable bluetooth(ctl)
   hardware.bluetooth.enable = true;
   # Bluetooth GUI if bluetoothctl is not sufficient
   #hardware.bluetooth.enable = true;
@@ -85,16 +89,12 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for nowJ)
-    #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  programs.zsh.enable = true;
+  programs.neovim = {
+    enable = true;
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.michael = {
@@ -112,35 +112,23 @@
     ];
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # List packages installed in system profile
   environment.systemPackages = with pkgs; [
-	acpi
-	arandr
-	brightnessctl
-	curl
-	gcc
-	git
-	gnumake
-	htop
-	networkmanagerapplet
-	pulseaudio
-	unzip
-	wget
-	xorg.xhost
-	zip
+    acpi # battery interfae
+    arandr # simple app to configure displays
+    brightnessctl # for manipulating screen brightness
+    curl
+    gcc
+    git
+    gnumake
+    htop
+    networkmanagerapplet # tray icon
+    pulseaudio # for audio controlls
+    unzip
+    wget
+    xorg.xhost # give permission to access X-server from a container
+    zip
   ];
-
-  programs.zsh.enable = true;
-  programs.neovim = {
-    enable = true;
-  };
-
 
   fonts = {
       fonts = with pkgs; [
@@ -158,9 +146,6 @@
       };
   };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
