@@ -120,20 +120,20 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-	curl
-	wget
-	zip
-	git
-	gcc
-	gnumake
-	unzip
-	brightnessctl
-	pulseaudio
 	acpi
+	arandr
+	brightnessctl
+	curl
+	gcc
+	git
+	gnumake
 	htop
 	networkmanagerapplet
-	arandr
+	pulseaudio
+	unzip
+	wget
 	xorg.xhost
+	zip
   ];
 
   programs.zsh.enable = true;
