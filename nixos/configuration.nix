@@ -192,19 +192,19 @@
         "unraid" = { id = "42GWJCT-VAONXMN-UNQVPRX-MVX6VHC-CSFKYFI-7MJX7QT-7VPK7SV-XJUFHAG"; addresses = [ "tcp://192.168.178.62:22222" ]; };
       };
       folders = {
-        "secrets" = {        # Label of the folder
-	  id = "lkumh-nvc74"; # ID of the folder
-          path = "~/.secrets/";    # Which folder to add to Syncthing
+        "secrets" = {                  # Label of the folder
+	        id = "lkumh-nvc74";          # ID of the folder
+          path = "~/.secrets/";        # Which folder to add to Syncthing
           devices = [ "unraid" ];      # Which devices to share the folder with
-	  type = "receiveonly"; # One of "sendreceive" "sendonly" "receiveonly" "receiveencrypted"
-	  ignorePerms = false;
+	        type = "receiveonly";        # One of "sendreceive" "sendonly" "receiveonly" "receiveencrypted"
+	        ignorePerms = false;         # Whether to ignore permission changes
         };
-        "workspace" = {        # Label of the folder
-	  id = "domaq-kl2sg"; # ID of the folder
-          path = "~/workspace/";    # Which folder to add to Syncthing
+        "workspace" = {                # Label of the folder
+	        id = "domaq-kl2sg";          # ID of the folder
+          path = "~/workspace/";       # Which folder to add to Syncthing
           devices = [ "unraid" ];      # Which devices to share the folder with
-	  type = "sendreceive"; # One of "sendreceive" "sendonly" "receiveonly" "receiveencrypted"
-	  ignorePerms = false;
+	        type = "sendreceive";        # One of "sendreceive" "sendonly" "receiveonly" "receiveencrypted"
+	        ignorePerms = false;         # Whether to ignore permission changes
         };
       };
     };
