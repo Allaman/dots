@@ -11,8 +11,14 @@ alias \
 
 # nix
 alias \
-  nconf='sudo $EDITOR /etc/nixos/configuration.nix' \
-  nrebuild='sudo nixos-rebuild switch'
+  nrebuild='sudo nixos-rebuild -I /home/michael/.local/share/chezmoi/nixos/configuration.nix switch'
+
+# distrobox
+alias \
+  dbenter='distrobox-enter' \
+  dblist='distrobox-list' \
+  dbstop='distrobox-stop' \
+  dbrm='distrobox-rm'
 
 # Suffix alias
 alias -s txt=nvim
