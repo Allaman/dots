@@ -18,12 +18,12 @@ source $HOME/.shell/bindings
 if [[ "$OSTYPE" =~ "darwin" ]]
 then
   # when put in zshenv it gets overwritten by tmux which calls /etc/profile again (login shell)
-  export PATH=$HOME/Library/Python/3.10/bin:/opt/homebrew/opt/gnu-tar/libexec/gnubin:/opt/homebrew/opt/findutils/libexec/gnubin:/opt/homebrew/Cellar/coreutils/9.1/libexec/gnubin:/opt/homebrew/bin:/opt/homebrew/opt/mysql-client/bin:/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH
+  export PATH=$HOME/Library/Python/3.11/bin:/opt/homebrew/opt/gnu-tar/libexec/gnubin:/opt/homebrew/opt/findutils/libexec/gnubin:/opt/homebrew/Cellar/coreutils/9.1/libexec/gnubin:/opt/homebrew/bin:/opt/homebrew/opt/mysql-client/bin:/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH
 
 fi
 
 autoload -Uz +X compinit
-# compinit test to check why was it there?
+compinit -d # needed for fpath completions to work
 
 trap_exit_tmux ()
 {
