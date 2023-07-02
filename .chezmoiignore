@@ -26,7 +26,6 @@ Library
 {{- if ne .chezmoi.os "linux" }}
 .config/i3blocks
 .config/i3status
-.config/nixpkgs
 .config/rofi
 .config/sxiv
 .config/zathura
@@ -34,10 +33,7 @@ Library
 .i3
 .urlview
 .xinitrc
-.xprofile
 .Xresources
 .xbindkeysrc
 .wezterm.lua
-default.nix
 {{- end }}
-
