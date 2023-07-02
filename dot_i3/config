@@ -21,8 +21,8 @@ font xft:URWGothic-Book 11
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 
-# start a terminal
-bindsym $mod+Return exec alacritty
+# start distrobox terminal
+bindsym $mod+Return exec --no-startup-id alacritty -e distrobox-enter db0
 # start program launcher
 bindsym $mod+d exec --no-startup-id dmenu_run
 # screenshot
@@ -246,6 +246,7 @@ mode "resize" {
 exec --no-startup-id xautolock -time 30 -locker 'i3lock-fancy -p' -notify 30 -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'"
 exec --no-startup-id nm-applet
 exec --no-startup-id xbindkeys
+exec --no-startup-id xhost +si:localuser:$USER
 
 
 # Start the bar

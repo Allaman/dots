@@ -22,6 +22,15 @@ then
 
 fi
 
+# Stuff for distrobox containers
+if [[ "$HOSTNAME" =~ "db" ]];
+then
+  export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
+  # these are not working in their usual destination - I don't know why
+  which trash > /dev/null && alias rm='trash'
+  command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
+fi
+
 autoload -Uz +X compinit
 # compinit test to check why was it there?
 
