@@ -103,12 +103,12 @@
     description = "Michael";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      	firefox # best browser
-	alacritty # terminal application
-	xautolock # automatic screen locking
-	flameshot # Screenshots
-	keepassxc # password manager
-        distrobox # Linux distribution as Podman/Docker
+      firefox # best browser
+	    alacritty # terminal application
+	    xautolock # automatic screen locking
+	    flameshot # Screenshots
+	    keepassxc # password manager
+      distrobox # Linux distribution as Podman/Docker
     ];
   };
 
