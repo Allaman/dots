@@ -5,7 +5,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      ./hardware-confiburation.nix
     ];
 
   # Enable experimental features
@@ -197,6 +197,13 @@
         };
       };
     };
+  };
+
+  # Enable garbage collection
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
   };
 
   # Enable the OpenSSH daemon.
