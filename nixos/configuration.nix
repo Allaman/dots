@@ -5,7 +5,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-confiburation.nix
+      ./hardware-configuration.nix
     ];
 
   # Enable experimental features
@@ -44,6 +44,9 @@
     LC_TELEPHONE = "de_DE.UTF-8";
     LC_TIME = "de_DE.UTF-8";
   };
+
+  # https://discourse.nixos.org/t/udiskie-no-longer-runs/23768
+  services.udisks2.enable = true;
 
   # https://nixos.wiki/wiki/I3#i3blocks
   environment.pathsToLink = [ "/libexec" ];
@@ -124,6 +127,7 @@
     htop
     networkmanagerapplet # tray icon
     pulseaudio # for audio controlls
+    udisks # query/manipulate storage devices
     unzip
     wget
     xorg.xhost # give permission to access X-server from a container
@@ -175,7 +179,7 @@
       overrideFolders = true;     # overrides any folders added or deleted through the WebUI
       extraOptions = {
         globalAnnounceEnabled = false;
-      }
+      };
       devices = {
         # https://docs.syncthing.net/users/faq.html#should-i-keep-my-device-ids-secret
         "unraid" = { id = "42GWJCT-VAONXMN-UNQVPRX-MVX6VHC-CSFKYFI-7MJX7QT-7VPK7SV-XJUFHAG"; addresses = [ "tcp://192.168.178.62:22222" ]; };
