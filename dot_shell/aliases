@@ -11,7 +11,8 @@ alias \
 
 # nix
 alias \
-  nrebuild='sudo nixos-rebuild -I /home/michael/.local/share/chezmoi/nixos/configuration.nix switch'
+  nrebuild='sudo nixos-rebuild switch'
+  nupdateall='sudo nix-channel --update && sudo nixos-rebuild switch'
 
 # distrobox
 alias \
