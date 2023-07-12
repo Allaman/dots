@@ -1,5 +1,10 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
+# Fix lua-language-server and stylua
+# patchelf --set-interpreter $(patchelf --print-interpreter `which find`) $HOME/.local/share/nvim/mason/packages/lua-language-server/libexec/bin/lua-language-server
+# patchelf --set-interpreter $(patchelf --print-interpreter `which find`) /home/michael/.local/share/nvim/mason/packages/stylua/stylua
+
+
 { config, pkgs, ... }:
 
 {
@@ -106,20 +111,38 @@
     description = "Michael";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      firefox # best browser
-	    alacritty # terminal application
-	    xautolock # automatic screen locking
 	    flameshot # Screenshots
 	    keepassxc # password manager
+	    xautolock # automatic screen locking
+      #java
+      age # key management
+      cargo
+      chezmoi # dotfile management
       distrobox # Linux distribution as Podman/Docker
+      fd # finder alternative
+      firefox # best browser
+      gitui # Git TUI
+      go
+      lf # TUI file manager
+      nodejs
+      ripgrep # grep alternative
+      rustc
+      tectonic # LaTex compiler
+      tig # GIT TUI
+      tmux # Terminal multiplexer
+      trash-cli # trash bin
+      xclip # clipboard tool
+      zoxide # Quickly jump to know folders
     ];
   };
 
   # List packages installed in system profile
   environment.systemPackages = with pkgs; [
+	  alacritty # terminal application
     acpi # battery interfae
     arandr # simple app to configure displays
     brightnessctl # for manipulating screen brightness
+    libnotify # notification library
     curl
     gcc
     git
