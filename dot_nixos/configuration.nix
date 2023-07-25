@@ -130,12 +130,14 @@
       go
       lf # TUI file manager
       nodejs
+      obsidian # markdown based knowledge management
       ripgrep # grep alternative
       rustc
       tectonic # LaTex compiler
       tig # GIT TUI
       tmux # Terminal multiplexer
       trash-cli # trash bin
+      ueberzugpp # ueberzug written in C++
       xclip # clipboard tool
       zoxide # Quickly jump to know folders
     ];
@@ -148,13 +150,14 @@
     arandr # simple app to configure displays
     brightnessctl # for manipulating screen brightness
     curl
+    file
     gcc
     git
     gnumake
     htop
     icu.dev # dependecy for marksman
     libnotify # notification library
-    libz # dependecy for marksman
+    zlib # dependecy for marksman
     networkmanagerapplet # tray icon
     pulseaudio # for audio controlls
     udisks # query/manipulate storage devices
