@@ -85,6 +85,9 @@
   # Enable CUPS to print documents.
   services.printing.enable = false;
 
+  # Enable TLP
+  services.tlp.enable = true;
+
   # Enable bluetooth(ctl)
   hardware.bluetooth.enable = true;
   # Bluetooth GUI if bluetoothctl is not sufficient
