@@ -88,6 +88,7 @@
     # battery                 # internal battery
     # example                 # example user-defined segment (see prompt_example function below)
     # =========================[ Line #2 ]=========================
+    shlvl                     # Displays the number of nested shells
     newline                   # \n
   )
 
@@ -771,6 +772,13 @@
     p10k segment -f 208 -i '⭐' -t 'hello, %n'
   }
 
+  function prompt_shlvl() {
+    if [[ $SHLVL -gt 1 ]];
+    then
+      p10k segment -f 208 -t "$SHLVL"
+    fi
+  }
+
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
   # is to generate the prompt segment for display in instant prompt. See
   # https://github.com/romkatv/powerlevel10k/blob/master/README.md#instant-prompt.
@@ -788,6 +796,7 @@
     # instant_prompt_example. This will give us the same `example` prompt segment in the instant
     # and regular prompts.
     prompt_example
+    prompt_shlvl
   }
 
   # User-defined prompt segments can be customized the same way as built-in segments.
