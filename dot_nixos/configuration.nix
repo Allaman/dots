@@ -58,18 +58,19 @@
   # https://nixos.wiki/wiki/I3#i3blocks
   environment.pathsToLink = [ "/libexec" ];
   # Enable the X11 windowing system.
+  # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/x11/xserver.nix
   services.xserver = {
-      enable = true;
-      desktopManager.xterm.enable = false;
-      windowManager.i3 = {
+    enable = true;
+    desktopManager.xterm.enable = false;
+    windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
         dmenu #application launcher most people use
         i3status # gives you the default i3 status bar
         i3lock #default i3 screen locker
         i3blocks #if you are planning on using i3blocks over i3status
-	      i3lock-fancy # screen locking with blur effect
-     ];
+        i3lock-fancy # screen locking with blur effect
+      ];
     };
     displayManager.defaultSession = "none+i3";
     # Configure keymap in X11
