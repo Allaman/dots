@@ -33,6 +33,8 @@ bindsym $mod+Shift+t exec --no-startup-id "alacritty -e htop"
 bindsym --release mod+c exec "xdotool key --clearmodifiers ctrl+c"
 bindsym --release mod+v exec "xdotool key --clearmodifiers ctrl+v"
 
+# clipboard manager
+bindsym $mod+p exec --no-startup-id clipmenu
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -246,6 +248,7 @@ mode "resize" {
 exec --no-startup-id xautolock -time 30 -locker 'i3lock-fancy -p' -notify 30 -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'"
 exec --no-startup-id nm-applet
 exec --no-startup-id xbindkeys
+exec --no-startup-id clipmenud
 # exec --no-startup-id xhost +si:localuser:$USER
 
 

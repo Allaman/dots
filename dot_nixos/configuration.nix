@@ -128,6 +128,7 @@
       age # key management
       cargo
       chezmoi # dotfile management
+      clipmenu # clipboard manager
       distrobox # Linux distribution as Podman/Docker
       fd # finder alternative
       firefox # best browser
