@@ -139,6 +139,7 @@
       trash-cli # trash bin
       ueberzugpp # ueberzug written in C++
       xclip # clipboard tool
+      xdotool # simulate keyboard/mouse
       zoxide # Quickly jump to know folders
     ];
   };

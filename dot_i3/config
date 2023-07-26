@@ -29,9 +29,9 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 bindsym $mod+Shift+x exec --no-startup-id "flameshot gui"
 # htop
 bindsym $mod+Shift+t exec --no-startup-id "alacritty -e htop"
-# file manager
-# FIX: $mod4 should be super but is not working here
-# bindsym $mod4+e exec --no-startup-id "alacritty -e lf"
+# alt+c, alt+v as copy, paste
+bindsym --release mod+c exec "xdotool key --clearmodifiers ctrl+c"
+bindsym --release mod+v exec "xdotool key --clearmodifiers ctrl+v"
 
 
 # kill focused window
