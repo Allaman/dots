@@ -78,6 +78,10 @@
     xkbVariant = "nodeadkeys";
     # Set caps lock to escape
     xkbOptions = "caps:escape";
+    # length of time in milliseconds that a key must be depressed before autorepeat starts
+    autoRepeatDelay = 150;
+    # length of time in milliseconds that should elapse between autorepeat-generated keystrokes
+    autoRepeatInterval = 30;
   };
 
   # Configure console keymap
