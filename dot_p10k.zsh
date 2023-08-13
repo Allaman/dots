@@ -773,7 +773,11 @@
   }
 
   function prompt_shlvl() {
-    if [[ $SHLVL -gt 1 ]];
+    default_level=1
+    if [ -n "$TMUX" ]; then
+      default_level=2
+    fi
+    if [[ $SHLVL -gt $default_level ]];
     then
       p10k segment -f 208 -t "$SHLVL"
     fi
