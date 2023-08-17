@@ -55,6 +55,14 @@
   # https://discourse.nixos.org/t/udiskie-no-longer-runs/23768
   services.udisks2.enable = true;
 
+  environment.etc."inputrc" = {
+    text = pkgs.lib.mkDefault( pkgs.lib.mkAfter ''
+        #  alternate mappings for "page up" and "page down" to search the history
+        "\e[5~": history-search-backward
+        "\e[6~": history-search-forward
+        '');
+  };
+
   # https://nixos.wiki/wiki/I3#i3blocks
   environment.pathsToLink = [ "/libexec" ];
   # Enable the X11 windowing system.
