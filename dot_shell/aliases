@@ -11,7 +11,7 @@ alias \
 
 # nix
 alias \
-  nrebuild='sudo nixos-rebuild switch'
+  nrebuild='sudo nixos-rebuild switch' \
   nupdateall='sudo nix-channel --update && sudo nixos-rebuild switch'
 
 # distrobox
