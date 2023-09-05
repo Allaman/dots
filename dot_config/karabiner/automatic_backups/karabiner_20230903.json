@@ -10001,6 +10001,16 @@
                         },
                         {
                             "from": {
+                                "key_code": "keypad_period"
+                            },
+                            "to": [
+                                {
+                                    "key_code": "comma"
+                                }
+                            ]
+                        },
+                        {
+                            "from": {
                                 "key_code": "left_command"
                             },
                             "to": [
