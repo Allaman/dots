@@ -2,7 +2,11 @@
 return {
   plugins = {
     copilot = {
+{{- if eq .chezmoi.os "darwin" }}
       enable = true,
+{{ else }}
+      enable = false,
+{{- end }}
     },
     ltex = {
       additional_lang = "de-DE",
