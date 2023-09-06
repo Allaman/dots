@@ -115,6 +115,8 @@ key_bindings:
   - {key: Space, mods: Control, chars: "\0"} # for ctrl-space autosuggestion
   - {key: PageUp, mods: Shift, action: ScrollPageUp, mode: ~Alt}
   - {key: PageDown, mods: Shift, action: ScrollPageDown, mode: ~Alt}
+  - {key: C, mods: Command, chars: "\x03"} # Fix command/ctrl+c with karabiner not recognized
+  - {key: A, mods: Command, chars: "\x01"} # Fix command/ctrl+a with karabiner not recognized
 schemes:
   material: &material
     primary:
@@ -301,7 +303,7 @@ schemes:
     indexed_colors:
       - {index: 16, color: "0xf4a261"}
       - {index: 17, color: "0xd67ad2"}
-  catpppuccin: &catppuccin
+  catppuccin: &catppuccin
     primary:
       background: '#303446' # base
       foreground: '#C6D0F5' # text
@@ -366,4 +368,4 @@ schemes:
     indexed_colors:
       - {index: 16, color: "0xF8BD96"}
       - {index: 17, color: "0xF5E0DC"}
-colors: *doom-one
+colors: *catppuccin
