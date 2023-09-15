@@ -4,7 +4,8 @@ return {
     copilot = {
 {{- if eq .chezmoi.os "darwin" }}
       enable = true,
-{{ else }}
+      disable_autostart = false,
+{{- else }}
       enable = false,
 {{- end }}
     },
