@@ -11,7 +11,7 @@ alias \
 
 # nix
 alias \
-  nflakeupdate='nix flake update' \
+  nflakeupdate='cd $(chezmoi source-path)/dot_nixos && nix flake update' \
   nflakerebuild='sudo nixos-rebuild switch --flake $(chezmoi source-path)/dot_nixos#thinkpad' \
   ndevelop='nix develop --command zsh'
 
