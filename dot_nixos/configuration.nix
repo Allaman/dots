@@ -6,6 +6,7 @@
 # libz.so.1 and glibc++6 not found in this case in this case
 # patchelf --set-rpath "$(nix eval nixpkgs#zlib.outPath --raw)/lib:$(nix eval nixpkgs#stdenv.cc.cc.lib.outPath --raw)/lib" .local/share/nvim/mason/bin/marksman
 
+{ self }:
 { config, pkgs, ... }:
 
 {
@@ -137,6 +138,7 @@
       chezmoi # dotfile management
       clipmenu # clipboard manager
       distrobox # Linux distribution as Podman/Docker
+      eza # ls alternative (from flake.nix)
       fd # finder alternative
       firefox # best browser
       gitui # Git TUI
