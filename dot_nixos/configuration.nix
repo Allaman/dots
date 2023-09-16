@@ -6,7 +6,6 @@
 # libz.so.1 and glibc++6 not found in this case in this case
 # patchelf --set-rpath "$(nix eval nixpkgs#zlib.outPath --raw)/lib:$(nix eval nixpkgs#stdenv.cc.cc.lib.outPath --raw)/lib" .local/share/nvim/mason/bin/marksman
 
-
 { config, pkgs, ... }:
 
 {
@@ -87,9 +86,9 @@
     # Set caps lock to escape
     xkbOptions = "caps:escape";
     # length of time in milliseconds that a key must be depressed before autorepeat starts
-    autoRepeatDelay = 150;
+    autoRepeatDelay = 100;
     # length of time in milliseconds that should elapse between autorepeat-generated keystrokes
-    autoRepeatInterval = 30;
+    autoRepeatInterval = 10;
   };
 
   # Configure console keymap
