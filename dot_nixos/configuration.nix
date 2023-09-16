@@ -118,6 +118,12 @@
   };
 
   programs.zsh.enable = true;
+  # Apparently, those are defaults and overwrite my "~/.shell/aliases"
+  # so I need to disable them here
+  environment.shellAliases = {
+    ls = null;
+    ll = null;
+  };
   programs.neovim = {
     enable = true;
   };
