@@ -11,8 +11,8 @@ alias \
 
 # nix
 alias \
-  nrebuild='sudo nixos-rebuild switch' \
-  nupdateall='sudo nix-channel --update && sudo nixos-rebuild switch' \
+  nflakeupdate='nix flake update' \
+  nflakerebuild='sudo nixos-rebuild switch --flake $(chezmoi source-path)/dot_nixos#thinkpad' \
   ndevelop='nix develop --command zsh'
 
 # distrobox
