@@ -65,7 +65,6 @@
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
-        dmenu #application launcher most people use
         i3status # gives you the default i3 status bar
         i3lock #default i3 screen locker
         i3blocks #if you are planning on using i3blocks over i3status
@@ -144,6 +143,7 @@
       lf # TUI file manager
       nodejs
       obsidian # markdown based knowledge management
+      rofi # App launcher / dmenu replacement
       ripgrep # grep alternative
       rustc
       tectonic # LaTex compiler
