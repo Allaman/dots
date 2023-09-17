@@ -1,6 +1,9 @@
 (
     open_help: Some(( code: F(1), modifiers: ( bits: 0,),)),
 
+    log_find: Some(( code: Char('/'), modifiers: ( bits: 0,),)),
+    file_find: Some(( code: Char('/'), modifiers: ( bits: 0,),)),
+
     focus_right: Some(( code: Char('l'), modifiers: ( bits: 0,),)),
     focus_left: Some(( code: Char('h'), modifiers: ( bits: 0,),)),
     focus_above: Some(( code: Char('k'), modifiers: ( bits: 0,),)),
