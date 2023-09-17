@@ -1,5 +1,5 @@
 configuration{
-    font: "FiraCode Nerd Font Mono 10";
+    font: "FiraCode Nerd Font Mono 16";
     modi: "run,drun,filebrowser,window,ssh";
     show-icons: true;
     terminal: "alacritty";
