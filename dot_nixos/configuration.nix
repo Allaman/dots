@@ -164,6 +164,7 @@
     arandr # simple app to configure displays
     brightnessctl # for manipulating screen brightness
     curl
+    dunst # Notification handling
     file
     gcc
     git
