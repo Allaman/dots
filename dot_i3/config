@@ -24,7 +24,7 @@ floating_modifier $mod
 # start distrobox terminal
 bindsym $mod+Return exec --no-startup-id alacritty
 # start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+space exec --no-startup-id rofi -show drun
 # screenshot
 bindsym $mod+Shift+x exec --no-startup-id "flameshot gui"
 # htop
@@ -34,7 +34,7 @@ bindsym --release mod+c exec "xdotool key --clearmodifiers ctrl+c"
 bindsym --release mod+v exec "xdotool key --clearmodifiers ctrl+v"
 
 # clipboard manager
-bindsym $mod+p exec --no-startup-id clipmenu
+bindsym $mod+p exec --no-startup-id CM_LAUNCHER=rofi clipmenu
 
 # kill focused window
 bindsym $mod+Shift+q kill
