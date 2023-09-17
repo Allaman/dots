@@ -24,7 +24,7 @@ floating_modifier $mod
 # start distrobox terminal
 bindsym $mod+Return exec --no-startup-id alacritty
 # start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+space exec --no-startup-id rofi -show drun
 # screenshot
 bindsym $mod+Shift+x exec --no-startup-id "flameshot gui"
 # htop
@@ -34,19 +34,20 @@ bindsym --release mod+c exec "xdotool key --clearmodifiers ctrl+c"
 bindsym --release mod+v exec "xdotool key --clearmodifiers ctrl+v"
 
 # clipboard manager
-bindsym $mod+p exec --no-startup-id clipmenu
+bindsym $mod+p exec --no-startup-id CM_LAUNCHER=rofi clipmenu
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id "brightnessctl set +10%"
-bindsym XF86MonBrightnessDown exec --no-startup-id "brightnessctl set 10%-"
+bindsym XF86MonBrightnessUp exec --no-startup-id "brightnessctl set +10% && notify-send $(brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}')"
+bindsym XF86MonBrightnessDown exec --no-startup-id "brightnessctl set 10%- && notify-send $(brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}')"
 
 # Audio Volume controls
-bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ -5%"
-bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ +5%"
+bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ -5% && notify-send $(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+%' | uniq)"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ +5% && notify-send $(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+%' | uniq)"
 bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+
 bindsym XF86AudioMicMute exec --no-startup-id "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
 
 # focus_follows_mouse no
@@ -162,7 +163,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 assign [class="firefox"] 1
 
 # Open specific applications in floating mode
-for_window [class="KeePassXC"] floating enable
+for_window [class="KeePassXC"] move scratchpad
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border normal
 for_window [class="Clipgrab"] floating enable
@@ -247,8 +248,9 @@ mode "resize" {
 # Autostart applications
 exec --no-startup-id xautolock -time 30 -locker 'i3lock-fancy -p' -notify 30 -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'"
 exec --no-startup-id nm-applet
-exec --no-startup-id xbindkeys
 exec --no-startup-id clipmenud
+exec --no-startup-id keepassxc
+exec --no-startup-id pasystray
 # exec --no-startup-id xhost +si:localuser:$USER
 
 

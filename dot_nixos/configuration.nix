@@ -1,12 +1,4 @@
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-# Fix lua-language-server and stylua
-# patchelf --set-interpreter $(patchelf --print-interpreter `which find`) $HOME/.local/share/nvim/mason/packages/lua-language-server/libexec/bin/lua-language-server
-# patchelf --set-interpreter $(patchelf --print-interpreter `which find`) /home/michael/.local/share/nvim/mason/packages/stylua/stylua
-# libz.so.1 and glibc++6 not found in this case in this case
-# patchelf --set-rpath "$(nix eval nixpkgs#zlib.outPath --raw)/lib:$(nix eval nixpkgs#stdenv.cc.cc.lib.outPath --raw)/lib" .local/share/nvim/mason/bin/marksman
-
-
+{ self }:
 { config, pkgs, ... }:
 
 {
@@ -73,7 +65,6 @@
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
-        dmenu #application launcher most people use
         i3status # gives you the default i3 status bar
         i3lock #default i3 screen locker
         i3blocks #if you are planning on using i3blocks over i3status
@@ -87,9 +78,9 @@
     # Set caps lock to escape
     xkbOptions = "caps:escape";
     # length of time in milliseconds that a key must be depressed before autorepeat starts
-    autoRepeatDelay = 150;
+    autoRepeatDelay = 200;
     # length of time in milliseconds that should elapse between autorepeat-generated keystrokes
-    autoRepeatInterval = 30;
+    autoRepeatInterval = 20;
   };
 
   # Configure console keymap
@@ -118,6 +109,12 @@
   };
 
   programs.zsh.enable = true;
+  # Apparently, those are defaults and overwrite my "~/.shell/aliases"
+  # so I need to disable them here
+  environment.shellAliases = {
+    ls = null;
+    ll = null;
+  };
   programs.neovim = {
     enable = true;
   };
@@ -138,6 +135,7 @@
       chezmoi # dotfile management
       clipmenu # clipboard manager
       distrobox # Linux distribution as Podman/Docker
+      eza # ls alternative (from flake.nix)
       fd # finder alternative
       firefox # best browser
       gitui # Git TUI
@@ -145,6 +143,7 @@
       lf # TUI file manager
       nodejs
       obsidian # markdown based knowledge management
+      rofi # App launcher / dmenu replacement
       ripgrep # grep alternative
       rustc
       tectonic # LaTex compiler
@@ -165,6 +164,7 @@
     arandr # simple app to configure displays
     brightnessctl # for manipulating screen brightness
     curl
+    dunst # Notification handling
     file
     gcc
     git
@@ -174,6 +174,7 @@
     libnotify # notification library
     zlib # dependecy for marksman
     networkmanagerapplet # tray icon
+    pasystray # pulseaudio tray icon
     pulseaudio # for audio controlls
     udisks # query/manipulate storage devices
     unzip
@@ -183,7 +184,7 @@
   ];
 
   fonts = {
-      fonts = with pkgs; [
+      packages = with pkgs; [
         (nerdfonts.override { fonts = [ "Meslo" "FiraCode" ]; })
       ];
       fontconfig = {
@@ -225,27 +226,27 @@
       configDir = "/home/michael/.config/syncthing";
       overrideDevices = true;     # overrides any devices added or deleted through the WebUI
       overrideFolders = true;     # overrides any folders added or deleted through the WebUI
-      extraOptions = {
+      settings = {
         globalAnnounceEnabled = false;
-      };
-      devices = {
+        devices = {
         # https://docs.syncthing.net/users/faq.html#should-i-keep-my-device-ids-secret
         "unraid" = { id = "42GWJCT-VAONXMN-UNQVPRX-MVX6VHC-CSFKYFI-7MJX7QT-7VPK7SV-XJUFHAG"; addresses = [ "tcp://192.168.178.62:22222" ]; };
-      };
-      folders = {
-        "secrets" = {                  # Label of the folder
-	        id = "lkumh-nvc74";          # ID of the folder
-          path = "~/.secrets/";        # Which folder to add to Syncthing
-          devices = [ "unraid" ];      # Which devices to share the folder with
-	        type = "receiveonly";        # One of "sendreceive" "sendonly" "receiveonly" "receiveencrypted"
-	        ignorePerms = false;         # Whether to ignore permission changes
         };
-        "workspace" = {                # Label of the folder
-	        id = "domaq-kl2sg";          # ID of the folder
-          path = "~/workspace/";       # Which folder to add to Syncthing
-          devices = [ "unraid" ];      # Which devices to share the folder with
-	        type = "sendreceive";        # One of "sendreceive" "sendonly" "receiveonly" "receiveencrypted"
-	        ignorePerms = false;         # Whether to ignore permission changes
+        folders = {
+          "secrets" = {                  # Label of the folder
+            id = "lkumh-nvc74";          # ID of the folder
+            path = "~/.secrets/";        # Which folder to add to Syncthing
+            devices = [ "unraid" ];      # Which devices to share the folder with
+            type = "receiveonly";        # One of "sendreceive" "sendonly" "receiveonly" "receiveencrypted"
+            ignorePerms = false;         # Whether to ignore permission changes
+          };
+          "workspace" = {                # Label of the folder
+            id = "domaq-kl2sg";          # ID of the folder
+            path = "~/workspace/";       # Which folder to add to Syncthing
+            devices = [ "unraid" ];      # Which devices to share the folder with
+            type = "sendreceive";        # One of "sendreceive" "sendonly" "receiveonly" "receiveencrypted"
+            ignorePerms = false;         # Whether to ignore permission changes
+          };
         };
       };
     };

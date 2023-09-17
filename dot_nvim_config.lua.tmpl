@@ -1,5 +1,25 @@
 -- https://github.com/Allaman/nvim/
 return {
+{{- if eq .chezmoi.os "linux" }}
+  lsp_servers = {
+    "bashls",
+    "dockerls",
+    "jsonls",
+    "gopls",
+    "ltex",
+    "marksman",
+    "nil_ls",
+    "pyright",
+    "lua_ls",
+    "rust_analyzer",
+    "tailwindcss",
+    "terraformls",
+    "texlab",
+    "tsserver",
+    "typst_lsp",
+    "yamlls",
+  },
+{{- end }}
   plugins = {
     copilot = {
 {{- if eq .chezmoi.os "darwin" }}
