@@ -40,8 +40,8 @@ bindsym $mod+p exec --no-startup-id clipmenu
 bindsym $mod+Shift+q kill
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id "brightnessctl set +10%"
-bindsym XF86MonBrightnessDown exec --no-startup-id "brightnessctl set 10%-"
+bindsym XF86MonBrightnessUp exec --no-startup-id "brightnessctl set +10% && notify-send $(brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}')"
+bindsym XF86MonBrightnessDown exec --no-startup-id "brightnessctl set 10%- && notify-send $(brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}')"
 
 # Audio Volume controls
 bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ -5%"
