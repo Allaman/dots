@@ -174,6 +174,7 @@
     libnotify # notification library
     zlib # dependecy for marksman
     networkmanagerapplet # tray icon
+    pasystray # pulseaudio tray icon
     pulseaudio # for audio controlls
     udisks # query/manipulate storage devices
     unzip
