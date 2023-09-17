@@ -44,9 +44,10 @@ bindsym XF86MonBrightnessUp exec --no-startup-id "brightnessctl set +10% && noti
 bindsym XF86MonBrightnessDown exec --no-startup-id "brightnessctl set 10%- && notify-send $(brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}')"
 
 # Audio Volume controls
-bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ -5%"
-bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ +5%"
+bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ -5% && notify-send $(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+%' | uniq)"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ +5% && notify-send $(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+%' | uniq)"
 bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+
 bindsym XF86AudioMicMute exec --no-startup-id "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
 
 # focus_follows_mouse no
