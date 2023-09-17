@@ -4,7 +4,7 @@ return {
     copilot = {
 {{- if eq .chezmoi.os "darwin" }}
       enable = true,
-      disable_autostart = false,
+      disable_autostart = true,
 {{- else }}
       enable = false,
 {{- end }}
@@ -22,6 +22,16 @@ return {
       dev = {
         path = "$HOME/workspace/github.com/allaman/",
       },
+      disabled_neovim_plugins = {
+        "gzip",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      }
     },
     telescope = {
       fzf_native = {
