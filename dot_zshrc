@@ -28,15 +28,15 @@ compinit -d # needed for fpath completions to work
 trap_exit_tmux ()
 {
   # switch only when current session has only one window and one pane
-  if [ $(tmux list-panes | wc -l) -eq 1 ] && [ $(tmux list-windows | wc -l) -eq 1 ]; then
+  if [ "$(tmux list-panes | wc -l)" -eq 1 ] && [ "$(tmux list-windows | wc -l)" -eq 1 ]; then
     tmux switch-client -t default
   fi
 }
 
 if [[ $- == *i* ]]
 then
-  # activate trap only when inside tmux so that I can open Terminals that don't trigger the trap
-  if [[ $TERM_PROGRAM = "tmux" ]]
+  # activate trap only when inside tmux and not inside Neovim terminal (in tmux)
+  if [[ $TERM_PROGRAM == "tmux" && -n $VIMRUNTIME ]]
   then
     trap trap_exit_tmux EXIT
   fi
@@ -44,3 +44,5 @@ fi
 
 # Profiling zsh
 # zprof
+
+# vim: filetype=sh
