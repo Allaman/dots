@@ -16,35 +16,29 @@
 
 # global settings
 # if mouse_modifier is set to 'cmd' this prevents cmd + right mouse to select!
-yabai -m config mouse_follows_focus          off \
-                focus_follows_mouse          off \
-                window_origin_display        default \
-                window_placement             second_child \
-                window_topmost               off \
-                window_shadow                off \
-                window_opacity               off \
-                window_opacity_duration      0.0 \
-                active_window_opacity        1.0 \
-                normal_window_opacity        0.80 \
-                window_border                on \
-                window_border_blur           off \
-                window_border_width          1 \
-                active_window_border_color   0xff6e75f5 \
-                normal_window_border_color   0xffBCBDBF \
-                insert_feedback_color        0xffd75f5f \
-                split_ratio                  0.50 \
-                auto_balance                 off \
-                mouse_modifier               alt \
-                mouse_action1                move \
-                mouse_action2                resize \
-                mouse_drop_action            swap \
-                layout                       float \
-                top_padding                  5 \
-                bottom_padding               5 \
-                left_padding                 5 \
-                right_padding                5 \
-                window_gap                   06 \
-                external_bar                 all:25:0 # padding top:bottom
+yabai -m config mouse_follows_focus off \
+	focus_follows_mouse off \
+	window_origin_display default \
+	window_placement second_child \
+	window_shadow off \
+	window_opacity off \
+	window_opacity_duration 0.0 \
+	active_window_opacity 1.0 \
+	normal_window_opacity 0.80 \
+	insert_feedback_color 0xffd75f5f \
+	split_ratio 0.50 \
+	auto_balance off \
+	mouse_modifier alt \
+	mouse_action1 move \
+	mouse_action2 resize \
+	mouse_drop_action swap \
+	layout float \
+	top_padding 5 \
+	bottom_padding 5 \
+	left_padding 5 \
+	right_padding 5 \
+	window_gap 06 \
+	external_bar all:25:0 # padding top:bottom
 
 # no tiling on space one
 # BUT apps will not respect top padding for the bar
