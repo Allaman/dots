@@ -77,9 +77,9 @@ map ab targz
 map ex unarchive
 
 # File commands
-cmd yank-dirname $dirname -- "$f" | head -c-1 | ccopy
+cmd yank-dirname $dirname -- "$f" | head | ccopy
 cmd yank-path $printf '%s' "$fx" | ccopy
-cmd yank-basename $basename -a -- $fx | head -c-1 | ccopy
+cmd yank-basename $basename -a -- $fx | head | ccopy
 cmd yank-content $cat $fx | ccopy
 cmd bulkrename ${{
   printf '%s\n' $fx | vidir -
