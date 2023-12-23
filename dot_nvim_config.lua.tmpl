@@ -6,12 +6,12 @@ return {
     "dockerls",
     "jsonls",
     "gopls",
+    "htmx",
     "ltex",
     "marksman",
     "nil_ls",
     "pyright",
     "lua_ls",
-    "rust_analyzer",
     "tailwindcss",
     "terraformls",
     "texlab",
@@ -20,6 +20,23 @@ return {
     "yamlls",
   },
 {{- end }}
+  lsp_servers = {
+    "bashls",
+    "dockerls",
+    "jsonls",
+    "gopls",
+    "htmx",
+    "ltex",
+    "marksman",
+    "pyright",
+    "lua_ls",
+    "tailwindcss",
+    "terraformls",
+    "texlab",
+    "tsserver",
+    "typst_lsp",
+    "yamlls",
+  },
   plugins = {
     copilot = {
 {{- if eq .chezmoi.os "darwin" }}
@@ -28,6 +45,12 @@ return {
 {{- else }}
       enable = false,
 {{- end }}
+    },
+    gopher = {
+      enable = true,
+    },
+    harpoon = {
+      enable = true,
     },
     indent_blankline = {
       enable_scope = false,
@@ -62,9 +85,21 @@ return {
     lualine = {
       extensions = { "fugitive", "lazy", "neo-tree", "nvim-dap-ui", "quickfix", "symbols-outline", "toggleterm" },
     },
+    oil = {
+      enable = true,
+    },
+    overseer = {
+      enable = true,
+    },
     telescope = {
       fzf_native = {
         enable = true,
+      },
+    },
+    trouble = {
+      enable = true,
+      opts = {
+        auto_preview = false,
       },
     },
   },
