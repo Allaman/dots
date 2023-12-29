@@ -107,7 +107,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-
   programs.zsh.enable = true;
   # Apparently, those are defaults and overwrite my "~/.shell/aliases"
   # so I need to disable them here
@@ -118,6 +117,10 @@
   programs.neovim = {
     enable = true;
   };
+
+  # https://github.com/NixOS/nixpkgs/issues/273611
+  nixpkgs.config.permittedInsecurePackages =
+    pkgs.lib.optional (pkgs.obsidian.version == "1.4.16") "electron-25.9.0";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.michael = {
