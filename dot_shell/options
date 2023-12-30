@@ -38,5 +38,5 @@ unsetopt menu_complete                                          # do not autosel
 unsetopt nomatch                                                # allow gloobing, e.g apt update kernel*
 setopt complete_aliases                                         # autocompletion CLI switches for aliases
 zstyle ':completion:*' list-colors ''                           # show colors on menu completion
-compinit -d
+# compinit -d
 colors
