@@ -1,6 +1,5 @@
 { self }:
 { config, pkgs, ... }:
-
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -46,7 +45,6 @@
 
   # https://discourse.nixos.org/t/udiskie-no-longer-runs/23768
   services.udisks2.enable = true;
-
   environment.etc."inputrc" = {
     text = pkgs.lib.mkDefault( pkgs.lib.mkAfter ''
         #  alternate mappings for "page up" and "page down" to search the history
@@ -75,12 +73,38 @@
     # Configure keymap in X11
     layout = "de";
     xkbVariant = "nodeadkeys";
-    # Set caps lock to escape
-    xkbOptions = "caps:escape";
     # length of time in milliseconds that a key must be depressed before autorepeat starts
     autoRepeatDelay = 200;
     # length of time in milliseconds that should elapse between autorepeat-generated keystrokes
     autoRepeatInterval = 20;
+  };
+
+  services.keyd = {
+    enable = true;
+    keyboards = {
+      internal = {
+        settings = {
+          main = {
+            # Tapping caps is ESC
+            # Holding caps with hjkl act as arrow keys
+            capslock = "overload(arrows, esc)";
+            # Tapping ctrl will apply it to the next key
+            # Typping ctrl twice "locks" it until pressed again
+            # Holding ctrl works as expected
+	          control = "oneshot(control)";
+          };
+          control = {
+            control = "toggle(control)";
+          };
+          arrows = {
+            h = "left";
+            j = "down";
+            k = "up";
+            l = "right";
+          };
+        };
+      };
+    };
   };
 
   # Configure console keymap
