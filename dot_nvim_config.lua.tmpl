@@ -19,7 +19,7 @@ return {
     "typst_lsp",
     "yamlls",
   },
-{{- end }}
+{{- else }}
   lsp_servers = {
     "bashls",
     "dockerls",
@@ -37,6 +37,7 @@ return {
     "typst_lsp",
     "yamlls",
   },
+{{- end }}
   plugins = {
     copilot = {
 {{- if eq .chezmoi.os "darwin" }}
