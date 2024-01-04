@@ -1,6 +1,5 @@
 # vim: set ft=zsh:
 
-[ -d $HOME/.shell/fast-syntax-Highlighting ] && source $HOME/.shell/fast-syntax-Highlighting/fast-syntax-highlighting.plugin.zsh
 [ -f $HOME/.shell/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source $HOME/.shell/zsh-autosuggestions/zsh-autosuggestions.zsh
 # https://github.com/zsh-users/zsh-autosuggestions/issues/746
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS=(
@@ -9,7 +8,6 @@ ZSH_AUTOSUGGEST_CLEAR_WIDGETS=(
     history-beginning-search-forward-end
 	)
 typeset -ga ZSH_AUTOSUGGEST_CLEAR_WIDGETS
-[ -d $HOME/.shell/zsh-completions/ ] && fpath=($HOME/.shell/zsh-completions/src $fpath)
 [ -d /opt/homebrew/share/zsh/site-functions ] && fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

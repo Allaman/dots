@@ -22,7 +22,7 @@ then
 
 fi
 
-autoload -Uz +X compinit
+autoload -Uz compinit
 compinit -d # needed for fpath completions to work
 
 trap_exit_tmux ()
@@ -41,6 +41,10 @@ then
     trap trap_exit_tmux EXIT
   fi
 fi
+
+# Putting these at the end of reduces load time from many 100ms to 70ms
+[ -d $HOME/.shell/zsh-completions/ ] && fpath=($HOME/.shell/zsh-completions/src $fpath)
+[ -d $HOME/.shell/fast-syntax-Highlighting ] && source $HOME/.shell/fast-syntax-Highlighting/fast-syntax-highlighting.plugin.zsh
 
 # Profiling zsh
 # zprof
