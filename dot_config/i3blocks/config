@@ -34,8 +34,9 @@ markup=pango
 [memory]
 color=#AABBAA
 # label=
-separator=false
 interval=30
+
+[ssid]
 
 # CPU usage
 #
@@ -60,8 +61,10 @@ interval=10
 # see the script for details.
 [temperature]
 color=#AABBAA
-# label=糖
+# label=
 interval=10
+SENSOR_CHIP="coretemp-isa-0000"
+
 #
 # Disk usage
 #
@@ -70,7 +73,7 @@ interval=10
 # (defaults to 10 for 10%).
 [disk]
 color=#AABBAA
-# label=
+# label=
 #instance=/mnt/data
 interval=30
 
@@ -84,35 +87,36 @@ label=⚡
 interval=30
 
 # next calendar entry
-[agenda]
-command=khal list today | awk 'NR==2'
-color=#FFAABB
-interval=300
+# [agenda]
+# command=khal list today | awk 'NR==2'
+# color=#FFAABB
+# interval=300
 
 # uptime of system
-[uptime]
+# [uptime]
 # label=祥
-command=uptime | \grep -ohe 'up .*' | sed 's/,//g' | awk '{ print $2}'
-color=#FFA500
-interval=60
+# command=uptime | \grep -ohe 'up .*' | sed 's/,//g' | awk '{ print $2}'
+# color=#FFA500
+# interval=60
 
 # Volume indicator
 #
 # The first parameter sets the step (and units to display)
 # The second parameter overrides the mixer selection
 # See the script for details.
-[volume]
+# [volume]
 # label=蓼
 #label=♪
-instance=Master
+# instance=Master
 #instance=PCM
-interval=once
-signal=10
-interval=60
+# interval=once
+# signal=10
+# interval=60
 
-[brightness]
+# On NixOS/Thinkpad uses 100% cpu..
+# [brightness]
 # label=
-interval=60
+# interval=persist
 
 # Network interface monitoring
 #
@@ -123,51 +127,30 @@ interval=60
 # label=
 color=#00FF00
 interval=10
-separator=false
 
-[wifi]
-#instance=wlp3s0
-interval=10
-separator=false
+[bandwidth3]
+interval=persist
+markup=pango
+
+[nameserver]
+command=~/.local/bin/i3blocks-nameserver.sh
+interval=60
+color=#ff7000
+# command=i3blocks-nameserver.sh
+
+# [wifi]
+# #instance=wlp3s0
+# interval=10
+# separator=false
 
 # [bandwidth]
 # #instance=eth0
 # interval=5
 
+[time]
+interval=1
+STRFTIME_FORMAT=%Y-%m-%d %H:%M
+TZONES=$DEFAULT_TZ,Brazil/East,Australia/Brisbane,Asia/Calcutta
+# Omits the label for the defalt timezone
+TZ_LABELS=,Brazil,AU,Hyderabad
 
-# Generic media player support
-#
-# This displays "ARTIST - SONG" if a music is playing.
-# Supported players are: spotify, vlc, audacious, xmms2, mplayer, and others.
-[mediaplayer]
-instance=spotify
-interval=5
-signal=10
-
-# Date Time
-# clickable pop up calendar
-[rofi-calendar]
-command=rofi-calendar.sh
-interval=5
-
-# OpenVPN support
-#
-# Support multiple VPN, with colors.
-#[openvpn]
-#interval=20
-
-# Key indicators
-#
-# Add the following bindings to i3 config file:
-#
-# bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
-# bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
-#[keyindicator]
-#instance=CAPS
-#interval=once
-#signal=11
-
-#[keyindicator]
-#instance=NUM
-#interval=once
-#signal=11
