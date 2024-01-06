@@ -36,8 +36,12 @@ bindsym --release mod+v exec "xdotool key --clearmodifiers ctrl+v"
 # clipboard manager
 bindsym $mod+p exec --no-startup-id CM_LAUNCHER=rofi clipmenu
 
-# kill focused window
-bindsym $mod+Shift+q kill
+# kill focused window with mod+q+q
+bindsym $mod+q mode "quit"
+mode "quit"{
+    bindsym $mod+q kill; mode "default"
+    bindsym Escape mode "default"
+}
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id "brightnessctl set +10% && notify-send $(brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}')"
