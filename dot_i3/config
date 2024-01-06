@@ -93,10 +93,14 @@ workspace_auto_back_and_forth yes
 bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
-# split orientation
-# bindsym $mod+h split h;exec notify-send 'tile horizontally'
-# bindsym $mod+v split v;exec notify-send 'tile vertically'
-bindsym $mod+q split toggle
+bindsym $mod+t mode "tile"
+mode "tile" {
+    bindsym h  split h; exec notify-send 'tile horizontally'; mode "default"
+    bindsym v  split v; exec notify-send 'tile vertically'; mode "default
+    bindsym t  split toggle; exec notify-send 'toggle tile'; mode "default"
+
+    bindsym Escape mode "default"
+}
 
 # toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
