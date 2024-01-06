@@ -193,6 +193,7 @@
     acpi # battery interfae
     arandr # simple app to configure displays
     brightnessctl # for manipulating screen brightness
+    coreutils # GNU Core utils
     curl
     dunst # Notification handling
     file
@@ -202,10 +203,12 @@
     htop
     icu.dev # dependecy for marksman
     libnotify # notification library
+    lm_sensors # get system temperature
     zlib # dependecy for marksman
     networkmanagerapplet # tray icon
     pasystray # pulseaudio tray icon
     pulseaudio # for audio controlls
+    sysstat # A collection of performance monitoring tools for Linux (mpstat is required for i3blocks)
     udisks # query/manipulate storage devices
     unzip
     wget
