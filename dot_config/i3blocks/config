@@ -45,6 +45,10 @@ color=#AABBAA
 interval=10
 SENSOR_CHIP="coretemp-isa-0000"
 
+[fan]
+command=~/.local/bin/i3blocks-fan.sh
+interval=10
+
 [battery]
 label=BAT
 label=⚡
