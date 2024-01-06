@@ -28,103 +28,38 @@ command=~/.local/share/i3blocks-contrib/$BLOCK_NAME/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 
-# Memory usage
-#
-# The type defaults to "mem" if the instance is not specified.
 [memory]
 color=#AABBAA
-# label=
 interval=30
 
-[ssid]
-
-# CPU usage
-#
-# The script may be called with -w and -c switches to specify thresholds,
-# see the script for details.
 [cpu_usage]
 color=#AABBAA
-# label=
 interval=10
-# min_width=CPU: 100.00%
-#separator=false
 
-# [load_average]
-# color=#AABBAA
-# label=LOAD
-# interval=10
+[disk]
+color=#AABBAA
+interval=30
 
-# Temperature
-#
-# Support multiple chips, though lm-sensors.
-# The script may be called with -w and -c switches to specify thresholds,
-# see the script for details.
 [temperature]
 color=#AABBAA
-# label=
 interval=10
 SENSOR_CHIP="coretemp-isa-0000"
 
-#
-# Disk usage
-#
-# The directory defaults to $HOME if the instance is not specified.
-# The script may be called with a optional argument to set the alert
-# (defaults to 10 for 10%).
-[disk]
-color=#AABBAA
-# label=
-#instance=/mnt/data
-interval=30
-
-# Battery indicator
-#
-# The battery instance defaults to 0.
 [battery]
 label=BAT
 label=⚡
-#instance=1
 interval=30
 
-# next calendar entry
-# [agenda]
-# command=khal list today | awk 'NR==2'
-# color=#FFAABB
-# interval=300
-
-# uptime of system
-# [uptime]
-# label=祥
-# command=uptime | \grep -ohe 'up .*' | sed 's/,//g' | awk '{ print $2}'
-# color=#FFA500
-# interval=60
-
-# Volume indicator
-#
-# The first parameter sets the step (and units to display)
-# The second parameter overrides the mixer selection
-# See the script for details.
-# [volume]
-# label=蓼
-#label=♪
-# instance=Master
-#instance=PCM
-# interval=once
-# signal=10
-# interval=60
+[uptime]
+command=uptime | \grep -ohe 'up .*' | sed 's/,//g' | awk '{ print $2}'
+color=#FFA500
+interval=60
 
 # On NixOS/Thinkpad uses 100% cpu..
 # [brightness]
-# label=
 # interval=persist
 
-# Network interface monitoring
-#
-# If the instance is not specified, use the interface used for default route.
-# The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
 [iface]
-#instance=wlan0
-# label=
 color=#00FF00
 interval=10
 
@@ -136,16 +71,6 @@ markup=pango
 command=~/.local/bin/i3blocks-nameserver.sh
 interval=60
 color=#ff7000
-# command=i3blocks-nameserver.sh
-
-# [wifi]
-# #instance=wlp3s0
-# interval=10
-# separator=false
-
-# [bandwidth]
-# #instance=eth0
-# interval=5
 
 [time]
 interval=1
