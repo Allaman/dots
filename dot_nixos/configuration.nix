@@ -88,12 +88,22 @@
             # Tapping caps is ESC
             # Holding caps with hjkl act as arrow keys
             capslock = "overload(arrows, esc)";
+            # Left alt acts as ctrl in certain key combos
+            # Mimic the behaviour of my macOS config (karabiner)
+            leftalt = "layer(alt)";
           };
           arrows = {
             h = "left";
             j = "down";
             k = "up";
             l = "right";
+          };
+          "alt:A" = {
+            c = "C-insert";
+            v = "S-insert";
+            t = "C-t";
+            w = "C-w";
+            d = "C-d";
           };
         };
       };
