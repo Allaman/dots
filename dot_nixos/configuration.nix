@@ -88,13 +88,6 @@
             # Tapping caps is ESC
             # Holding caps with hjkl act as arrow keys
             capslock = "overload(arrows, esc)";
-            # Tapping ctrl will apply it to the next key
-            # Typping ctrl twice "locks" it until pressed again
-            # Holding ctrl works as expected
-	          control = "oneshot(control)";
-          };
-          control = {
-            control = "toggle(control)";
           };
           arrows = {
             h = "left";
