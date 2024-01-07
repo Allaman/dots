@@ -1,0 +1,16 @@
+sync_address = {{ gopassRaw "atuin_sync_address" | trim |quote }}
+
+## enable or disable automatic sync
+auto_sync = true
+
+sync_frequency = "5m"
+
+## possible values: prefix, fulltext, fuzzy
+search_mode = "fuzzy"
+
+# auto, compact, full
+style = "compact"
+
+inline_height = 30
+
+show_preview = true
