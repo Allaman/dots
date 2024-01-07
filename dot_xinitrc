@@ -62,7 +62,5 @@ get_session(){
 
 	echo "dbus-launch ${dbus_args[*]}"
 }
-# dbus-update-activation-environment --systemd DISPLAY
-# export SSH_AUTH_SOCK
 
 exec $(get_session)

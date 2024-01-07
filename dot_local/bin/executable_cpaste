@@ -1,9 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-if [[ "$OSTYPE" =~ "darwin"* ]]
-then
-  pbpaste
+if [[ "$OSTYPE" =~ "darwin"* ]]; then
+	pbpaste
 else
-  xclip -selection clipboard -o
+	xclip -selection clipboard -o
 fi
-
