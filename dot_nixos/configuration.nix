@@ -79,9 +79,12 @@
     autoRepeatInterval = 20;
   };
 
+  services.gnome.gnome-keyring.enable = true;
+
   services.keyd = {
     enable = true;
     keyboards = {
+      # https://manpages.opensuse.org/Tumbleweed/keyd/keyd.1.en.html
       internal = {
         settings = {
           main = {
@@ -156,6 +159,7 @@
     description = "Michael";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
+      atuin # Shell history (from flake.nix)
 	    flameshot # Screenshots
 	    keepassxc # password manager
 	    xautolock # automatic screen locking
@@ -170,6 +174,7 @@
       firefox # best browser
       gitui # Git TUI
       go
+      gopass # CLI password manager
       lf # TUI file manager
       nodejs
       obsidian # markdown based knowledge management
@@ -207,6 +212,7 @@
     zlib # dependecy for marksman
     networkmanagerapplet # tray icon
     pasystray # pulseaudio tray icon
+    pinentry-curses # GnuPG’s interface to passphrase input
     pulseaudio # for audio controlls
     sysstat # A collection of performance monitoring tools for Linux (mpstat is required for i3blocks)
     udisks # query/manipulate storage devices
@@ -235,8 +241,14 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
+    pinentryFlavor = "curses";
+    settings = {
+      default-cache-ttl = 21600;
+      default-cache-ttl-ssh = 21600;
+      max-cache-ttl = 21600;
+      max-cache-ttl-ssh = 21600;
+    };
   };
-
   virtualisation = {
     podman = {
       enable = true;
