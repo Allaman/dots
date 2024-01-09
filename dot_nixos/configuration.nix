@@ -158,38 +158,6 @@
     shell = pkgs.zsh;
     description = "Michael";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      atuin # Shell history (from flake.nix)
-	    flameshot # Screenshots
-	    keepassxc # password manager
-	    xautolock # automatic screen locking
-      #java
-      age # key management
-      cargo
-      chezmoi # dotfile management
-      clipmenu # clipboard manager
-      distrobox # Linux distribution as Podman/Docker
-      eza # ls alternative (from flake.nix)
-      fd # finder alternative
-      firefox # best browser
-      gitui # Git TUI
-      go
-      gopass # CLI password manager
-      lf # TUI file manager
-      nodejs
-      obsidian # markdown based knowledge management
-      rofi # App launcher / dmenu replacement
-      ripgrep # grep alternative
-      rustc
-      tectonic # LaTex compiler
-      tig # GIT TUI
-      tmux # Terminal multiplexer
-      trash-cli # trash bin
-      ueberzugpp # ueberzug written in C++
-      xclip # clipboard tool
-      xdotool # simulate keyboard/mouse
-      zoxide # Quickly jump to know folders
-    ];
   };
 
   # List packages installed in system profile

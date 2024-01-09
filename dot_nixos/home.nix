@@ -18,10 +18,36 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
+    pkgs.atuin # Shell history (from flake.nix)
+    pkgs.flameshot # Screenshots
+    pkgs.keepassxc # password manager
+    pkgs.xautolock # automatic screen locking
+    #java
+    pkgs.age # key management
+    pkgs.cargo
+    pkgs.chezmoi # dotfile management
+    pkgs.clipmenu # clipboard manager
+    pkgs.distrobox # Linux distribution as Podman/Docker
+    pkgs.eza # ls alternative (from flake.nix)
+    pkgs.fd # finder alternative
+    pkgs.firefox # best browser
+    pkgs.gitui # Git TUI
+    pkgs.go
+    pkgs.gopass # CLI password manager
+    pkgs.lf # TUI file manager
+    pkgs.nodejs
+    pkgs.obsidian # markdown based knowledge management
+    pkgs.rofi # App launcher / dmenu replacement
+    pkgs.ripgrep # grep alternative
+    pkgs.rustc
+    pkgs.tectonic # LaTex compiler
+    pkgs.tig # GIT TUI
+    pkgs.tmux # Terminal multiplexer
+    pkgs.trash-cli # trash bin
+    pkgs.ueberzugpp # ueberzug written in C++
+    pkgs.xclip # clipboard tool
+    pkgs.xdotool # simulate keyboard/mouse
+    pkgs.zoxide # Quickly jump to know folders
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
