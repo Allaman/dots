@@ -34,7 +34,7 @@ bindsym --release mod+c exec "xdotool key --clearmodifiers ctrl+c"
 bindsym --release mod+v exec "xdotool key --clearmodifiers ctrl+v"
 
 # clipboard manager
-bindsym $mod+p exec --no-startup-id CM_LAUNCHER=rofi clipmenu
+bindsym $mod+shift+p exec --no-startup-id CM_LAUNCHER=rofi clipmenu
 
 # kill focused window with mod+q+q
 bindsym $mod+q mode "quit"
