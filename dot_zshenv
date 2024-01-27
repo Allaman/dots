@@ -76,8 +76,6 @@ fi
 
 if [[ "$OSTYPE" =~ "linux" ]]
 then
-  export TERM=screen-256color
-  export TERMINAL=kitty
   export BROWSER=firefox
   export BROWSERCLI=lynx
   export MAIL=/usr/bin/neomutt
