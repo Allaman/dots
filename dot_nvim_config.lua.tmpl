@@ -39,6 +39,12 @@ return {
   },
 {{- end }}
   plugins = {
+    chatgpt = {
+      enable = true,
+      opts = {
+        api_key_cmd = "gopass show --password openai/api-token",
+      },
+    },
     copilot = {
 {{- if eq .chezmoi.os "darwin" }}
       enable = true,
@@ -47,6 +53,12 @@ return {
       enable = false,
 {{- end }}
     },
+    lf = {
+      enable = true,
+    },
+    git = {
+      merge_conflict_tool = "",
+    },
     gopher = {
       enable = true,
     },
@@ -54,6 +66,7 @@ return {
       enable = true,
     },
     indent_blankline = {
+      enable = true,
       enable_scope = false,
     },
     kustomize = {
@@ -71,8 +84,6 @@ return {
       },
       disabled_neovim_plugins = {
         "gzip",
-        "matchit",
-        "matchparen",
         "netrwPlugin",
         "tarPlugin",
         "tohtml",
@@ -87,7 +98,7 @@ return {
       extensions = { "fugitive", "lazy", "neo-tree", "nvim-dap-ui", "quickfix", "symbols-outline", "toggleterm" },
     },
     oil = {
-      enable = true,
+      enable = false,
     },
     overseer = {
       enable = true,
@@ -103,6 +114,9 @@ return {
       opts = {
         auto_preview = false,
       },
+    },
+    zenmode = {
+      enable = true,
     },
   },
 }
