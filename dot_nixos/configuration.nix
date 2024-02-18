@@ -185,6 +185,7 @@
     pinentry-curses # GnuPG’s interface to passphrase input
     pulseaudio # for audio controlls
     sysstat # A collection of performance monitoring tools for Linux (mpstat is required for i3blocks)
+    tree # file and folders as tree
     udisks # query/manipulate storage devices
     unzip
     wget
