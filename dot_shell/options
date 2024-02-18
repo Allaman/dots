@@ -2,7 +2,10 @@
 
 ## Options section
 setopt extendedglob                                             # Extended globbing. Allows using regular expressions with *
-setopt nocaseglob                                               # Case insensitive globbing
+if [[ "$OSTYPE" =~ "darwin" ]]; then
+  # This causes huge startup lag on NixOS/Alacritty
+  setopt nocaseglob                                             # Case insensitive globbing
+fi
 setopt rcexpandparam                                            # Array expension with parameters
 setopt nocheckjobs                                              # Don't warn about running processes when exiting
 setopt numericglobsort                                          # Sort filenames numerically when it makes sense
