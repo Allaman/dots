@@ -100,6 +100,8 @@
             j = "down";
             k = "up";
             l = "right";
+            c = "A-c"; # fzf cd-folder-widget
+            "." = "A-."; # last argument
           };
           "alt:A" = {
             c = "C-insert";
