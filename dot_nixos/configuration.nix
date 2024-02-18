@@ -71,8 +71,10 @@
     };
     displayManager.defaultSession = "none+i3";
     # Configure keymap in X11
-    layout = "de";
-    xkbVariant = "nodeadkeys";
+    xkb = {
+      layout = "de";
+      variant = "nodeadkeys";
+    };
     # length of time in milliseconds that a key must be depressed before autorepeat starts
     autoRepeatDelay = 200;
     # length of time in milliseconds that should elapse between autorepeat-generated keystrokes
