@@ -36,7 +36,7 @@ trap_exit_tmux ()
 if [[ $- == *i* ]]
 then
   # activate trap only when inside tmux and not inside Neovim terminal (in tmux)
-  if [[ $TERM_PROGRAM == "tmux" && -z $VIMRUNTIME ]]
+  if [[ $TERM_PROGRAM == "tmux" && -z $NVIM ]]
   then
     trap trap_exit_tmux EXIT
   fi
