@@ -12,7 +12,6 @@ return {
     "nil_ls",
     "pyright",
     "lua_ls",
-    "tailwindcss",
     "terraformls",
     "texlab",
     "tsserver",
@@ -30,7 +29,6 @@ return {
     "marksman",
     "pyright",
     "lua_ls",
-    "tailwindcss",
     "terraformls",
     "texlab",
     "tsserver",
@@ -53,6 +51,11 @@ return {
       enable = false,
 {{- end }}
     },
+    emoji = {
+      enable = true,
+      enable_cmp_integration = true,
+      plugin_path = vim.fn.expand("$HOME/workspace/github.com/allaman/"),
+    },
     lf = {
       enable = true,
     },
@@ -72,9 +75,10 @@ return {
     kustomize = {
       dev = true,
       opts = {
+        enable_lua_snip = true,
         kinds = {
-          show_filepath = false,
-          show_line = false,
+          show_filepath = true,
+          show_line = true,
         },
       },
     },
@@ -102,6 +106,11 @@ return {
     },
     overseer = {
       enable = true,
+    },
+    symbol_usage = {
+      opts = {
+        vt_position = "end_of_line"
+      },
     },
     telescope = {
       show_untracked_files = true,
