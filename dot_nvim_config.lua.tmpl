@@ -1,5 +1,8 @@
 -- https://github.com/Allaman/nvim/
 return {
+  options = {
+    list = true,
+  },
 {{- if eq .chezmoi.os "linux" }}
   lsp_servers = {
     "bashls",
@@ -99,7 +102,9 @@ return {
       additional_lang = "de-DE",
     },
     lualine = {
-      extensions = { "fugitive", "lazy", "neo-tree", "nvim-dap-ui", "quickfix", "symbols-outline", "toggleterm" },
+      opts = {
+        extensions = { "fugitive", "lazy", "neo-tree", "nvim-dap-ui", "quickfix", "symbols-outline", "toggleterm" },
+      },
     },
     oil = {
       enable = false,
