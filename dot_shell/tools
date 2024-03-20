@@ -11,7 +11,7 @@ command -v paru >/dev/null 2>&1 && export AUR_MANAGER=paru
 [ -d $HOME/.cargo/bin ] && export PATH=$PATH:~/.cargo/bin
 [ -d $HOME/.luarocks/bin ] && export PATH=$PATH:$HOME/.luarocks/bin
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
-command -v atuin >/dev/null 2>&1 && atuin-setup # overwrites ^R bind
+command -v atuin >/dev/null 2>&1 && eval "$(atuin init zsh --disable-up-arrow)"
 [ -d "/Applications/Sublime Text.app/Contents/SharedSupport/bin" ] && export PATH="$PATH:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
 [ -d "/Applications/Sublime Merge.app/Contents/SharedSupport/bin" ] && export PATH="$PATH:/Applications/Sublime Merge.app/Contents/SharedSupport/bin"
 # [ -d $HOME/.local/sdkman/ ] && export SDKMAN_DIR="$HOME/.local/sdkman" && source $HOME/.local/sdkman/bin/sdkman-init.sh
