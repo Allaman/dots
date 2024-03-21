@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # inspired from https://carlosbecker.com/posts/tmux-sessionizer/
 
 for program in tmux fzf zoxide; do
