@@ -1,19 +1,10 @@
 { config, pkgs, ... }:
 
+# https://nix-community.github.io/home-manager/options.xhtml
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
+  # Home Manager needs a bit of information about you and the paths it should manage.
   home.username = "michael";
   home.homeDirectory = "/home/michael";
-
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "23.11"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -24,6 +15,7 @@
     pkgs.xautolock # automatic screen locking
     #java
     pkgs.age # key management
+    pkgs.bat # cat alternative
     pkgs.cargo
     pkgs.chezmoi # dotfile management
     pkgs.clipmenu # clipboard manager
@@ -33,8 +25,10 @@
     pkgs.firefox # best browser
     pkgs.gitui # Git TUI
     pkgs.go
+    pkgs.go-task # Makefile alternative written in Go
     pkgs.gopass # CLI password manager
     pkgs.lf # TUI file manager
+    pkgs.localsend # AirDrop alternative
     pkgs.nodejs
     pkgs.obsidian # markdown based knowledge management
     pkgs.rofi # App launcher / dmenu replacement
@@ -98,4 +92,14 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # This value determines the Home Manager release that your configuration is
+  # compatible with. This helps avoid breakage when a new Home Manager release
+  # introduces backwards incompatible changes.
+  #
+  # You should not change this value, even if you update Home Manager. If you do
+  # want to update the value, then make sure to first check the Home Manager
+  # release notes.
+  home.stateVersion = "23.11"; # Please read the comment before changing.
+
 }
