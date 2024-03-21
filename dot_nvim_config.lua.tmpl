@@ -40,6 +40,10 @@ return {
   },
 {{- end }}
   plugins = {
+    alpha = {
+      dashboard_recent_files = 10,
+      use_mini_visits = true,
+    },
     chatgpt = {
       enable = true,
       opts = {
@@ -128,6 +132,7 @@ return {
       enable = true,
       opts = {
         auto_preview = false,
+        cycle_results = false,
       },
     },
     zenmode = {
