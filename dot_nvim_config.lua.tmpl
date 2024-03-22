@@ -72,6 +72,12 @@ return {
     gopher = {
       enable = true,
     },
+    gp = {
+      enabled = true,
+      opts = {
+        openai_api_key = { "gopass", "show", "--password", "openai/api-token" },
+      },
+    },
     harpoon = {
       enable = true,
     },
