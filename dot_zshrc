@@ -1,5 +1,12 @@
-# Profiling zsh start
+# Per function profiling
 # zmodload zsh/zprof
+
+# Per command profiling
+# zmodload zsh/datetime
+# setopt promptsubst
+# PS4='+$EPOCHREALTIME %N:%i> '
+# exec 3>&2 2> startlog.$$
+# setopt xtrace prompt_subst
 
 stty -ixon -ixoff # disable ctrl-s and ctrl-q
 bindkey -e # Emacs keybinding
@@ -46,7 +53,11 @@ fi
 [ -d $HOME/.shell/zsh-completions/ ] && fpath=($HOME/.shell/zsh-completions/src $fpath)
 [ -d $HOME/.shell/fast-syntax-Highlighting ] && source $HOME/.shell/fast-syntax-Highlighting/fast-syntax-highlighting.plugin.zsh
 
-# Profiling zsh
+# Per-command profiling:
+# unsetopt xtrace
+# exec 2>&3 3>&-
+
+# Per-function profiling
 # zprof
 
 # vim: filetype=sh
