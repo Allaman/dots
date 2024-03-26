@@ -9,7 +9,7 @@
 # setopt xtrace prompt_subst
 
 stty -ixon -ixoff # disable ctrl-s and ctrl-q
-bindkey -e # Emacs keybinding
+bindkey -e        # Emacs keybinding
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
@@ -22,8 +22,7 @@ source $HOME/.shell/plugins
 source $HOME/.shell/tools
 source $HOME/.shell/bindings
 
-if [[ "$OSTYPE" =~ "darwin" ]]
-then
+if [[ "$OSTYPE" =~ "darwin" ]]; then
   # when put in zshenv it gets overwritten by tmux which calls /etc/profile again (login shell)
   export PATH=$HOME/Library/Python/3.11/bin:/opt/homebrew/opt/gnu-tar/libexec/gnubin:/opt/homebrew/opt/findutils/libexec/gnubin:/opt/homebrew/Cellar/coreutils/9.1/libexec/gnubin:/opt/homebrew/bin:/opt/homebrew/opt/mysql-client/bin:/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH
 
@@ -32,19 +31,16 @@ fi
 autoload -Uz compinit
 compinit -d # needed for fpath completions to work
 
-trap_exit_tmux ()
-{
+trap_exit_tmux() {
   # switch only when current session has only one window and one pane
   if [[ -n $TMUX && $TMUX = "$(tmux list-sessions | wc -l)" ]]; then
     tmux switch-client -t default
   fi
 }
 
-if [[ $- == *i* ]]
-then
+if [[ $- == *i* ]]; then
   # activate trap only when inside tmux and not inside Neovim terminal (in tmux)
-  if [[ $TERM_PROGRAM == "tmux" && -z $NVIM ]]
-  then
+  if [[ $TERM_PROGRAM == "tmux" && -z $NVIM ]]; then
     trap trap_exit_tmux EXIT
   fi
 fi
