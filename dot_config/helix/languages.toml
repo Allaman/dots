@@ -1,2 +1,70 @@
 [[language]]
 name = "go"
+auto-format = true
+formatter = {command = "goimports"}
+
+[[language]]
+name = "python"
+auto-format = true
+roots = ["pyproject.toml", "setup.py", "Poetry.lock", ".git"]
+language-servers = [ "pyright"]
+formatter = {command = "ruff", args = ["format", "--silent", "-"]}
+
+[[language]]
+name = "json"
+auto-format = true
+formatter = { command = 'prettier', args = ["--parser", "json"] }
+
+[[language]]
+name = "markdown"
+auto-format = true
+formatter = { command = 'prettier', args = ["--parser", "markdown"] }
+
+[[language]]
+name = "hcl"
+auto-format = true
+formatter = { command = 'terraform', args = ["fmt", "-"] }
+
+[[language]]
+name = "tfvars"
+auto-format = true
+formatter = { command = 'terraform', args = ["fmt", "-"] }
+
+[[language]]
+name = "yaml"
+auto-format = true
+formatter = { command = "yamlfmt", args = ["-formatter", "indent=2,include_document_start=true,retain_line_breaks_single=true", "-" ] }
+
+[language-server.yaml-language-server.config.yaml]
+format = { enable = true }
+completion = true
+validation = true
+hover = true
+
+[language-server.yaml-language-server.config.yaml.schemas]
+# kubernetes = "*.yaml"
+kubernetes = [
+ "*deployment*.yaml",
+ "*statefulset*.yaml",
+ "*cronjob*.yaml",
+ "*service*.yaml",
+ "*serviceaccount*.yaml",
+ "*configmap*.yaml",
+ "*secret*.yaml",
+ "*pod*.yaml",
+ "*namespace*.yaml",
+ "*ingress*.yaml"
+]
+"http://json.schemastore.org/github-workflow" = ".github/workflows/*"
+"http://json.schemastore.org/github-action" = ".github/action.{ymlyaml}"
+"https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json" = "azure-pipelines.{ymlyaml}"
+"https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/tasks" = "roles/tasks/*.{ymlyaml}"
+"https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook" = "*play*.{ymlyaml}"
+"http://json.schemastore.org/prettierrc" = ".prettierrc.{ymlyaml}"
+"http://json.schemastore.org/kustomization" = "kustomization.{ymlyaml}"
+"http://json.schemastore.org/chart" = "Chart.{ymlyaml}"
+"https://json.schemastore.org/dependabot-v2" = ".github/dependabot.{ymlyaml}"
+"https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json" = "*gitlab-ci*.{ymlyaml}"
+"https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json" = "*api*.{ymlyaml}"
+"https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json" = "*docker-compose*.{ymlyaml}"
+"https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json" = "*flow*.{ymlyaml}"
