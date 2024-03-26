@@ -9,6 +9,7 @@ return {
     "dockerls",
     "jsonls",
     "gopls",
+    "helm_ls",
     "htmx",
     "ltex",
     "marksman",
@@ -27,6 +28,7 @@ return {
     "dockerls",
     "jsonls",
     "gopls",
+    "helm_ls",
     "htmx",
     "ltex",
     "marksman",
@@ -79,7 +81,7 @@ return {
       },
     },
     harpoon = {
-      enable = true,
+      enabled = true,
     },
     indent_blankline = {
       enable = true,
@@ -130,9 +132,7 @@ return {
     },
     telescope = {
       show_untracked_files = true,
-      fzf_native = {
-        enable = true,
-      },
+      fzf_native = true,
     },
     trouble = {
       enable = true,
