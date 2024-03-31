@@ -1,5 +1,11 @@
 -- https://github.com/Allaman/nvim/
 return {
+  theme = {
+    name = "catppuccin",
+    catppuccin = {
+      variant = "catppuccin-mocha",
+    },
+  },
   options = {
     list = true,
   },
@@ -115,6 +121,7 @@ return {
     },
     lualine = {
       opts = {
+        theme = "catppuccin",
         extensions = { "fugitive", "lazy", "neo-tree", "nvim-dap-ui", "quickfix", "symbols-outline", "toggleterm" },
       },
     },
@@ -134,12 +141,11 @@ return {
       show_untracked_files = true,
       fzf_native = true,
     },
+    todo_comments = {
+      enabled = true,
+    },
     trouble = {
-      enable = true,
-      opts = {
-        auto_preview = false,
-        cycle_results = false,
-      },
+      enabled = true,
     },
     zenmode = {
       enable = true,
