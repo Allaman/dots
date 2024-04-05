@@ -1,0 +1,25 @@
+# Dropping to the shell
+[[manager.prepend_keymap]]
+on   = [ "<C-s>" ]
+run  = 'shell "$SHELL" --block --confirm'
+desc = "Open shell here"
+
+# Close input by once Esc press
+[[input.prepend_keymap]]
+on   = [ "<Esc>" ]
+run  = "close"
+desc = "Cancel input"
+
+# Smart enter: enter for directory, open for file
+[[manager.prepend_keymap]]
+on   = [ "l" ]
+run  = "plugin --sync smart-enter"
+desc = "Enter the child directory, or open the file"
+
+# File navigation wraparound
+[[manager.prepend_keymap]]
+on  = [ "k" ]
+run = "plugin --sync arrow --args=-1"
+[[manager.prepend_keymap]]
+on  = [ "j" ]
+run = "plugin --sync arrow --args=1"
