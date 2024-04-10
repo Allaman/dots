@@ -23,3 +23,11 @@ run = "plugin --sync arrow --args=-1"
 [[manager.prepend_keymap]]
 on  = [ "j" ]
 run = "plugin --sync arrow --args=1"
+
+# Use trash-cli to trash file
+[[manager.prepend_keymap]]
+on = [ "d" ]
+run = ['''
+    shell --confirm 'trash-put "$@"'
+''']
+desc = "Move the files to the trash"
