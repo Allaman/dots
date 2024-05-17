@@ -233,5 +233,5 @@ then
         pacdisup='sudo apt-get update && sudo apt-get dist-upgrade' \
         pacpurge='sudo apt-get purge'
   fi
-  alias lf='lfrun'
+  alias lf='yazi' # habits ...
 fi
