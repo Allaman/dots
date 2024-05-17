@@ -7,7 +7,7 @@ return {
     },
   },
   options = {
-    list = true,
+    list = false,
   },
 {{- if eq .chezmoi.os "linux" }}
   lsp_servers = {
@@ -72,7 +72,7 @@ return {
       plugin_path = vim.fn.expand("$HOME/workspace/github.com/allaman/"),
     },
     lf = {
-      enable = true,
+      enable = false,
     },
     git = {
       merge_conflict_tool = "",
@@ -128,6 +128,9 @@ return {
         extensions = { "fugitive", "lazy", "neo-tree", "nvim-dap-ui", "quickfix", "symbols-outline", "toggleterm" },
       },
     },
+    markdown_preview = {
+      enabled = true,
+    },
     oil = {
       enable = false,
     },
@@ -153,5 +156,7 @@ return {
     zenmode = {
       enable = true,
     },
-  },
+    yazi = {
+      enabled = true,
+    },
 }
