@@ -301,17 +301,6 @@ extract() {
 	done
 }
 
-# Use lf to switch directories with lf and bind it to ctrl-o
-cdlf () {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        \rm -f "$tmp"
-        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-    fi
-}
-
 # select from all PRs and view in vim
 ghprl() {
   local prid

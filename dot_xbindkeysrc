@@ -43,7 +43,7 @@ kitty
   Mod1 + space
 
 # Start file manager
-"kitty -T files -e /bin/zsh --login -c lfrun"
+"kitty -T files -e /bin/zsh --login -c yazi"
   Mod4 + e
 
 # Start Mail

@@ -27,5 +27,3 @@ bindkey "^X^E" edit-command-line
 
 bindkey '^ ' autosuggest-accept                               # zsh autosuggestions completion
 
-bindkey -s '^o' 'cdlf\n'                                      # change directory with lf
-
