@@ -41,6 +41,7 @@
     pkgs.ueberzugpp # ueberzug written in C++
     pkgs.xclip # clipboard tool
     pkgs.xdotool # simulate keyboard/mouse
+    pkgs.yazi # TUI file manager
     pkgs.zoxide # Quickly jump to know folders
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
