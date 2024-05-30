@@ -69,7 +69,6 @@
         i3lock-fancy # screen locking with blur effect
       ];
     };
-    displayManager.defaultSession = "none+i3";
     # Configure keymap in X11
     xkb = {
       layout = "de";
@@ -81,6 +80,7 @@
     autoRepeatInterval = 20;
   };
 
+  services.displayManager.defaultSession = "none+i3";
   services.gnome.gnome-keyring.enable = true;
 
   services.keyd = {
