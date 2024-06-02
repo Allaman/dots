@@ -211,10 +211,10 @@
       };
   };
 
+  # NOTE: Moving this to home-manager does break something
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryFlavor = "curses";
     settings = {
       default-cache-ttl = 21600;
       default-cache-ttl-ssh = 21600;
@@ -237,6 +237,7 @@
   # List services that you want to enable:
 
   # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/syncthing.nix
+# TODO: move to home-manager when proper config options are available https://github.com/nix-community/home-manager/issues/4049
   services = {
     syncthing = {
       enable = true;
