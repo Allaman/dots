@@ -12867,7 +12867,28 @@
                     "mouse_flip_y": false,
                     "mouse_swap_wheels": false,
                     "mouse_swap_xy": false,
-                    "simple_modifications": [],
+                    "simple_modifications": [
+                        {
+                            "from": {
+                                "key_code": "copy"
+                            },
+                            "to": [
+                                {
+                                    "pointing_button": "button4"
+                                }
+                            ]
+                        },
+                        {
+                            "from": {
+                                "key_code": "paste"
+                            },
+                            "to": [
+                                {
+                                    "pointing_button": "button5"
+                                }
+                            ]
+                        }
+                    ],
                     "treat_as_built_in_keyboard": false
                 },
                 {
@@ -12903,7 +12924,7 @@
                         "product_id": 57007,
                         "vendor_id": 2867
                     },
-                    "ignore": true,
+                    "ignore": false,
                     "manipulate_caps_lock_led": true,
                     "mouse_flip_horizontal_wheel": false,
                     "mouse_flip_vertical_wheel": false,
