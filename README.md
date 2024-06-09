@@ -22,6 +22,10 @@ Tested with Arch Linux and macOS on Apple Silicone. Should work with most Linux 
 
 My Neovim setup is in its own [repo](https://github.com/Allaman/nvim)
 
+## NixOS
+
+My NixOS config is in its own [repo](https://github.com/Allaman/nix)
+
 ## Karabiner
 
 Karabiner is an exception for several reasons:
