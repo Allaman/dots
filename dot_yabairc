@@ -45,21 +45,21 @@ yabai -m config mouse_follows_focus off \
 # yabai -m config --space 1 layout float
 
 # Floating for special apps
-yabai -m rule --add app="^KeePassXC$" sticky=off layer=normal manage=off
-yabai -m rule --add app="^ForkLift$" sticky=off layer=normal manage=off
-yabai -m rule --add app="^Font Book$" sticky=off layer=normal manage=off
-yabai -m rule --add app="^System Preferences$" sticky=off layer=normal manage=off
-yabai -m rule --add app="^TinkerTool$" sticky=off layer=normal manage=off
-yabai -m rule --add app="^Docker Desktop$" sticky=off layer=normal manage=off
-yabai -m rule --add app="^Karabiner-Elements$" sticky=off layer=normal manage=off
+yabai -m rule --add app="^KeePassXC$" sticky=off sub-layer=normal manage=off
+yabai -m rule --add app="^ForkLift$" sticky=off sub-layer=normal manage=off
+yabai -m rule --add app="^Font Book$" sticky=off sub-layer=normal manage=off
+yabai -m rule --add app="^System Preferences$" sticky=off sub-layer=normal manage=off
+yabai -m rule --add app="^TinkerTool$" sticky=off sub-layer=normal manage=off
+yabai -m rule --add app="^Docker Desktop$" sticky=off sub-layer=normal manage=off
+yabai -m rule --add app="^Karabiner-Elements$" sticky=off sub-layer=normal manage=off
 yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
 yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
 yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
 # Some Goland settings, in case you are using it. float Goland Preference panes
-yabai -m rule --add app='Goland IDEA' title='^$' sticky=off layer=normal manage=off
-yabai -m rule --add app='Goland IDEA' title='Project Structure' sticky=off layer=normal manage=off
-yabai -m rule --add app='Goland IDEA' title='Preferences' sticky=off layer=normal manage=off
-yabai -m rule --add app='Goland IDEA' title='Edit configuration' sticky=off layer=normal manage=off
+yabai -m rule --add app='Goland IDEA' title='^$' sticky=off sub-layer=normal manage=off
+yabai -m rule --add app='Goland IDEA' title='Project Structure' sticky=off sub-layer=normal manage=off
+yabai -m rule --add app='Goland IDEA' title='Preferences' sticky=off sub-layer=normal manage=off
+yabai -m rule --add app='Goland IDEA' title='Edit configuration' sticky=off sub-layer=normal manage=off
 
 # Handling sketchybar window events
 yabai -m signal --add event=window_focused action="sketchybar -m --trigger window_focus &> /dev/null"
