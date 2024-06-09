@@ -31,3 +31,9 @@ run = ['''
     shell --confirm 'trash-put "$@"'
 ''']
 desc = "Move the files to the trash"
+
+# Smart paste: paste files without entering the directory
+[[manager.prepend_keymap]]
+on   = [ "p" ]
+run  = "plugin --sync smart-paste"
+desc = "Paste into the hovered directory or CWD"
