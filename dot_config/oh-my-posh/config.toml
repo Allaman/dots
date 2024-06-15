@@ -1,0 +1,123 @@
+version = 2
+final_space = true
+console_title_template = '{{ .Shell }} in {{ .Folder }}'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'right'
+
+  [[blocks.segments]]
+  type = "text"
+  style = "plain"
+  foreground = "magenta"
+  template = "{{ if and (gt .SHLVL 2) .Env.TMUX }}{{ .SHLVL }}{{ else if (gt .SHLVL 1) }}{{ .SHLVL }}{{ end }}"
+
+  [[blocks.segments]]
+  type = "time"
+  style = "plain"
+  foreground = "grey"
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    type = 'path'
+    style = 'plain'
+    background = 'transparent'
+    foreground = 'blue'
+    template = '{{ .Path }}'
+
+    [blocks.segments.properties]
+      style = 'unique'
+
+  [[blocks.segments]]
+    type = 'git'
+    style = 'plain'
+    foreground = 'grey'
+    background = 'transparent'
+    # template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>'
+    template = " {{ .UpstreamIcon }}{{ .HEAD }}{{ if .Working.Changed }}  <cyan>{{ .Working.String }}{{ end }}<cyan>{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}<magenta>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}<magenta>"
+
+    [blocks.segments.properties]
+      branch_icon = ''
+      commit_icon = '@'
+      fetch_status = true
+
+  [[blocks.segments]]
+  type = "python"
+  style = "plain"
+  foreground = "magenta"
+  background = "transparent"
+  template = "  {{ .Full }} "
+
+[[blocks]]
+  type = 'rprompt'
+  overflow = 'hidden'
+
+  [[blocks.segments]]
+    type = 'executiontime'
+    style = 'plain'
+    foreground = 'yellow'
+    background = 'transparent'
+    template = '{{ .FormattedMs }}'
+
+    [blocks.segments.properties]
+      threshold = 5000
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    type = 'text'
+    style = 'plain'
+    foreground_templates = [
+      "{{if gt .Code 0}}red{{end}}",
+      "{{if eq .Code 0}}magenta{{end}}",
+    ]
+    background = 'transparent'
+    template = '❯'
+
+[transient_prompt]
+  foreground_templates = [
+    "{{if gt .Code 0}}red{{end}}",
+    "{{if eq .Code 0}}magenta{{end}}",
+  ]
+  background = 'transparent'
+  template = '❯ '
+
+[secondary_prompt]
+  foreground = 'magenta'
+  background = 'transparent'
+  template = '❯❯ '
+
+[[tooltips]]
+type = "kubectl"
+tips = ["k","kubectl","helm","kubens","kubeseal","kubectx","oc","istioctl","kogito","kx","kns","k9s","telepresence","flux"]
+style = "plain"
+foreground = "yellow"
+background = "transparent"
+
+# TODO: Not working properly
+[[tooltips]]
+type = "aws"
+tips = ["aws"]
+style = "plain"
+foreground = "yellow"
+background = "transparent"
+template = "{{if .Profile }}{{.Profile}}{{end}}{{if .Region}}@{{.Region}}{{end}}"
+
+[[tooltips]]
+type = "terraform"
+tips = ["terraform"]
+style = "plain"
+foreground = "yellow"
+background = "transparent"
+template = "{{ if .Version }}{{ .Version }}{{ end }}"
+
+  # TODO: Does not work
+  [tooltips.properties]
+  fetch_version = true
