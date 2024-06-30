@@ -12,11 +12,6 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   foreground = "magenta"
   template = "{{ if and (gt .SHLVL 2) .Env.TMUX }}{{ .SHLVL }}{{ else if (gt .SHLVL 1) }}{{ .SHLVL }}{{ end }}"
 
-  [[blocks.segments]]
-  type = "time"
-  style = "plain"
-  foreground = "grey"
-
 [[blocks]]
   type = 'prompt'
   alignment = 'left'
@@ -54,6 +49,11 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
 [[blocks]]
   type = 'rprompt'
   overflow = 'hidden'
+
+  [[blocks.segments]]
+  type = "time"
+  style = "plain"
+  foreground = "grey"
 
   [[blocks.segments]]
     type = 'executiontime'
