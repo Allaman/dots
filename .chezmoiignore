@@ -9,8 +9,9 @@ styles
 .config/procs/
 # Not in use in favour of xbindkeysrc
 .config/sxhkd
-# is managed via symlink
+# managed via symlink
 .config/karabiner
+.lazy-lock.json
 
 # only on darwin systems
 {{- if ne .chezmoi.os "darwin" }}
