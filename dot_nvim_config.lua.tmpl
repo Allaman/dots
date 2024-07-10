@@ -1,5 +1,6 @@
 -- https://github.com/Allaman/nvim/
 return {
+  dashboard = "alpha",
   theme = {
     name = "tokyonight",
     tokyonight = {
@@ -50,8 +51,6 @@ return {
   plugins = {
     alpha = {
       header = "banners.graffiti",
-      dashboard_recent_files = 10,
-      use_mini_visits = true,
     },
     chatgpt = {
       enable = true,
@@ -115,7 +114,8 @@ return {
         "tohtml",
         "tutor",
         "zipPlugin",
-      }
+      },
+      lockfile = "~/.lazy-lock.json"
     },
     typst_preview = {
       enabled = true,
