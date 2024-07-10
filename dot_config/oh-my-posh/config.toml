@@ -6,12 +6,6 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   type = 'prompt'
   alignment = 'right'
 
-  [[blocks.segments]]
-  type = "text"
-  style = "plain"
-  foreground = "magenta"
-  template = "{{ if and (gt .SHLVL 2) .Env.TMUX }}{{ .SHLVL }}{{ else if (gt .SHLVL 1) }}{{ .SHLVL }}{{ end }}"
-
 [[blocks]]
   type = 'prompt'
   alignment = 'left'
@@ -49,6 +43,12 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
 [[blocks]]
   type = 'rprompt'
   overflow = 'hidden'
+
+  [[blocks.segments]]
+  type = "text"
+  style = "plain"
+  foreground = "magenta"
+  template = "{{ if and (gt .SHLVL 2) .Env.TMUX }}{{ .SHLVL }}{{ else if and (gt .SHLVL 1) (not .Env.TMUX) }}{{ .SHLVL }}{{ end }}"
 
   [[blocks.segments]]
   type = "time"
