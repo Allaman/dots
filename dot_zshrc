@@ -41,7 +41,7 @@ fi
 
 # Putting these at the end of reduces load time from many 100ms to 70ms
 [ -d $HOME/.shell/zsh-completions/ ] && fpath=($HOME/.shell/zsh-completions/src $fpath)
-[ -d $HOME/.shell/fast-syntax-Highlighting ] && source $HOME/.shell/fast-syntax-Highlighting/fast-syntax-highlighting.plugin.zsh
+[ -d $HOME/.shell/zsh-syntax-highlighting ] && source $HOME/.shell/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Per-command profiling:
 # unsetopt xtrace
