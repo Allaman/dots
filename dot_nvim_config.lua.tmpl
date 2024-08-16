@@ -59,12 +59,7 @@ return {
       },
     },
     copilot = {
-{{- if eq .chezmoi.os "darwin" }}
-      enable = true,
-      disable_autostart = true,
-{{- else }}
       enable = false,
-{{- end }}
     },
     emoji = {
       enable = true,
