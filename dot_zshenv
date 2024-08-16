@@ -54,9 +54,6 @@ command -v fd >/dev/null 2>&1 && export FZF_DEFAULT_COMMAND='fd --type file --fo
 command -v fd >/dev/null 2>&1 && export FZF_ALT_C_COMMAND='fd --type directory --follow --hidden'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-# homebrew
-export HOMEBREW_NO_GOOGLE_ANALYTICS=1
-
 if [[ "$OSTYPE" =~ "darwin" ]]
 then
   export LC_CTYPE=UTF-8
