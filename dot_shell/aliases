@@ -181,6 +181,7 @@ which tokei > /dev/null && alias cloc='tokei'
 #alias rm='echo "This is not the command you are looking for."; false' # real use with \rm file
 which trash > /dev/null && alias rm='trash' # real use with \rm file
 [ -f /Applications/Skim.app/Contents/MacOS/Skim ] && alias skim='open -a skim'
+[ -f /Applications/Zed\ Preview.app/Contents/MacOS/cli ] && alias zed='/Applications/Zed\ Preview.app/Contents/MacOS/cli'
 alias lf='yazi' # habits ...
 
 # Kubernetes
