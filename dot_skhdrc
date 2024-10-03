@@ -20,9 +20,9 @@ cmd - 1 : yabai -m space --focus prev
 
 cmd - 2 : yabai -m space --focus next
 
-cmd + shift - 1  : yabai -m window --space prev; yabai -m space --focus prev
+cmd + shift - 1  : yabai -m window --space prev --focus
 
-cmd + shift - 2  : yabai -m window --space next; yabai -m space --focus next
+cmd + shift - 2  : yabai -m window --space next --focus
 
 # WARNING: IRGENDEIN MAPPING hier LÄSST ALTGR+q nicht mehr @ schreiben
 
