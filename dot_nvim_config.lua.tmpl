@@ -25,7 +25,7 @@ return {
     "lua_ls",
     "terraformls",
     "texlab",
-    "tsserver",
+    "ts_ls",
     "typst_lsp",
     "yamlls",
   },
@@ -43,7 +43,7 @@ return {
     "lua_ls",
     "terraformls",
     "texlab",
-    "tsserver",
+    "ts_ls",
     "typst_lsp",
     "yamlls",
   },
@@ -60,6 +60,9 @@ return {
     },
     copilot = {
       enable = false,
+    },
+    supermaven = {
+      enabled = true,
     },
     emoji = {
       enable = true,
@@ -79,6 +82,16 @@ return {
       enabled = true,
       opts = {
         openai_api_key = { "gopass", "show", "--password", "openai/api-token" },
+        providers = {
+          openai = {
+            disable = false,
+          },
+          anthropic = {
+            disable = false,
+            endpoint = "https://api.anthropic.com/v1/messages",
+            secret = {"bash", "-c", "cat $HOME/.secrets/anthropic-gp-nvm-token"},
+          },
+        },
       },
     },
     harpoon = {
@@ -95,6 +108,20 @@ return {
         kinds = {
           show_filepath = true,
           show_line = true,
+        },
+        run = {
+          trivy = {
+            cmd = "trivy",
+            args = { "-q", "fs" },
+          },
+          deprecations29 = {
+            cmd = "kubent",
+            args = { "-t", "1.29", "-c=false", "--helm3=false", "-l=error", "-e", "-f" },
+          },
+          deprecations30 = {
+            cmd = "kubet",
+            args = { "-t", "1.29", "-c=false", "--helm3=false", "-l=error", "-e", "-f" },
+          },
         },
       },
     },
