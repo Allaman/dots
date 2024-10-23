@@ -28,11 +28,6 @@ HISTSIZE=50000
 SAVEHIST=50000
 WORDCHARS=${WORDCHARS//\/[&.;]}                                 # Don't consider certain characters part of the word
 
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-# https://github.com/zsh-users/zsh-autosuggestions/issues/619
-ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-beginning-search-backward-end history-beginning-search-forward-end)
-
-
 # Theming section
 autoload -U compinit colors zcalc
 zmodload zsh/complist

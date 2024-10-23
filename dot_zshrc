@@ -5,21 +5,19 @@
 # zmodload zsh/datetime
 # setopt promptsubst
 # PS4='+$EPOCHREALTIME %N:%i> '
-# exec 3>&2 2> startlog.$$
+# exec 3>&2 2>startlog.$$
 # setopt xtrace prompt_subst
 
 stty -ixon -ixoff # disable ctrl-s and ctrl-q
 bindkey -e        # Emacs keybinding
 
 source $HOME/.shell/options
-source $HOME/.shell/plugins
 source $HOME/.shell/tools
 source $HOME/.shell/bindings
 
 if [[ "$OSTYPE" =~ "darwin" ]]; then
   # when put in zshenv it gets overwritten by tmux which calls /etc/profile again (login shell)
   export PATH=$HOME/Library/Python/3.11/bin:/opt/homebrew/opt/gnu-tar/libexec/gnubin:/opt/homebrew/opt/findutils/libexec/gnubin:/opt/homebrew/Cellar/coreutils/9.1/libexec/gnubin:/opt/homebrew/bin:/opt/homebrew/opt/mysql-client/bin:/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH
-
 fi
 
 autoload -Uz compinit
@@ -38,10 +36,6 @@ if [[ $- == *i* ]]; then
     trap trap_exit_tmux EXIT
   fi
 fi
-
-# Putting these at the end of reduces load time from many 100ms to 70ms
-[ -d $HOME/.shell/zsh-completions/ ] && fpath=($HOME/.shell/zsh-completions/src $fpath)
-[ -d $HOME/.shell/zsh-syntax-highlighting ] && source $HOME/.shell/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Per-command profiling:
 # unsetopt xtrace
