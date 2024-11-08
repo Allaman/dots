@@ -10,6 +10,9 @@ command -v nvim >/dev/null 2>&1 && export EDITOR=nvim
 [ -f $HOME/.shell/aliases ] && source $HOME/.shell/aliases
 [ -f $HOME/.shell/funcs ] && source $HOME/.shell/funcs
 
+# K9s
+export K9S_CONFIG_DIR=~/.config/k9s/
+
 # NNN
 export NNN_OPTS=aidRU
 export NNN_TRASH=1 # trash-cli

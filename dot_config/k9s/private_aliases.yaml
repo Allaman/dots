@@ -1,0 +1,14 @@
+---
+aliases:
+  dp: deployments
+  sec: v1/secrets
+  jo: jobs
+  cr: clusterroles
+  crb: clusterrolebindings
+  ro: roles
+  rb: rolebindings
+  np: networkpolicies
+  hrold: helmreleases.helm.fluxcd.io
+  hr: helmreleases.helm.toolkit.fluxcd.io
+  eso: externalsecrets.external-secrets.io
+  kes: externalsecrets.kubernetes-client.io
