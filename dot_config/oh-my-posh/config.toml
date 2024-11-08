@@ -21,6 +21,11 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
       style = 'unique'
 
   [[blocks.segments]]
+    type = "status"
+    style = "plain"
+    foreground = "#e91e63"
+
+  [[blocks.segments]]
     type = 'git'
     style = 'plain'
     foreground = 'grey'
