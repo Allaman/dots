@@ -1,6 +1,16 @@
-version = 2
-final_space = true
 console_title_template = '{{ .Shell }} in {{ .Folder }}'
+version = 3
+final_space = true
+
+[secondary_prompt]
+  template = '❯❯ '
+  foreground = 'magenta'
+  background = 'transparent'
+
+[transient_prompt]
+  template = '❯ '
+  background = 'transparent'
+  foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}magenta{{end}}']
 
 [[blocks]]
   type = 'prompt'
@@ -11,27 +21,26 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   alignment = 'left'
 
   [[blocks.segments]]
+    template = '{{ .Path }}'
+    foreground = 'blue'
+    background = 'transparent'
     type = 'path'
     style = 'plain'
-    background = 'transparent'
-    foreground = 'blue'
-    template = '{{ .Path }}'
 
     [blocks.segments.properties]
       style = 'unique'
 
   [[blocks.segments]]
-    type = "status"
-    style = "plain"
-    foreground = "#e91e63"
+    foreground = '#e91e63'
+    type = 'status'
+    style = 'plain'
 
   [[blocks.segments]]
-    type = 'git'
-    style = 'plain'
+    template = ' {{ .UpstreamIcon }}{{ .HEAD }}{{ if .Working.Changed }}  <cyan>{{ .Working.String }}{{ end }}<cyan>{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}<magenta>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}<magenta>'
     foreground = 'grey'
     background = 'transparent'
-    # template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>'
-    template = " {{ .UpstreamIcon }}{{ .HEAD }}{{ if .Working.Changed }}  <cyan>{{ .Working.String }}{{ end }}<cyan>{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}<magenta>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}<magenta>"
+    type = 'git'
+    style = 'plain'
 
     [blocks.segments.properties]
       branch_icon = ''
@@ -39,33 +48,33 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
       fetch_status = true
 
   [[blocks.segments]]
-  type = "python"
-  style = "plain"
-  foreground = "magenta"
-  background = "transparent"
-  template = "  {{ .Full }} "
+    template = '  {{ .Full }} '
+    foreground = 'magenta'
+    background = 'transparent'
+    type = 'python'
+    style = 'plain'
 
 [[blocks]]
   type = 'rprompt'
   overflow = 'hidden'
 
   [[blocks.segments]]
-  type = "text"
-  style = "plain"
-  foreground = "magenta"
-  template = "{{ if and (gt .SHLVL 2) .Env.TMUX }}{{ .SHLVL }}{{ else if and (gt .SHLVL 1) (not .Env.TMUX) }}{{ .SHLVL }}{{ end }}"
-
-  [[blocks.segments]]
-  type = "time"
-  style = "plain"
-  foreground = "grey"
-
-  [[blocks.segments]]
-    type = 'executiontime'
+    template = '{{ if and (gt .SHLVL 2) .Env.TMUX }}{{ .SHLVL }}{{ else if and (gt .SHLVL 1) (not .Env.TMUX) }}{{ .SHLVL }}{{ end }}'
+    foreground = 'magenta'
+    type = 'text'
     style = 'plain'
+
+  [[blocks.segments]]
+    foreground = 'grey'
+    type = 'time'
+    style = 'plain'
+
+  [[blocks.segments]]
+    template = '{{ .FormattedMs }}'
     foreground = 'yellow'
     background = 'transparent'
-    template = '{{ .FormattedMs }}'
+    type = 'executiontime'
+    style = 'plain'
 
     [blocks.segments.properties]
       threshold = 5000
@@ -76,52 +85,35 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   newline = true
 
   [[blocks.segments]]
+    template = '❯'
+    background = 'transparent'
     type = 'text'
     style = 'plain'
-    foreground_templates = [
-      "{{if gt .Code 0}}red{{end}}",
-      "{{if eq .Code 0}}magenta{{end}}",
-    ]
-    background = 'transparent'
-    template = '❯'
+    foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}magenta{{end}}']
 
-[transient_prompt]
-  foreground_templates = [
-    "{{if gt .Code 0}}red{{end}}",
-    "{{if eq .Code 0}}magenta{{end}}",
-  ]
+[[tooltips]]
+  foreground = 'yellow'
   background = 'transparent'
-  template = '❯ '
+  type = 'kubectl'
+  style = 'plain'
+  tips = ['k', 'kubectl', 'helm', 'kubens', 'kubeseal', 'kubectx', 'oc', 'istioctl', 'kogito', 'kx', 'kns', 'k9s', 'telepresence', 'flux']
 
-[secondary_prompt]
-  foreground = 'magenta'
+[[tooltips]]
+  template = '{{if .Profile }}{{.Profile}}{{end}}{{if .Region}}@{{.Region}}{{end}}'
+  foreground = 'yellow'
   background = 'transparent'
-  template = '❯❯ '
+  type = 'aws'
+  style = 'plain'
+  tips = ['aws']
 
 [[tooltips]]
-type = "kubectl"
-tips = ["k","kubectl","helm","kubens","kubeseal","kubectx","oc","istioctl","kogito","kx","kns","k9s","telepresence","flux"]
-style = "plain"
-foreground = "yellow"
-background = "transparent"
+  template = '{{ if .Version }}{{ .Version }}{{ end }}'
+  foreground = 'yellow'
+  background = 'transparent'
+  type = 'terraform'
+  style = 'plain'
+  tips = ['terraform']
 
-# TODO: Not working properly
-[[tooltips]]
-type = "aws"
-tips = ["aws"]
-style = "plain"
-foreground = "yellow"
-background = "transparent"
-template = "{{if .Profile }}{{.Profile}}{{end}}{{if .Region}}@{{.Region}}{{end}}"
-
-[[tooltips]]
-type = "terraform"
-tips = ["terraform"]
-style = "plain"
-foreground = "yellow"
-background = "transparent"
-template = "{{ if .Version }}{{ .Version }}{{ end }}"
-
-  # TODO: Does not work
   [tooltips.properties]
-  fetch_version = true
+    fetch_version = true
+
