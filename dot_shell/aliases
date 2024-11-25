@@ -187,15 +187,8 @@ alias lf='yazi' # habits ...
 # Kubernetes
 which kubectx > /dev/null && alias kx='kubectx'
 which kubens > /dev/null && alias kns='kubens'
-which kubectl > /dev/null && alias k='kubectl'
-which kubectl > /dev/null && alias srckubectl='source <(kubectl completion zsh)'
 which helm > /dev/null && alias srchelm='source <(helm completion zsh)'
-[ -f $HOME/.shell/kubectl_aliases ] && source $HOME/.shell/kubectl_aliases
 which kustomize > /dev/null && alias kb='kustomize build'
-
-# Cloud
-which awless > /dev/null && alias srcawless='source <(awless completion zsh)'
-which aws_zsh_completer.sh > /dev/null && alias srcaws='source aws_zsh_completer.sh'
 
 # Linux only aliases
 if [[ ! "$OSTYPE" =~ "darwin" ]]
