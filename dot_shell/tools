@@ -1,27 +1,22 @@
-# vim: set ft=zsh:
-
 # command -v direnv > /dev/null 2>&1 && eval "$(direnv hook zsh)"
-# command -v flux > /dev/null 2>&1 && eval "$(flux completion zsh)"
+
 command -v go >/dev/null 2>&1 && export GOPATH=$HOME/.local/share/go && export GOBIN=$HOME/.local/share/go/bin
-# [ -d $HOME/.luarocks/bin ] && export PATH=$PATH:$HOME/.luarocks/bin
 [ -d $HOME/.cargo/bin ] && export PATH=$PATH:~/.cargo/bin
+
 [ -d "/Applications/Sublime Text.app/Contents/SharedSupport/bin" ] && export PATH="$PATH:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
 [ -d "/Applications/Sublime Merge.app/Contents/SharedSupport/bin" ] && export PATH="$PATH:/Applications/Sublime Merge.app/Contents/SharedSupport/bin"
 
-export _ZO_FZF_OPTS="$_FZF_DEFAULT_OPTS --select-1 --exit-0 --height=25% --reverse --no-sort --cycle"
-[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+source $HOME/.fzf.zsh
+
 export _ZO_DATA_DIR=$HOME/.zoxide
 command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
+
 command -v atuin >/dev/null 2>&1 && eval "$(atuin init zsh --disable-up-arrow)"
 
-[ -d /opt/homebrew/share/zsh/site-functions ] && fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
-[ -f $HOME/.shell/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source $HOME/.shell/zsh-autosuggestions/zsh-autosuggestions.zsh
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-
-# Putting these at the end of reduces load time from many 100ms to 70ms
-[ -d $HOME/.shell/zsh-completions/ ] && fpath=($HOME/.shell/zsh-completions/src $fpath)
-[ -d $HOME/.shell/fast-syntax-Highlighting ] && source $HOME/.shell/fast-syntax-Highlighting/fast-syntax-highlighting.plugin.zsh
+source $HOME/.shell/fast-syntax-Highlighting/fast-syntax-highlighting.plugin.zsh
 
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/config.toml)"
 fi
+
+# vim: set ft=zsh:

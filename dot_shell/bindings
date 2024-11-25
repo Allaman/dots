@@ -1,29 +1,19 @@
-# vim: set ft=zsh:
+bindkey -e              # Emacs keybinding
 
-## Keybindings section
-bindkey "^[[3~" delete-char                                  # Delete key
-bindkey '^[[2~' overwrite-mode                               # Insert key
-bindkey "^[[H"  beginning-of-line                            # Home
-bindkey "^[[F"  end-of-line                                  # End
-bindkey '^[[Z' reverse-menu-complete                         # Shift-Tab
-# https://unix.stackexchange.com/a/97844
+bindkey "^[[3~" delete-char # Delete with DEL
+
 autoload -U history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey '^P' history-beginning-search-backward-end           # CTRL+p
 bindkey '^N' history-beginning-search-forward-end            # CTRL+n
-bindkey -s '^f' 'nova^M'                                     # Run nova with CTRL-f
-bindkey -s '^s' 'tmux-sessionizer.sh^M'                      # Run nova with CTRL-f
-# Use vim keys to select autocompletion
-_comp_options+=(globdots)		# Include hidden files.
-bindkey -M menuselect '^h' vi-backward-char
-bindkey -M menuselect '^k' vi-up-line-or-history
-bindkey -M menuselect '^l' vi-forward-char
-bindkey -M menuselect '^j' vi-down-line-or-history
-# edit command in editor
+
+# Use autosuggestion
+bindkey '^ ' autosuggest-accept
+
+# Edit in EDITOR
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
-bindkey '^ ' autosuggest-accept                               # zsh autosuggestions completion
-
+# vim: set ft=zsh:

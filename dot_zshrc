@@ -8,20 +8,29 @@
 # exec 3>&2 2>startlog.$$
 # setopt xtrace prompt_subst
 
-stty -ixon -ixoff # disable ctrl-s and ctrl-q
-bindkey -e        # Emacs keybinding
+stty -ixon -ixoff           # disable ctrl-s and ctrl-q
+setopt EXTENDED_GLOB        # Use extended globbing syntax.
+setopt HIST_IGNORE_DUPS     # Do not record an event that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS # Delete an old recorded event if a new event is a duplicate.
+setopt HIST_SAVE_NO_DUPS    # Do not write a duplicate event to the history file.
+setopt SHARE_HISTORY        # Share history between session/terminals
+setopt HIST_IGNORE_SPACE    # Ignore commands starting with space
 
-source $HOME/.shell/options
-source $HOME/.shell/tools
+HISTFILE=~/.zhistory
+HISTSIZE=50000
+SAVEHIST=50000
+
 source $HOME/.shell/bindings
+source $HOME/.shell/completion
+source $HOME/.shell/tools
 
 if [[ "$OSTYPE" =~ "darwin" ]]; then
   # when put in zshenv it gets overwritten by tmux which calls /etc/profile again (login shell)
-  export PATH=$HOME/Library/Python/3.11/bin:/opt/homebrew/opt/gnu-tar/libexec/gnubin:/opt/homebrew/opt/findutils/libexec/gnubin:/opt/homebrew/Cellar/coreutils/9.1/libexec/gnubin:/opt/homebrew/bin:/opt/homebrew/opt/mysql-client/bin:/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH
+  # export PATH=$HOME/Library/Python/3.11/bin:/opt/homebrew/opt/gnu-tar/libexec/gnubin:/opt/homebrew/opt/findutils/libexec/gnubin:/opt/homebrew/Cellar/coreutils/9.1/libexec/gnubin:/opt/homebrew/bin:/opt/homebrew/opt/mysql-client/bin:/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH
+  PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+  PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
+  PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 fi
-
-autoload -Uz compinit
-compinit -d # needed for fpath completions to work
 
 trap_exit_tmux() {
   # switch only when current session has only one window and one pane
@@ -36,6 +45,9 @@ if [[ $- == *i* ]]; then
     trap trap_exit_tmux EXIT
   fi
 fi
+
+# zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+# source <(carapace _carapace)
 
 # Per-command profiling:
 # unsetopt xtrace
