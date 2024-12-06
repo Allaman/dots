@@ -1,14 +1,10 @@
 -- https://github.com/Allaman/nvim/
 return {
-  dashboard = "alpha",
   theme = {
     name = "tokyonight",
     tokyonight = {
       variant = "moon",
     },
-  },
-  options = {
-    list = false,
   },
 {{- if eq .chezmoi.os "linux" }}
   lsp_servers = {
@@ -17,7 +13,6 @@ return {
     "jsonls",
     "gopls",
     "helm_ls",
-    "htmx",
     "ltex",
     "marksman",
     "nil_ls",
@@ -26,7 +21,7 @@ return {
     "terraformls",
     "texlab",
     "ts_ls",
-    "typst_lsp",
+    "tinymist",
     "yamlls",
   },
 {{- else }}
@@ -36,7 +31,6 @@ return {
     "jsonls",
     "gopls",
     "helm_ls",
-    "htmx",
     "ltex",
     "marksman",
     "pyright",
@@ -44,13 +38,13 @@ return {
     "terraformls",
     "texlab",
     "ts_ls",
-    "typst_lsp",
+    "tinymist",
     "yamlls",
   },
 {{- end }}
   plugins = {
-    alpha = {
-      header = "banners.graffiti",
+    blink = {
+      enabled = true,
     },
     chatgpt = {
       enable = true,
@@ -65,9 +59,11 @@ return {
       enabled = true,
     },
     emoji = {
-      enable = true,
-      enable_cmp_integration = true,
-      plugin_path = vim.fn.expand("$HOME/workspace/github.com/allaman/"),
+      enabled = true,
+      opts = {
+        enable_cmp_integration = true,
+        plugin_path = vim.fn.expand("$HOME/workspace/github.com/allaman/"),
+      },
     },
     lf = {
       enable = false,
@@ -94,6 +90,9 @@ return {
         },
       },
     },
+    grug_far = {
+      enabled = true,
+    },
     harpoon = {
       enabled = false,
     },
@@ -119,8 +118,8 @@ return {
             args = { "-t", "1.29", "-c=false", "--helm3=false", "-l=error", "-e", "-f" },
           },
           deprecations30 = {
-            cmd = "kubet",
-            args = { "-t", "1.29", "-c=false", "--helm3=false", "-l=error", "-e", "-f" },
+            cmd = "kubent",
+            args = { "-t", "1.30", "-c=false", "--helm3=false", "-l=error", "-e", "-f" },
           },
         },
       },
@@ -139,26 +138,24 @@ return {
       },
       lockfile = "~/.lazy-lock.json"
     },
-    typst_preview = {
-      enabled = true,
-    },
     ltex = {
       additional_lang = "de-DE",
     },
     lualine = {
-      opts = {
-        theme = "catppuccin",
-        extensions = { "fugitive", "lazy", "neo-tree", "nvim-dap-ui", "quickfix", "symbols-outline", "toggleterm" },
-      },
+      extensions = { "fugitive", "lazy", "neo-tree", "nvim-dap-ui", "quickfix", "symbols-outline", "toggleterm" },
+      options = {},
     },
     markdown_preview = {
       enabled = true,
     },
     oil = {
-      enable = false,
+      enabled = true,
     },
     overseer = {
       enable = true,
+    },
+    substitute = {
+      enabled = true,
     },
     symbol_usage = {
       opts = {
