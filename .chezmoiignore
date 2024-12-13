@@ -16,6 +16,7 @@ styles
 # only on darwin systems
 {{- if ne .chezmoi.os "darwin" }}
 .config/kitty/macos-launch-services-cmdline
+~/Library/LaunchAgents/com.michael.sync-mail.plist
 Library
 .config/sketchybar
 .yabairc
