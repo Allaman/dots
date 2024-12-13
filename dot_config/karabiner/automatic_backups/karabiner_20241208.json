@@ -1634,7 +1634,8 @@
                     "to": [{ "key_code": "illumination_increment" }]
                 }
             ],
-            "name": "Internal"
+            "name": "Internal",
+            "selected": true
         },
         {
             "complex_modifications": {
@@ -8694,7 +8695,6 @@
                 }
             ],
             "name": "G Pro X",
-            "selected": true,
             "simple_modifications": [
                 {
                     "from": { "key_code": "grave_accent_and_tilde" },
@@ -8711,10 +8711,6 @@
                 {
                     "from": { "key_code": "non_us_backslash" },
                     "to": [{ "key_code": "grave_accent_and_tilde" }]
-                },
-                {
-                    "from": { "key_code": "right_option" },
-                    "to": [{ "key_code": "right_option" }]
                 }
             ]
         }
