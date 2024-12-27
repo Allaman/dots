@@ -10,6 +10,7 @@ font_family            Comic Code Ligatures
 font_size              14.0
 disable_ligatures      never
 modify_font cell_width 110%
+modify_font cell_height 110%
 
 # url handling
 url_style     curly
@@ -83,7 +84,7 @@ map super+n no_op
 {{- if eq .chezmoi.os "darwin" }}
 macos_quit_when_last_window_closed yes
 macos_thicken_font                 0.75
-macos_option_as_alt                no # either working alt-b or altgr
+macos_option_as_alt                left # working alt key or alt-gr due to karabiner ALT-GR rules
 {{- end }}
 scrollback_lines                   5000
 allow_remote_control               yes
@@ -97,5 +98,5 @@ map  ctrl+tab        send_text normal,application \x1b[9;5u
 map  ctrl+shift+tab  send_text normal,application \x1b[9;6u
 
 # BEGIN_KITTY_THEME
-include Catppuccin-Mocha.conf
+include Tokyonight-Moon.conf
 # END_KITTY_THEME
