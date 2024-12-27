@@ -20,6 +20,7 @@ return {
     "lua_ls",
     "terraformls",
     "texlab",
+    "tflint",
     "ts_ls",
     "tinymist",
     "yamlls",
@@ -37,6 +38,7 @@ return {
     "lua_ls",
     "terraformls",
     "texlab",
+    "tflint",
     "ts_ls",
     "tinymist",
     "yamlls",
@@ -47,7 +49,7 @@ return {
       enabled = true,
     },
     chatgpt = {
-      enable = true,
+      enable = false,
       opts = {
         api_key_cmd = "gopass show --password openai/api-token",
       },
@@ -142,7 +144,7 @@ return {
       additional_lang = "de-DE",
     },
     lualine = {
-      extensions = { "fugitive", "lazy", "neo-tree", "nvim-dap-ui", "quickfix", "symbols-outline", "toggleterm" },
+      extensions = { "fugitive", "fzf", "lazy", "neo-tree", "nvim-dap-ui", "quickfix", "symbols-outline", "toggleterm" },
       options = {},
     },
     markdown_preview = {
