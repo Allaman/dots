@@ -13,16 +13,16 @@ desc = "Cancel input"
 # Smart enter: enter for directory, open for file
 [[manager.prepend_keymap]]
 on   = [ "l" ]
-run  = "plugin --sync smart-enter"
+run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
 # File navigation wraparound
 [[manager.prepend_keymap]]
 on  = [ "k" ]
-run = "plugin --sync arrow --args=-1"
+run = "plugin arrow --args=-1"
 [[manager.prepend_keymap]]
 on  = [ "j" ]
-run = "plugin --sync arrow --args=1"
+run = "plugin arrow --args=1"
 
 # Use trash-cli to trash file
 [[manager.prepend_keymap]]
@@ -35,5 +35,5 @@ desc = "Move the files to the trash"
 # Smart paste: paste files without entering the directory
 [[manager.prepend_keymap]]
 on   = [ "p" ]
-run  = "plugin --sync smart-paste"
+run  = "plugin smart-paste"
 desc = "Paste into the hovered directory or CWD"
