@@ -3,6 +3,7 @@
 
 cmd - return : /Applications/kitty.app/Contents/MacOS/kitty -d ~
 # cmd - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
+# cmd - return : /Applications/WezTerm.app/Contents/MacOS/wezterm
 
 cmd - d : /Applications/kitty.app/Contents/MacOS/kitty -d ~ -T fzf-nova -e zsh -ic $HOME/workspace/git.rootknecht.net/scripts/fzf-nova/fzf-nova
 
