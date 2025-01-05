@@ -1,21 +1,26 @@
 # A list of all built-in modifier and literal keywords can
 # be found at https://github.com/koekeishiya/skhd/issues/1
 
-cmd - return : /Applications/kitty.app/Contents/MacOS/kitty -d ~
+cmd - return : open -n /Applications/Ghostty.app
+# cmd - return : /Applications/kitty.app/Contents/MacOS/kitty -d ~
 # cmd - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
 # cmd - return : /Applications/WezTerm.app/Contents/MacOS/wezterm
 
-cmd - d : /Applications/kitty.app/Contents/MacOS/kitty -d ~ -T fzf-nova -e zsh -ic $HOME/workspace/git.rootknecht.net/scripts/fzf-nova/fzf-nova
+# cmd - d : /Applications/kitty.app/Contents/MacOS/kitty -d ~ -T fzf-nova -e zsh -ic $HOME/workspace/git.rootknecht.net/scripts/fzf-nova/fzf-nova
+cmd - d : open -n /Applications/Ghostty.app --args --title=fzf-nova --command=$HOME/workspace/git.rootknecht.net/scripts/fzf-nova/fzf-nova
 
 # cmd - e : /Applications/kitty.app/Contents/MacOS/kitty -T files -e zsh -ic yazi
 
-cmd + shift -l : /Applications/kitty.app/Contents/MacOS/kitty -d ~ -T ledger -e nvim $HOME/data/finanzen/ledger/main.ledger
+# cmd + shift -l : /Applications/kitty.app/Contents/MacOS/kitty -d ~ -T ledger -e nvim $HOME/data/finanzen/ledger/main.ledger
+cmd + shift -l : open -n /Applications/Ghostty.app --args --title=ledger --command="nvim $HOME/data/finanzen/ledger/main.ledger"
 
-cmd + shift -h : /Applications/kitty.app/Contents/MacOS/kitty -d ~ -T ledger -e hledger add -f $HOME/data/finanzen/ledger/main.ledger
+# cmd + shift -h : /Applications/kitty.app/Contents/MacOS/kitty -d ~ -T ledger -e hledger add -f $HOME/data/finanzen/ledger/main.ledger
+cmd + shift -h : open -n /Applications/Ghostty.app --args --title=ledger --command="hledger add -f $HOME/data/finanzen/ledger/main.ledger"
 
-cmd + shift -m : /Applications/kitty.app/Contents/MacOS/kitty -d ~ -T MAIL --start-as maximized -e neomutt
+# cmd + shift -m : /Applications/kitty.app/Contents/MacOS/kitty -d ~ -T MAIL --start-as maximized -e neomutt
+cmd + shift -m : open -n /Applications/Ghostty.app --args --title=MAIL --command=neomutt
 
-alt + shift -n : /Applications/kitty.app/Contents/MacOS/kitty -d ~ -T projects -e zsh -ic $HOME/workspace/git.rootknecht.net/scripts/fzf-nova/_projects.sh
+# alt + shift -n : /Applications/kitty.app/Contents/MacOS/kitty -d ~ -T projects -e zsh -ic $HOME/workspace/git.rootknecht.net/scripts/fzf-nova/_projects.sh
 
 cmd - 1 : yabai -m space --focus prev
 
