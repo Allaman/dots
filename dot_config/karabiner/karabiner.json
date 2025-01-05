@@ -69,6 +69,7 @@
                     },
                     {
                         "description": "Ctrl+C, Ctrl+V, Ctrl+X => Cmd+C (Copy), Cmd+V (Paste), Cmd+X (Cut)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -348,65 +349,8 @@
                         ]
                     },
                     {
-                        "description": "Ctrl+A => Cmd+A (Select all)",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com\\.microsoft\\.rdc$",
-                                            "^com\\.microsoft\\.rdc\\.mac$",
-                                            "^com\\.microsoft\\.rdc\\.macos$",
-                                            "^com\\.microsoft\\.rdc\\.osx\\.beta$",
-                                            "^net\\.sf\\.cord$",
-                                            "^com\\.thinomenon\\.RemoteDesktopConnection$",
-                                            "^com\\.itap-mobile\\.qmote$",
-                                            "^com\\.nulana\\.remotixmac$",
-                                            "^com\\.p5sys\\.jump\\.mac\\.viewer$",
-                                            "^com\\.p5sys\\.jump\\.mac\\.viewer\\.web$",
-                                            "^com\\.teamviewer\\.TeamViewer$",
-                                            "^com\\.vmware\\.horizon$",
-                                            "^com\\.2X\\.Client\\.Mac$",
-                                            "^com\\.vmware\\.fusion$",
-                                            "^com\\.vmware\\.horizon$",
-                                            "^com\\.vmware\\.view$",
-                                            "^com\\.parallels\\.desktop$",
-                                            "^com\\.parallels\\.vm$",
-                                            "^com\\.parallels\\.desktop\\.console$",
-                                            "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                                            "^com\\.citrix\\.XenAppViewer$",
-                                            "^com\\.vmware\\.proxyApp\\.",
-                                            "^com\\.parallels\\.winapp\\.",
-                                            "^org\\.macports\\.X11$",
-                                            "^com\\.apple\\.Terminal$",
-                                            "^com\\.googlecode\\.iterm2$",
-                                            "^co\\.zeit\\.hyperterm$",
-                                            "^co\\.zeit\\.hyper$",
-                                            "^io\\.alacritty$",
-                                            "^net\\.kovidgoyal\\.kitty$"
-                                        ],
-                                        "type": "frontmost_application_unless"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "a",
-                                    "modifiers": {
-                                        "mandatory": ["control"],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "a",
-                                        "modifiers": ["left_command"]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Ctrl+S => Cmd+S (Save)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -634,6 +578,7 @@
                     },
                     {
                         "description": "Ctrl+W => Cmd+W (Close)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -8715,64 +8660,6 @@
         {
             "complex_modifications": {
                 "rules": [
-                    {
-                        "description": "Ctrl+W => Cmd+W (Close)",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com\\.microsoft\\.rdc$",
-                                            "^com\\.microsoft\\.rdc\\.mac$",
-                                            "^com\\.microsoft\\.rdc\\.macos$",
-                                            "^com\\.microsoft\\.rdc\\.osx\\.beta$",
-                                            "^net\\.sf\\.cord$",
-                                            "^com\\.thinomenon\\.RemoteDesktopConnection$",
-                                            "^com\\.itap-mobile\\.qmote$",
-                                            "^com\\.nulana\\.remotixmac$",
-                                            "^com\\.p5sys\\.jump\\.mac\\.viewer$",
-                                            "^com\\.p5sys\\.jump\\.mac\\.viewer\\.web$",
-                                            "^com\\.teamviewer\\.TeamViewer$",
-                                            "^com\\.vmware\\.horizon$",
-                                            "^com\\.2X\\.Client\\.Mac$",
-                                            "^com\\.vmware\\.fusion$",
-                                            "^com\\.vmware\\.horizon$",
-                                            "^com\\.vmware\\.view$",
-                                            "^com\\.parallels\\.desktop$",
-                                            "^com\\.parallels\\.vm$",
-                                            "^com\\.parallels\\.desktop\\.console$",
-                                            "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                                            "^com\\.citrix\\.XenAppViewer$",
-                                            "^com\\.vmware\\.proxyApp\\.",
-                                            "^com\\.parallels\\.winapp\\.",
-                                            "^org\\.macports\\.X11$",
-                                            "^com\\.apple\\.Terminal$",
-                                            "^com\\.googlecode\\.iterm2$",
-                                            "^co\\.zeit\\.hyperterm$",
-                                            "^co\\.zeit\\.hyper$",
-                                            "^io\\.alacritty$",
-                                            "^net\\.kovidgoyal\\.kitty$"
-                                        ],
-                                        "type": "frontmost_application_unless"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "w",
-                                    "modifiers": {
-                                        "mandatory": ["control"],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "w",
-                                        "modifiers": ["left_command"]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
                     {
                         "description": "Ctrl+F => Cmd+F (Find)",
                         "manipulators": [
