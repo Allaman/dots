@@ -7,6 +7,7 @@ font-family = "Comic Code Ligatures"
 mouse-hide-while-typing = true
 shell-integration = "zsh"
 scrollback-limit = 10000
+window-save-state = never
 quit-after-last-window-closed = true
 
 # map super+p to meta+n for tmux
