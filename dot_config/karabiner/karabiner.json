@@ -7299,6 +7299,7 @@
                 "rules": [
                     {
                         "description": "Ctrl+C, Ctrl+V, Ctrl+X => Cmd+C (Copy), Cmd+V (Paste), Cmd+X (Cut)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -7463,6 +7464,7 @@
                     },
                     {
                         "description": "Ctrl+A => Cmd+A (Select all)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -7748,6 +7750,7 @@
                     },
                     {
                         "description": "Ctrl+W => Cmd+W (Close)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -7840,6 +7843,7 @@
                     },
                     {
                         "description": "F5 => Cmd+r (Reload)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -8638,6 +8642,7 @@
                 }
             ],
             "name": "G Pro X",
+            "selected": true,
             "simple_modifications": [
                 {
                     "from": { "key_code": "grave_accent_and_tilde" },
@@ -9121,7 +9126,6 @@
                 ]
             },
             "name": "Redragon",
-            "selected": true,
             "simple_modifications": [
                 {
                     "from": { "key_code": "y" },
