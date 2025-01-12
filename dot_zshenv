@@ -47,6 +47,8 @@ _fzf_compgen_path() {
 _fzf_compgen_dir() {
   fd --type d --hidden --follow . "$1"
 }
+# https://github.com/ibhagwan/fzf-lua/issues/332
+export ESCDELAY=1
 # add support for ctrl+o to open selected file
 export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute:nvim {} > /dev/tty'"
 # Preview files
