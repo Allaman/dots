@@ -1,5 +1,5 @@
 title = " "
-theme = "catppuccin-mocha"
+theme = "tokyonight-moon"
 macos-titlebar-style = hidden
 copy-on-select = true
 adjust-cell-height = 20%
