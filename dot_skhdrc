@@ -10,7 +10,7 @@ cmd - return : open -n /Applications/Ghostty.app
 cmd - d : open -n /Applications/Ghostty.app --args --title=fzf-nova --command=$HOME/workspace/git.rootknecht.net/scripts/fzf-nova/fzf-nova
 
 # self made bookmark management https://github.com/Allaman/bm
-cmd - b : open -n /Applications/Ghostty.app --args --title=bm --command="bm --path $HOME/data/bookmarks.sqlite ls | fzf | awk -F';' '{print $2}' | ccopy"
+cmd - b : open -n /Applications/Ghostty.app --args --title=bm --command="$HOME/.local/bin/search-bookmark.sh"
 
 # cmd - e : /Applications/kitty.app/Contents/MacOS/kitty -T files -e zsh -ic yazi
 
