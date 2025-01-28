@@ -1,7 +1,8 @@
 # A list of all built-in modifier and literal keywords can
 # be found at https://github.com/koekeishiya/skhd/issues/1
 
-cmd - return : open -n /Applications/Ghostty.app
+# TODO: wait for 1.0.2 release to expand ~
+cmd - return : open -n /Applications/Ghostty.app --args --working-directory="/Users/michael"
 # cmd - return : /Applications/kitty.app/Contents/MacOS/kitty -d ~
 # cmd - return : /Applications/Alacritty.app/Contents/MacOS/alacritty
 # cmd - return : /Applications/WezTerm.app/Contents/MacOS/wezterm
