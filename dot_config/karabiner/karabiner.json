@@ -234,6 +234,7 @@
                     },
                     {
                         "description": "Ctrl+Z => Cmd+Z (Undo)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -292,6 +293,7 @@
                     },
                     {
                         "description": "Ctrl+Y => Cmd+Shift+Y (Redo)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -409,6 +411,7 @@
                     },
                     {
                         "description": "Ctrl+N => Cmd+N (New)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -467,6 +470,7 @@
                     },
                     {
                         "description": "Ctrl+F => Cmd+F (Find)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -823,6 +827,7 @@
                     },
                     {
                         "description": "Ctrl+T => Cmd+T (New tab)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
