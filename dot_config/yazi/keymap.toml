@@ -19,10 +19,10 @@ desc = "Enter the child directory, or open the file"
 # File navigation wraparound
 [[manager.prepend_keymap]]
 on  = [ "k" ]
-run = "plugin arrow --args=-1"
+run = "plugin arrow -1"
 [[manager.prepend_keymap]]
 on  = [ "j" ]
-run = "plugin arrow --args=1"
+run = "plugin arrow 1"
 
 # Use trash-cli to trash file
 [[manager.prepend_keymap]]
