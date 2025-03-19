@@ -7,6 +7,7 @@ command -v nvim >/dev/null 2>&1 && export MANPAGER='nvim +Man!'
 
 [ -d $HOME/workspace/git.rootknecht.net/scripts ] && export PATH=$PATH:$HOME/workspace/git.rootknecht.net/scripts
 [ -d $HOME/.local/bin ] && export PATH=$PATH:$HOME/.local/bin
+[ -d /opt/homebrew/bin ] && export PATH=/opt/homebrew/bin:$PATH
 [ -f $HOME/.shell/aliases ] && source $HOME/.shell/aliases
 [ -f $HOME/.shell/funcs ] && source $HOME/.shell/funcs
 
