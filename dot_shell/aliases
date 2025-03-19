@@ -34,6 +34,7 @@ alias -s lua=nvim
 alias \
   gst='git status' \
   gs='git status' \
+  gdb='git branch -D' \
   gc='git commit' \
   push='git push' \
   pull='git pull' \
@@ -89,6 +90,7 @@ alias \
   v="$EDITOR" \
   sv="sudo $EDITOR" \
   v.="vim ." \
+  vlazy="NVIM_APPNAME=LazyVim nvim" \
   vy="$EDITOR -c 'set filetype=yaml' -c 'nnoremap q :quit!<CR>'" \
   cssh='$EDITOR ~/.ssh/config' \
   caws='$EDITOR -p $HOME/.aws/{credentials,config}' \
@@ -184,6 +186,7 @@ which trash > /dev/null && alias rm='trash' # real use with \rm file
 [ -f /Applications/Zed\ Preview.app/Contents/MacOS/cli ] && alias zed='/Applications/Zed\ Preview.app/Contents/MacOS/cli'
 alias lf='yazi' # habits ...
 alias bm='bm --path $HOME/data/bookmarks.sqlite'
+[ -f /Applications/Docker.app/Contents/Resources/bin/docker ] && export PATH=$PATH:/Applications/Docker.app/Contents/Resources/bin
 
 # Kubernetes
 which kubectx > /dev/null && alias kx='kubectx'
