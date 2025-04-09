@@ -4,6 +4,19 @@
             "complex_modifications": {
                 "rules": [
                     {
+                        "description": "Hyper + x == delete",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "x",
+                                    "modifiers": { "mandatory": ["left_shift", "left_command", "left_control", "left_option"] }
+                                },
+                                "to": [{ "key_code": "delete_forward" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Quit application by pressing command-q twice",
                         "manipulators": [
                             {
@@ -1584,7 +1597,9 @@
                     "to": [{ "key_code": "illumination_increment" }]
                 }
             ],
-            "name": "Internal"
+            "name": "Internal",
+            "selected": true,
+            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         },
         {
             "complex_modifications": {
@@ -4560,6 +4575,19 @@
             "complex_modifications": {
                 "rules": [
                     {
+                        "description": "Hyper + x == delete",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "x",
+                                    "modifiers": { "mandatory": ["left_shift", "left_command", "left_control", "left_option"] }
+                                },
+                                "to": [{ "key_code": "delete_forward" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Ctrl+C, Ctrl+V, Ctrl+X => Cmd+C (Copy), Cmd+V (Paste), Cmd+X (Cut)",
                         "manipulators": [
                             {
@@ -7528,6 +7556,7 @@
                     },
                     {
                         "description": "Ctrl+S => Cmd+S (Save)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -7586,6 +7615,7 @@
                     },
                     {
                         "description": "Ctrl+N => Cmd+N (New)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -8647,7 +8677,6 @@
                 }
             ],
             "name": "G Pro X",
-            "selected": true,
             "simple_modifications": [
                 {
                     "from": { "key_code": "grave_accent_and_tilde" },

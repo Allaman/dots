@@ -4,6 +4,19 @@
             "complex_modifications": {
                 "rules": [
                     {
+                        "description": "Hyper + x == delete",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "x",
+                                    "modifiers": { "mandatory": ["left_shift", "left_command", "left_control", "left_option"] }
+                                },
+                                "to": [{ "key_code": "delete_forward" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Quit application by pressing command-q twice",
                         "manipulators": [
                             {
@@ -4560,6 +4573,19 @@
             "complex_modifications": {
                 "rules": [
                     {
+                        "description": "Hyper + x == delete",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "x",
+                                    "modifiers": { "mandatory": ["left_shift", "left_command", "left_control", "left_option"] }
+                                },
+                                "to": [{ "key_code": "delete_forward" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Ctrl+C, Ctrl+V, Ctrl+X => Cmd+C (Copy), Cmd+V (Paste), Cmd+X (Cut)",
                         "manipulators": [
                             {
@@ -7528,6 +7554,7 @@
                     },
                     {
                         "description": "Ctrl+S => Cmd+S (Save)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -7586,6 +7613,7 @@
                     },
                     {
                         "description": "Ctrl+N => Cmd+N (New)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
