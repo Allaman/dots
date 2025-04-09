@@ -14,6 +14,7 @@ pink: &pink "#e69AF7"
 blue: &blue "#7AA2F7"
 red: &red "#F7768E"
 white: &white "#C0CAF5"
+highlight: &highlight "#000CAD"
 
 k9s:
   # General K9s styles
@@ -85,7 +86,7 @@ k9s:
     table:
       fgColor: *foreground
       bgColor: default
-      cursorFgColor: *white
+      cursorFgColor: *highlight
       cursorBgColor: *background
       markColor: *pink
       # Header row styles.
