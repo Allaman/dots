@@ -1,9 +1,8 @@
 # This file is sourced by all instances of Zsh and I want
 # this config to be always available
 
-command -v vim >/dev/null 2>&1 && export EDITOR=vim
-command -v nvim >/dev/null 2>&1 && export EDITOR=nvim
-command -v nvim >/dev/null 2>&1 && export MANPAGER='nvim +Man!' 
+export EDITOR=nvim
+export MANPAGER='nvim +Man!' 
 
 [ -d $HOME/workspace/git.rootknecht.net/scripts ] && export PATH=$PATH:$HOME/workspace/git.rootknecht.net/scripts
 [ -d $HOME/.local/bin ] && export PATH=$PATH:$HOME/.local/bin
