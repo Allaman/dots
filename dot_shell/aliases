@@ -67,7 +67,6 @@ alias \
   cdl='cd /$HOME/Downloads/' \
   tree1='tree -L 1' \
   tree2='tree -L 2' \
-  ls='ls -hN --color=auto --group-directories-first' \
   ll='ls -lh' \
   lla='ls -alh' \
   lsym='ls -l `\find . -maxdepth 1 -type l -print`'
