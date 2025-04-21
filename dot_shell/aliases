@@ -47,7 +47,8 @@ alias \
   gcd='git checkout develop' \
   gcp='git checkout production' \
   gcn='git checkout -b' \
-  gt='gitui'
+  gt='gitui' \
+  del-all-branches-but-current='git branch | grep -v "$(git branch --show-current)" | xargs git branch -D'
 
 # Github
 alias \
