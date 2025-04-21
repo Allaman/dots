@@ -8,7 +8,7 @@ command -v go >/dev/null 2>&1 && export GOPATH=$HOME/.local/share/go && export G
 
 source $HOME/.fzf.zsh
 
-export _ZO_DATA_DIR=$HOME/.zoxide
+export _ZO_DATA_DIR=$HOME/data/.zoxide
 command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
 
 command -v atuin >/dev/null 2>&1 && eval "$(atuin init zsh --disable-up-arrow)"
