@@ -61,18 +61,19 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 if [[ "$OSTYPE" =~ "darwin" ]]
 then
-  export LC_CTYPE=UTF-8
-  export GPG_TTY=$(tty)
-  if [[ x"$KITTY_PID" == "x" ]]
-  then # not kitty
-    export TERMINAL=xterm
-    export TERM=xterm-256color
-  else
-    # not compatible with my ssh config to start tmux after connecting
-    # alias ssh='kitty +kitten ssh'
-    export TERMINAL=kitty
-    export TERM=xterm-kitty
-  fi
+  # export LC_CTYPE=UTF-8
+  # export GPG_TTY=$(tty)
+  # if [[ x"$KITTY_PID" == "x" ]]
+  # then # not kitty
+  #   export TERMINAL=xterm
+  #   export TERM=xterm-256color
+  # else
+  #   # not compatible with my ssh config to start tmux after connecting
+  #   # alias ssh='kitty +kitten ssh'
+  #   export TERMINAL=kitty
+  #   export TERM=xterm-kitty
+  # fi
+  export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
   export BROWSER="open -a firefox"
 fi
 
