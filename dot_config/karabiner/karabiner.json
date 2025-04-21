@@ -1598,7 +1598,6 @@
                 }
             ],
             "name": "Internal",
-            "selected": true,
             "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         },
         {
@@ -8677,6 +8676,7 @@
                 }
             ],
             "name": "G Pro X",
+            "selected": true,
             "simple_modifications": [
                 {
                     "from": { "key_code": "grave_accent_and_tilde" },
