@@ -1,6 +1,8 @@
 # command -v direnv > /dev/null 2>&1 && eval "$(direnv hook zsh)"
 
-command -v go >/dev/null 2>&1 && export GOPATH=$HOME/.local/share/go && export GOBIN=$HOME/.local/share/go/bin
+export GOPATH=$HOME/.local/share/go 
+export GOBIN=$HOME/.local/share/go/bin
+export PATH=$PATH:$GOBIN
 [ -d $HOME/.cargo/bin ] && export PATH=$PATH:~/.cargo/bin
 
 [ -d "/Applications/Sublime Text.app/Contents/SharedSupport/bin" ] && export PATH="$PATH:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
