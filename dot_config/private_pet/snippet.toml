@@ -1,0 +1,129 @@
+[[snippets]]
+description = "Rofi Config Menu"
+command = "fd -H -t f . .public-dotfiles .dotfiles | rofi -threads 0 -width 50 -dmenu -i -p Open | xargs alacritty -e nvim"
+output = ""
+
+[[snippets]]
+description = "Rofi File Opener"
+command = "fd -H -t f . data mjp kunden workspace Downloads .dotfiles .public-dotfiles | rofi -threads 0 -width 50 -dmenu -i -p Open | xargs  xdg-open"
+output = ""
+
+[[snippets]]
+description = "Check Key Code"
+command = "xbindkeys --key"
+output = ""
+
+[[snippets]]
+description = "List all resources in a Kubernetes manifest"
+command = "yq r -d'*'  <filename=stg>.yaml 'kind'"
+output = ""
+
+[[snippets]]
+description = "List all Kubernetes contexts"
+command = "kubectl config get-contexts --no-headers=false -o name"
+output = ""
+
+[[snippets]]
+description = "Curl HTTP Timings"
+command = "curl -o /dev/null -H 'Cache-Control: no-cache' -s -w Connect: %{time_connect} TTFB: %{time_starttransfer} Total time: %{time_total} n <URL>"
+output = ""
+
+[[snippets]]
+description = "Immediately delete an AWS secret"
+command = "aws --profile <profile> secretsmanager delete-secret --no-cli-pager --force-delete-without-recovery --secret-id <secret-name>"
+output = ""
+
+[[snippets]]
+description = "Create a new AWS secret from a JSON file"
+command = "aws --profile <profile> secretsmanager create-secret --name <secret-name> --description '<secret-description>' --secret-string file://<secrets-file>.json"
+output = ""
+
+[[snippets]]
+description = "Search and replace with sed"
+command = "sed -i 's#<search>#<replace>#' <file(s)>"
+output = ""
+
+[[snippets]]
+description = "Connect to EC2 instance via systems manager"
+command = "aws ssm start-session --target <instance-id> --profile <profile>"
+output = ""
+
+[[snippets]]
+description = "Get a shell to a running pod running one container"
+command = "kubectl exec --stdin --tty <pod-name> -- /bin/sh"
+output = ""
+
+[[snippets]]
+description = "Get a shell to a running pod running multiple containers"
+command = "kubectl exec --stdin --tty <pod-name> --container <container-name> -- /bin/sh"
+output = ""
+
+[[snippets]]
+description = "Run a command in a different namespace"
+command = "sudo nsenter -t  -n <command>"
+output = ""
+
+[[snippets]]
+description = "Kubectl port-forward"
+command = "kubectl -n <namespace> port-forward <resource=deployment>/<name> <local-port>:<target-port>"
+output = ""
+
+[[snippets]]
+description = "List all IPv4 addresses"
+command = "ip -o -4 addr | awk '-c[0-9]*: ?lo|link\\/ether/ {print  }'"
+output = ""
+
+[[snippets]]
+description = "Show top 5 memory/RAM usage processes"
+command = "ps aux | head -1; ps aux | sort -rnk 4 | head -5"
+output = ""
+
+[[snippets]]
+description = "Get Kubernetes node instance type"
+command = "kubectl get node <node-name> -o json | jq '.metadata.labels.node.kubernetes.io/instance-type'"
+output = ""
+
+[[snippets]]
+description = "Resize (percentual) all images in a folder"
+command = "mkdir resized/ && fd -e <param=JPG> | xargs -I {} convert -resize <size=20>% {} resized/{}"
+output = ""
+
+[[snippets]]
+description = "Sum up : separated durations (e.g. 5:30)"
+command = "awk -F : '{acch+=$1;accm+=$2;} ENDFILE { print acch+int(accm/60)  \":\" accm%60; }'"
+output = ""
+
+[[snippets]]
+description = "Helm Upgrade"
+command = "helm upgrade -i <release-name> <chart> -n <namespace> -f <values=values.yaml"
+output = ""
+
+[[snippets]]
+description = "Generate htpasswd basic auth"
+command = "printf \"<USER>:$(openssl passwd -apr1 <PASSWORD>)\\n\""
+output = ""
+
+[[snippets]]
+description = "Hledger register"
+command = "hledger register <account=expenses> depth:<depth=1> -b <begin=2022-01> -e <end=today> desc:<description=.*>"
+output = ""
+
+[[snippets]]
+description = "hledger balance"
+command = "hledger balance <account=expenses> -b <begin=2022-01> -e <end=today>"
+output = ""
+
+[[snippets]]
+description = "Generate a pub key from a priv SSH key"
+command = "ssh-keygen -y -e -f <file>"
+output = ""
+
+[[snippets]]
+description = "Print current date in YYYYMMDD format"
+command = "date +%Y%m%d"
+output = ""
+
+[[snippets]]
+description = "Remove password protection from pdf"
+command = "qpdf -password=<document-password> -decrypt <file> unprotected.pdf"
+output = ""
