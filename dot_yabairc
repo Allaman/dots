@@ -65,4 +65,6 @@ yabai -m rule --add app='Goland IDEA' title='Edit configuration' sticky=off sub-
 yabai -m signal --add event=window_focused action="sketchybar -m --trigger window_focus &> /dev/null"
 yabai -m signal --add event=window_title_changed action="sketchybar -m --trigger title_change &> /dev/null"
 
+yabai -m rule --add app=".*" sub-layer=normal
+
 echo "yabai configuration loaded.."
