@@ -1,0 +1,17 @@
+---
+gui:
+  showRandomTip: false
+  commandLogSize: 4
+git:
+  paging:
+    pater: delta --dark --paging=never
+    autoFetch: false
+os:
+  # Command for editing a file. Should contain "{{filename}}".
+  edit: "nvim {{filename}}"
+  editAtLine: "nvim {{filename}} -c {{line}}"
+  open: "nvim {{filename}}"
+  copyToClipboardCmd: ccopy
+  readFromClipboardCmd: cpaste
+
+notARepository: quit
