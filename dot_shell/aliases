@@ -48,6 +48,7 @@ alias \
   gcp='git checkout production' \
   gcn='git checkout -b' \
   gt='gitui' \
+  lg='lazygit' \
   del-all-branches-but-current='git branch | grep -v "$(git branch --show-current)" | xargs git branch -D'
 
 # Github
