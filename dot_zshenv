@@ -77,6 +77,8 @@ then
   export BROWSER="open -a firefox"
 fi
 
+export XDG_CONFIG_HOME="$HOME/.config"
+
 if [[ "$OSTYPE" =~ "linux" ]]
 then
   export BROWSER=firefox
@@ -89,10 +91,6 @@ then
   # http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
   if [[ -z "$XDG_DATA_HOME" ]]; then
     export XDG_DATA_HOME="$HOME/.local/share"
-  fi
-
-  if [[ -z "$XDG_CONFIG_HOME" ]]; then
-    export XDG_CONFIG_HOME="$HOME/.config"
   fi
 
   if [[ -z "$XDG_CACHE_HOME" ]]; then
