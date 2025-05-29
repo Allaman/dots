@@ -10,7 +10,7 @@ styles
 # Not in use in favour of xbindkeysrc
 .config/sxhkd
 # managed via symlink
-.config/karabiner
+.config/karabiner/karabiner.json
 .lazy-lock.json
 
 # only on darwin systems
