@@ -127,3 +127,8 @@ output = ""
 description = "Remove password protection from pdf"
 command = "qpdf -password=<document-password> -decrypt <file> unprotected.pdf"
 output = ""
+
+[[snippets]]
+description = "Get IP of a network interface"
+command = "ip -4 -o addr show dev <eth0> | awk '{print $4}' | cut -d/ -f1"
+output = ""
