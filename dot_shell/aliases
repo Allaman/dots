@@ -91,7 +91,6 @@ alias \
   v="$EDITOR" \
   sv="sudo $EDITOR" \
   v.="vim ." \
-  vlazy="NVIM_APPNAME=LazyVim nvim" \
   vy="$EDITOR -c 'set filetype=yaml' -c 'nnoremap q :quit!<CR>'" \
   cssh='$EDITOR ~/.ssh/config' \
   caws='$EDITOR -p $HOME/.aws/{credentials,config}' \
