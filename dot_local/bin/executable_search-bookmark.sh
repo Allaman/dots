@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+export PATH="$HOME/.local/bin:$HOME/.local/share/go/bin:$HOME/.fzf/bin:$PATH"
+
 bm --path "$HOME/data/bookmarks.sqlite" ls -c |
   fzf --header="Bookmark Management" \
     --header-first \
