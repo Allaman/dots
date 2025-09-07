@@ -362,3 +362,13 @@ function pg { pgrep -fa "$1" | grep -E --color "$1"; }
 
 # Print kubectl_aliases alias before executing
 #function kubectl() { echo "+ kubectl $@">&2; command kubectl $@; }
+
+cdd() {
+    local selected_dir
+    selected_dir=$(fd -t d . | fzf +m --height 50% --preview 'tree -C {}')
+    if [[ -n "$selected_dir" ]]; then
+        cd "$selected_dir" || return 1
+    fi
+}
+
+
