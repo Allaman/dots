@@ -1,3 +1,13 @@
 [mgr]
 sort_dir_first = true
 linemode = "size"
+
+[[plugin.prepend_fetchers]]
+id = "git"
+name = "*"
+run = "git"
+
+[[plugin.prepend_fetchers]]
+id = "git"
+name = "*/"
+run = "git"
