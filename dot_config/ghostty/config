@@ -6,7 +6,7 @@ adjust-cell-height = 20%
 font-family = "Akkurat-Mono"
 mouse-hide-while-typing = true
 shell-integration = "zsh"
-scrollback-limit = 10000
+scrollback-limit = 100000
 window-save-state = never
 quit-after-last-window-closed = true
 
