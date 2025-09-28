@@ -18,7 +18,9 @@ if [[ -z $selected ]]; then
   exit 0
 fi
 
-selected_name="$(basename "$selected" | tr . _)"
+# Get the last two path components
+path_suffix="$(echo "$selected" | rev | cut -d'/' -f1-2 | rev)"
+selected_name="$(echo "$path_suffix" | tr /. __)"
 tmux_running="$(pgrep tmux)"
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
