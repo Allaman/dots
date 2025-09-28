@@ -89,8 +89,9 @@ alias \
 # VI*
 alias \
   v="$EDITOR" \
+  vd="$EDITOR -d" \
   sv="sudo $EDITOR" \
-  v.="vim ." \
+  v.="$EDITOR ." \
   vy="$EDITOR -c 'set filetype=yaml' -c 'nnoremap q :quit!<CR>'" \
   cssh='$EDITOR ~/.ssh/config' \
   caws='$EDITOR -p $HOME/.aws/{credentials,config}' \
