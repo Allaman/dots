@@ -20,11 +20,14 @@ fi
 
 # Get the last two path components
 path_suffix="$(echo "$selected" | rev | cut -d'/' -f1-2 | rev)"
-selected_name="$(echo "$path_suffix" | tr /. __)"
+
+# Smart session name generation
+selected_name="$(echo "$path_suffix" | sed 's|^\.||' | tr '/.' '__')"
+
 tmux_running="$(pgrep tmux)"
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-  tmux new-session -s "$selected_name "-c "$selected"
+  tmux new-session -s "$selected_name" -c "$selected"
   exit 0
 fi
 
