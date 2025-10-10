@@ -11,13 +11,32 @@ done
 if [[ $# -eq 1 ]]; then
   selected=$1
 else
-  selected=$(zoxide query -l | fzf)
+  # Show active sessions first (green), then zoxide paths (blue)
+  selected=$(
+    {
+      tmux list-sessions -F "#{session_name}" 2>/dev/null | while read -r name; do
+        echo -e "\033[0;32m$name\033[0m"
+      done
+      zoxide query -l | while read -r path; do
+        echo -e "\033[0;34m$path\033[0m"
+      done
+    } | fzf --ansi --prompt="Session/Path: "
+  )
 fi
 
+# Skip if empty
 if [[ -z $selected ]]; then
   exit 0
 fi
 
+# Check if selected is a session name (no slashes) or a path
+if [[ $selected != *"/"* ]]; then
+  # It's a session name, switch directly
+  tmux switch-client -t "$selected"
+  exit 0
+fi
+
+# It's a path, process normally
 # Get the last two path components
 path_suffix="$(echo "$selected" | rev | cut -d'/' -f1-2 | rev)"
 
