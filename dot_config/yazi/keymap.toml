@@ -32,8 +32,12 @@ run = ['''
 ''']
 desc = "Move the files to the trash"
 
-# Smart paste: paste files without entering the directory
 [[mgr.prepend_keymap]]
-on = ["p"]
-run = "plugin smart-paste"
-desc = "Paste into the hovered directory or CWD"
+on = ["<C-f>"]
+run = "seek 5"
+desc = "Preview scroll forward"
+
+[[mgr.prepend_keymap]]
+on = ["<C-b>"]
+run = "seek -5"
+desc = "Preview scroll backward"
