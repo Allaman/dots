@@ -4,6 +4,42 @@
             "complex_modifications": {
                 "rules": [
                     {
+                        "description": "Hyper + i == }",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "i",
+                                    "modifiers": { "mandatory": ["left_shift", "left_command", "left_control", "left_option"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "9",
+                                        "modifiers": ["right_option"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Hyper + u == {",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "u",
+                                    "modifiers": { "mandatory": ["left_shift", "left_command", "left_control", "left_option"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "8",
+                                        "modifiers": ["right_option"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "PC-style Home/End to Mac Command+Arrow",
                         "manipulators": [
                             {
@@ -744,6 +780,25 @@
                         "is_pointing_device": true,
                         "product_id": 45954,
                         "vendor_id": 1133
+                    },
+                    "ignore": false,
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "left_command" },
+                            "to": [{ "key_code": "left_option" }]
+                        },
+                        {
+                            "from": { "key_code": "left_option" },
+                            "to": [{ "key_code": "left_command" }]
+                        }
+                    ]
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 2209,
+                        "vendor_id": 13364
                     },
                     "ignore": false,
                     "simple_modifications": [

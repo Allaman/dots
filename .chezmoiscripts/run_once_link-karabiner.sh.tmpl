@@ -3,7 +3,8 @@
 #!/usr/bin/env bash
 
 echo "Symlinking karabiner..."
-ln -fs $(chezmoi source-path)/dot_config/karabiner $HOME/.config/
+mkdir -p ~/.config/karabiner
+ln -fs $(chezmoi source-path)/dot_config/private_karabiner/private_karabiner.json /Users/michael/.config/karabiner/karabiner.json
 
 {{ else -}}
 
