@@ -69,4 +69,4 @@ yabai -m rule --add app=".*" sub-layer=normal
 
 echo "yabai configuration loaded.."
 
-borders style=round active_color=0xffe1e3e4 width=3.0 &
+borders style=round active_color=0xffe1e3e4 width=2.0 &
