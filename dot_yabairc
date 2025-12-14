@@ -68,3 +68,5 @@ yabai -m signal --add event=window_title_changed action="sketchybar -m --trigger
 yabai -m rule --add app=".*" sub-layer=normal
 
 echo "yabai configuration loaded.."
+
+borders style=round active_color=0xffe1e3e4 width=3.0 &
