@@ -1,9 +1,10 @@
 title = " "
-theme = "moonfly"
+theme = "tokyonight-moon"
 macos-titlebar-style = hidden
 copy-on-select = true
 adjust-cell-height = 20%
-font-family = "Akkurat-Mono"
+font-family = "JetBrains Mono"
+font-size = 14
 mouse-hide-while-typing = true
 shell-integration = "zsh"
 scrollback-limit = 100000
@@ -14,5 +15,7 @@ quit-after-last-window-closed = true
 keybind = super+n=text:\x1b[110;3u
 # super+n map to meta+p for tmux
 keybind = super+p=text:\x1b[112;3u
+
+keybind = shift+enter=text:\x1b\r
 
 # vim: set commentstring=#\ %s :
