@@ -2,3 +2,11 @@ encryption = "age"
 [age]
     identity = "~/.secrets/age_chezmoi_key"
     recipient = "age1uhsjqq09s8tsq4w2gvz0e0qu0rttj2c40aqct23vxl4gl4mtvyes75tuce"
+[merge]
+    command = "nvim"
+    args = [
+        "-d",
+        {{ printf "%q" "{{ .Destination }}" }},
+        {{ printf "%q" "{{ .Source }}" }},
+        {{ printf "%q" "{{ .Target }}" }},
+    ]
