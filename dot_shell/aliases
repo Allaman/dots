@@ -15,13 +15,6 @@ alias \
   nflakerebuild='sudo nixos-rebuild switch --flake /etc/nixos#thinkpad' \
   ndevelop='nix develop --command zsh'
 
-# distrobox
-alias \
-  dbenter='distrobox-enter' \
-  dblist='distrobox-list' \
-  dbstop='distrobox-stop' \
-  dbrm='distrobox-rm'
-
 # Suffix alias
 alias -s txt=nvim
 alias -s {js,json}=nvim
@@ -112,7 +105,8 @@ alias \
   to='zi' \
   cm='chezmoi' \
   vf='vifm ~' \
-  vf.='vifm .'
+  vf.='vifm .' \
+  make='make_wrap'
 
 # hledger
 alias \
