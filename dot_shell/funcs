@@ -370,5 +370,3 @@ cdd() {
         cd "$selected_dir" || return 1
     fi
 }
-
-
