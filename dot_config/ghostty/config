@@ -10,12 +10,13 @@ shell-integration = "zsh"
 scrollback-limit = 100000
 window-save-state = never
 quit-after-last-window-closed = true
+auto-update = check
 
 # map super+p to meta+n for tmux
 keybind = super+n=text:\x1b[110;3u
 # super+n map to meta+p for tmux
 keybind = super+p=text:\x1b[112;3u
-
+# for claude new line
 keybind = shift+enter=text:\x1b\r
 
 # vim: set commentstring=#\ %s :

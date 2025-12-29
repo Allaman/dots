@@ -370,3 +370,14 @@ cdd() {
         cd "$selected_dir" || return 1
     fi
 }
+
+# allows me to always type "make" and I do not have to check
+# the repo if a Taskfile or a Makefile is available
+make_wrap() {
+  # Taskfile is preferred
+  if [ -f Taskfile.yml ]; then
+    task $@
+  else
+    make $@
+  fi
+}
