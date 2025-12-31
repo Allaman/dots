@@ -21,4 +21,8 @@ if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/config.toml)"
 fi
 
+# enable zmv - an enhanced file mover
+# https://zsh.sourceforge.io/Doc/Release/User-Contributions.html#index-zmv
+autoload zmv
+
 # vim: set ft=zsh:
