@@ -22,6 +22,9 @@ alias -g JQ='| jq'
 alias -g YQ='| yq'
 alias -g B='| bat'
 
+# named directories
+hash -d dl=$HOME/Downloads
+
 # Suffix alias
 alias -s txt=nvim
 alias -s {js,json}=nvim
