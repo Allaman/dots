@@ -16,4 +16,11 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
+function copy-buffer-to-clipboard() {
+  echo -n "$BUFFER" | pbcopy
+  zle -M "Copied to clipboard"
+}
+zle -N copy-buffer-to-clipboard
+bindkey '^Y' copy-buffer-to-clipboard
+
 # vim: set ft=zsh:
