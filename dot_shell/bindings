@@ -26,4 +26,8 @@ bindkey '^Y' copy-buffer-to-clipboard
 # do history expansion on space
 bindkey " " magic-space 
 
+# Hotkey insertions
+# TODO: think about cool hotkey
+bindkey -s '^Xgc' 'git commit -m ""\C-b'
+
 # vim: set ft=zsh:
