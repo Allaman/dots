@@ -26,12 +26,14 @@ alias -g B='| bat'
 hash -d dl=$HOME/Downloads
 
 # Suffix alias
-alias -s txt=nvim
-alias -s {js,json}=nvim
-alias -s md=nvim
-alias -s {toml}=nvim
-alias -s {yml,yaml}=nvim
-alias -s lua=nvim
+alias -s txt=bat
+alias -s json=jless
+alias -s md=bat
+alias -s toml=bat
+alias -s {yml,yaml}="bat -l yaml"
+alias -s lua=$EDITOR
+alias -s go=$EDITOR
+alias -s py=$EDITOR
 
 # Git
 alias \
