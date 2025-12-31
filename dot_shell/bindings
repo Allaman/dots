@@ -23,4 +23,7 @@ function copy-buffer-to-clipboard() {
 zle -N copy-buffer-to-clipboard
 bindkey '^Y' copy-buffer-to-clipboard
 
+# do history expansion on space
+bindkey " " magic-space 
+
 # vim: set ft=zsh:
