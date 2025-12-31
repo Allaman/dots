@@ -15,6 +15,13 @@ alias \
   nflakerebuild='sudo nixos-rebuild switch --flake /etc/nixos#thinkpad' \
   ndevelop='nix develop --command zsh'
 
+alias -g NE='2> /dev/null' # error
+alias -g DN='> /dev/null' # stdout
+alias -g NUL='> /dev/null 2>&1' # stdout and error
+alias -g JQ='| jq'
+alias -g YQ='| yq'
+alias -g B='| bat'
+
 # Suffix alias
 alias -s txt=nvim
 alias -s {js,json}=nvim
