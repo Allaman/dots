@@ -377,7 +377,9 @@ make_wrap() {
   # Taskfile is preferred
   if [ -f Taskfile.yml ]; then
     task $@
-  else
+  elif [ -f Makefile ]; then
     make $@
+  else
+    echo "No Taskfile or Makefile found"
   fi
 }
