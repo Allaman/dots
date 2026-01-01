@@ -41,3 +41,8 @@ desc = "Preview scroll forward"
 on = ["<C-b>"]
 run = "seek -5"
 desc = "Preview scroll backward"
+
+[[mgr.prepend_keymap]]
+on = ["g", "r"]
+run = "plugin cd-git-root"
+desc = "Go to git repo root"
