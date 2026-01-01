@@ -36,7 +36,7 @@ final_space = true
     style = 'plain'
 
   [[blocks.segments]]
-    template = ' {{ .UpstreamIcon }}{{ .HEAD }}{{ if .Working.Changed }}  <cyan>{{ .Working.String }}{{ end }}<cyan>{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}<magenta>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}<magenta>'
+    template = " {{ if not .Segments.Jujutsu }}{{ .UpstreamIcon }}{{ .HEAD }}{{ if .Working.Changed }}  <cyan>{{ .Working.String }}{{ end }}<cyan>{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}<magenta>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}<magenta>{{end}}"
     foreground = 'grey'
     background = 'transparent'
     type = 'git'
@@ -46,6 +46,19 @@ final_space = true
       branch_icon = ''
       commit_icon = '@'
       fetch_status = true
+
+  [[blocks.segments]]
+    type = "jujutsu"
+    style = "plain"
+
+    [blocks.segments.properties]
+      fetch_status = true
+      ignore_working_copy = false
+      [status_formats]
+        Added = "A: %d"
+        Deleted = "D: %d"
+        Modified = "M: %d"
+        Moved = "Mv: %d"
 
   [[blocks.segments]]
     template = '  {{ .Full }} '
