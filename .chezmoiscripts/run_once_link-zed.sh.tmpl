@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+echo "Symlinking zed..."
+mkdir -p ~/.config/zed
+ln -fs $(chezmoi source-path)/dot_config/zed/private_settings.json $HOME/.config/zed/settings.json
+

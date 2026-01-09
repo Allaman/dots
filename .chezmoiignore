@@ -12,6 +12,7 @@ styles
 # managed via symlink
 .config/karabiner/karabiner.json
 .lazy-lock.json
+.config/zed/settings.json
 
 # only on darwin systems
 {{- if ne .chezmoi.os "darwin" }}
