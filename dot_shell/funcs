@@ -376,9 +376,11 @@ cdd() {
 make_wrap() {
   # Taskfile is preferred
   if [ -f Taskfile.yml ]; then
+    echo "using task"
     task $@
   elif [ -f Makefile ]; then
-    make $@
+    echo "Using make"
+    \make $@ # to prevent infinite recursion
   else
     echo "No Taskfile or Makefile found"
   fi
