@@ -8,6 +8,12 @@ if [ -z "$MBSYNC" ]; then
   exit 1
 fi
 
+NOTMUCH=$(which notmuch)
+if [ -z "$NOTMUCH" ]; then
+  echo "notmuch not found in PATH: $PATH"
+  exit 1
+fi
+
 notify() {
   if [ "$(uname -s)" == "Darwin" ]; then
     osascript -e "display notification \"$1\" with title \"Mail Sync\""
@@ -27,5 +33,13 @@ EXIT_CODE=$?
 
 if [ $EXIT_CODE -ne 0 ]; then
   notify "Sync failed: $OUTPUT"
+  exit $EXIT_CODE
+fi
+
+OUTPUT=$($NOTMUCH new 2>&1)
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -ne 0 ]; then
+  notify "notmuch failed: $OUTPUT"
   exit $EXIT_CODE
 fi
