@@ -385,3 +385,9 @@ make_wrap() {
     echo "No Taskfile or Makefile found"
   fi
 }
+
+# cd between git worktrees
+cdwt() {
+  local target=$(git worktree list | fzf --height=40% | awk '{print $1}')
+  [ -n "$target" ] && cd "$target"
+}
