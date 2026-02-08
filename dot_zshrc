@@ -47,9 +47,6 @@ if [[ $- == *i* ]]; then
   fi
 fi
 
-# zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-# source <(carapace _carapace)
-
 # Per-command profiling:
 # unsetopt xtrace
 # exec 2>&3 3>&-
