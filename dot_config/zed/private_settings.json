@@ -7,6 +7,33 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "git": {
+    "blame": {
+      "show_avatar": false
+    }
+  },
+  "bottom_dock_layout": "contained",
+  "tab_bar": {
+    "show": false
+  },
+  "title_bar": {
+    "show_project_items": true,
+    "show_onboarding_banner": false,
+    "show_user_picture": false,
+    "show_user_menu": false,
+    "show_sign_in": false,
+    "show_branch_name": true
+  },
+  "status_bar": {
+    "active_language_button": true
+  },
+  "project_panel": {
+    "button": true
+  },
+  "which_key": {
+    "delay_ms": null,
+    "enabled": true
+  },
   "use_smartcase_search": true,
   "inlay_hints": {
     "enabled": true,
