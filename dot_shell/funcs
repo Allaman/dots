@@ -337,7 +337,7 @@ fzf-git-branch() {
         sed "s/.* //"
 }
 
-fzf-git-checkout() {
+fzf-git-switch() {
     git rev-parse HEAD > /dev/null 2>&1 || return
 
     local branch
@@ -352,9 +352,9 @@ fzf-git-checkout() {
     # using --track and a remote branch name, it is the same as:
     # git checkout -b branchName --track origin/branchName
     if [[ "$branch" = 'remotes/'* ]]; then
-        git checkout --track $branch
+        git switch --track $branch
     else
-        git checkout $branch;
+        git switch $branch;
     fi
 }
 

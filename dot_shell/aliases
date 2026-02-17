@@ -46,7 +46,7 @@ alias \
   gd='git diff' \
   gtlist='git describe --tags --abbrev=0' \
   gl='git log --ext-diff -u' \
-  gco='fzf-git-checkout' \
+  gco='fzf-git-switch' \
   gcm='git_switch_default' \
   gcn='git switch -c' \
   gt='gitui' \
