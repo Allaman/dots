@@ -140,14 +140,15 @@ gtag() {
 }
 #}}}
 
-#-------- Checkout main or master {{{
-git_checkout_main_or_master() {
-    if git rev-parse --verify --quiet main > /dev/null; then
-        git checkout main
-    elif git rev-parse --verify --quiet master > /dev/null; then
-        git checkout master
+#-------- Switch default branch {{{
+git_switch_default() {
+    local default_branch
+    default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's|^refs/remotes/origin/||')
+
+    if [ -n "$default_branch" ]; then
+        git switch "$default_branch"
     else
-        echo "Neither main nor master branch found."
+        echo "Could not determine default branch."
     fi
 }
 #}}}
