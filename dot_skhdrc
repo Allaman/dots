@@ -16,7 +16,7 @@ cmd - 0x2F : open -n /Applications/Ghostty.app --args --title=bm --command="$HOM
 # cmd - e : /Applications/kitty.app/Contents/MacOS/kitty -T files -e zsh -ic yazi
 
 # cmd + shift -l : /Applications/kitty.app/Contents/MacOS/kitty -d ~ -T ledger -e nvim $HOME/data/finanzen/ledger/main.ledger
-cmd + shift -l : open -n /Applications/Ghostty.app --args --title=ledger --command="nvim $HOME/data/finanzen/ledger/main.ledger"
+cmd + shift -l : open -n /Applications/Ghostty.app --args --title=ledger --command="nvim -u NONE $HOME/data/finanzen/ledger/main.ledger"
 
 # cmd + shift -h : /Applications/kitty.app/Contents/MacOS/kitty -d ~ -T ledger -e hledger add -f $HOME/data/finanzen/ledger/main.ledger
 cmd + shift -h : open -n /Applications/Ghostty.app --args --title=ledger --command="hledger add -f $HOME/data/finanzen/ledger/main.ledger"
