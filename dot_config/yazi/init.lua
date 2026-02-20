@@ -8,5 +8,13 @@ require("zoxide"):setup({
   update_db = true,
 })
 
+th.git = th.git or {}
+th.git.unknown_sign = " "
+th.git.modified_sign = "M"
+th.git.deleted_sign = "D"
+th.git.added_sign = "A"
+th.git.untracked_sign = "U"
 -- https://github.com/yazi-rs/plugins/tree/main/git.yazi
-require("git"):setup()
+require("git"):setup({
+  order = 1500,
+})
