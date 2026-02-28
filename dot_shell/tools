@@ -7,6 +7,7 @@ export PATH=$PATH:$GOBIN
 
 [ -d "/Applications/Sublime Text.app/Contents/SharedSupport/bin" ] && export PATH="$PATH:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
 [ -d "/Applications/Sublime Merge.app/Contents/SharedSupport/bin" ] && export PATH="$PATH:/Applications/Sublime Merge.app/Contents/SharedSupport/bin"
+[ -d "/Applications/Obsidian.app/Contents/MacOS" ] && export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
 
 source $HOME/.fzf.zsh
 
