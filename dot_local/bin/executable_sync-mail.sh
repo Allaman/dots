@@ -27,19 +27,26 @@ while ! ping -c 1 -W 1 8.8.8.8 &>/dev/null; do
   sleep 5
 done
 
-# Run mbsync and capture output
-OUTPUT=$($MBSYNC -a 2>&1)
-EXIT_CODE=$?
+SYNC_INTERVAL=3600
 
-if [ $EXIT_CODE -ne 0 ]; then
-  notify "Sync failed: $OUTPUT"
-  exit $EXIT_CODE
-fi
+while true; do
 
-OUTPUT=$($NOTMUCH new 2>&1)
-EXIT_CODE=$?
+  # Run mbsync and capture output
+  OUTPUT=$($MBSYNC -a 2>&1)
+  EXIT_CODE=$?
 
-if [ $EXIT_CODE -ne 0 ]; then
-  notify "notmuch failed: $OUTPUT"
-  exit $EXIT_CODE
-fi
+  if [ $EXIT_CODE -ne 0 ]; then
+    notify "Sync failed: $OUTPUT"
+    exit $EXIT_CODE
+  fi
+
+  OUTPUT=$($NOTMUCH new 2>&1)
+  EXIT_CODE=$?
+
+  if [ $EXIT_CODE -ne 0 ]; then
+    notify "notmuch failed: $OUTPUT"
+    exit $EXIT_CODE
+  fi
+
+  sleep $SYNC_INTERVAL
+done
