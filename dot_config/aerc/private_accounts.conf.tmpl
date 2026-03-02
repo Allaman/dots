@@ -3,7 +3,7 @@ source             = notmuch://~/pim/mail/
 query-map          = ~/.config/aerc/map.conf
 default            = INBOX
 from               = Michael Peter <{{ output "gopass" "show" "--password" "mail/mailbox/from" }}>
-check-mail-cmd     = ~/.local/bin/sync-mail.sh
+check-mail-cmd     = "mbsync -a && notmuch new"
 check-mail         = 10m
 check-mail-timeout = 60s
 
