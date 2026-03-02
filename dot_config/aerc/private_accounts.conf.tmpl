@@ -1,0 +1,32 @@
+[Combined]
+source             = notmuch://~/pim/mail/
+query-map          = ~/.config/aerc/map.conf
+default            = INBOX
+from               = Michael Peter <{{ output "gopass" "show" "--password" "mail/mailbox/from" }}>
+check-mail-cmd     = ~/.local/bin/sync-mail.sh
+check-mail         = 10m
+check-mail-timeout = 60s
+
+[Personal]
+source               = notmuch://~/pim/mail/
+outgoing             = smtps://{{ output "gopass" "show" "--password" "mail/mailbox/outgoing" }}
+maildir-store        = ~/pim/mail/
+maildir-account-path = mailbox
+outgoing-cred-cmd    = gopass show --password mail/mailbox/pass
+default              = Inbox
+from                 = Michael Peter <{{ output "gopass" "show" "--password" "mail/mailbox/from" }}>
+cache-headers        = true
+copy-to              = Sent
+address-book-cmd     = ghard email --parsable
+
+[Work]
+source               = notmuch://~/pim/mail/
+outgoing             = smtps://{{ output "gopass" "show" "--password" "mail/mpeter/outgoing" }}
+maildir-store        = ~/pim/mail/
+maildir-account-path = mpeter
+outgoing-cred-cmd    = gopass show --password mail/mpeter/pass
+default              = Inbox
+from                 = Michael Peter <{{ output "gopass" "show" "--password" "mail/mpeter/user" }}>
+cache-headers        = true
+copy-to              = Sent
+address-book-cmd     = ghard email --parsable

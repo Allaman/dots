@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Tag by account (regex matches all subfolders)
+notmuch tag +personal -- tag:new and folder:/mailbox/
+notmuch tag +work     -- tag:new and folder:/mpeter/
+
+# Inbox: only messages physically in Inbox folders
+notmuch tag +inbox -- "tag:new and (folder:mailbox/Inbox or folder:mpeter/Inbox)"
+
+# System folders
+notmuch tag +sent    -inbox -unread -- "tag:new and (folder:mailbox/Sent  or folder:mpeter/Sent)"
+notmuch tag +deleted -inbox -unread -- "tag:new and (folder:mailbox/Trash or folder:mpeter/Trash)"
+notmuch tag +spam    -inbox -unread -- "tag:new and (folder:mailbox/Junk  or folder:mpeter/Junk)"
+
+# Reconcile: remove inbox from messages moved out of Inbox (e.g. deleted on another device)
+notmuch tag -inbox -- "tag:inbox and not (folder:mailbox/Inbox or folder:mpeter/Inbox)"
+
+# Remove new tag last
+notmuch tag -new -- tag:new

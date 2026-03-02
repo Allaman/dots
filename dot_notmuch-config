@@ -1,0 +1,16 @@
+# .notmuch-config - Configuration file for the notmuch mail system
+#
+# For more information about notmuch, see http://notmuchmail.org
+[database]
+path=pim/mail
+
+[new]
+# default tags for new messages
+tags=unread;new
+ignore=
+
+[maildir]
+# sync some notmuch tags with maildir flags (e.g. read/unread)
+synchronize_flags=true
+[user]
+[search]
