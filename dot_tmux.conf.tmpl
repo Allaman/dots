@@ -1,3 +1,9 @@
+{{- $copy_cmd := "pbcopy" -}}
+{{- $paste_cmd := "pbpaste" -}}
+{{- if eq .chezmoi.os "linux" -}}
+{{- $copy_cmd = "bash -c 'tee >(xclip -selection clipboard 2>/dev/null) >(wl-copy 2>/dev/null) >/dev/null'" -}}
+{{- $paste_cmd = "bash -c 'xclip -selection clipboard -o 2>/dev/null || wl-paste --no-newline 2>/dev/null'" -}}
+{{- end -}}
 # Screen-like prefix
 unbind C-b
 set-option -g prefix C-a
@@ -43,14 +49,12 @@ run -b 'tmux bind -T copy-mode-vi v send -X begin-selection 2> /dev/null || true
 run -b 'tmux bind -t vi-copy C-v rectangle-toggle 2> /dev/null || true'
 run -b 'tmux bind -T copy-mode-vi C-v send -X rectangle-toggle 2> /dev/null || true'
 run -b 'tmux bind -t vi-copy y copy-selection 2> /dev/null || true'
-run -b 'tmux bind -T copy-mode-vi y send -X copy-selection-and-cancel 2> /dev/null || true'
 run -b 'tmux bind -t vi-copy H start-of-line 2> /dev/null || true'
 run -b 'tmux bind -T copy-mode-vi H send -X start-of-line 2> /dev/null || true'
 run -b 'tmux bind -t vi-copy L end-of-line 2> /dev/null || true'
 run -b 'tmux bind -T copy-mode-vi L send -X end-of-line 2> /dev/null || true'
-# copy to X11 clipboard
-if -b 'command -v xsel > /dev/null 2>&1' 'bind y run -b "tmux save-buffer - | xsel -i -b"'
-if -b '! command -v xsel > /dev/null 2>&1 && command -v xclip > /dev/null 2>&1' 'bind y run -b "tmux save-buffer - | xclip -i -selection clipboard >/dev/null 2>&1"'
+# y: copy to system clipboard and exit copy mode
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "{{ $copy_cmd }}"
 
 # Scroll 1 lines at a time instead of default 5; don't extend dragged selections.
 bind-key -T copy-mode-vi WheelUpPane {
@@ -64,8 +68,19 @@ bind-key -T copy-mode-vi WheelDownPane {
   send-keys -t'{mouse}' -X -N 1 scroll-down
 }
 
-# Prevent from scroll down when selecting text
-unbind -T copy-mode-vi MouseDragEnd1Pane
+# Mouse drag end: copy to clipboard, stay in copy mode (viewport doesn't jump)
+bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-no-clear "{{ $copy_cmd }}"
+
+# Double-click: select word and copy
+bind-key -n DoubleClick1Pane select-pane \; copy-mode -M \; send-keys -X select-word \; send-keys -X copy-pipe-no-clear "{{ $copy_cmd }}"
+bind-key -T copy-mode-vi DoubleClick1Pane send-keys -X select-word \; send-keys -X copy-pipe-no-clear "{{ $copy_cmd }}"
+
+# Triple-click: select line and copy
+bind-key -n TripleClick1Pane select-pane \; copy-mode -M \; send-keys -X select-line \; send-keys -X copy-pipe-no-clear "{{ $copy_cmd }}"
+bind-key -T copy-mode-vi TripleClick1Pane send-keys -X select-line \; send-keys -X copy-pipe-no-clear "{{ $copy_cmd }}"
+
+# Middle-click: paste from system clipboard
+bind-key -n MouseDown2Pane run "{{ $paste_cmd }} | tmux load-buffer - && tmux paste-buffer -p"
 
 bind C-c new-session # create new session
 
@@ -79,10 +94,10 @@ bind -r f run-shell "tmux neww tmux-sessionizer.sh"
 bind-key v split-window -h -c "#{pane_current_path}"
 bind-key s split-window -v -c "#{pane_current_path}"
 
-# Smart pane switching with awareness of Vim splits, fzf, and atuin(c-j|k).
+# Smart pane switching with awareness of Vim splits, fzf, tv(television), and atuin(c-j|k).
 # See: https://github.com/christoomey/vim-tmux-navigator
 is_vim_or_fzf_or_atuin="ps -o state= -o comm= -t '#{pane_tty}' \
-    | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|l?n?vim?x?|fzf|atuin)(diff)?$'"
+    | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|l?n?vim?x?|fzf|atuin|tv)(diff)?$'"
 bind-key -n 'C-h' if-shell "$is_vim_or_fzf_or_atuin" 'send-keys C-h'  'select-pane -L'
 bind-key -n 'C-j' if-shell "$is_vim_or_fzf_or_atuin" 'send-keys C-j'  'select-pane -D'
 bind-key -n 'C-k' if-shell "$is_vim_or_fzf_or_atuin" 'send-keys C-k'  'select-pane -U'
