@@ -118,15 +118,3 @@ final_space = true
   type = 'aws'
   style = 'plain'
   tips = ['aws']
-
-[[tooltips]]
-  template = '{{ if .Version }}{{ .Version }}{{ end }}'
-  foreground = 'yellow'
-  background = 'transparent'
-  type = 'terraform'
-  style = 'plain'
-  tips = ['terraform']
-
-  [tooltips.properties]
-    fetch_version = true
-
