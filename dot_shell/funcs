@@ -332,35 +332,109 @@ fkill() {
   fi
 }
 
-fzf-git-branch() {
-    git rev-parse HEAD > /dev/null 2>&1 || return
+__fzf_default() {
+  fzf --height 50% --tmux 90%,70%  \
+      --multi --min-height 20+ --border \
+      --no-separator --header-border horizontal \
+      --border-label-pos 2 \
+      --color 'label:blue' \
+      --preview-window 'right,50%' --preview-border line \
+      --bind 'ctrl-f:preview-down,ctrl-b:preview-up' \
+      --bind 'ctrl-p:toggle-preview' \
+      --ansi "$@"
+}
 
-    git branch --color=always --all --sort=-committerdate |
-        grep -v HEAD |
-        fzf --height 50% --ansi --no-multi --preview-window right:65% \
-            --preview 'git log -n 50 --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed "s/.* //" <<< {})' |
-        sed "s/.* //"
+__git_check() {
+  git rev-parse > /dev/null 2>&1 && return
+  [[ -n $TMUX ]] && tmux display-message "Not in a git repository"
+  return 1
+}
+
+fzf-git-log() {
+  __git_check || return
+
+  local commits
+  
+  # Format: short hash + decorations + subject + relative date + author
+  git log --oneline --decorate --color=always "$@" \
+    | __fzf_default \
+        --reverse \
+        --preview 'git show --stat --color=always {1}' \
+        --header $'ctrl-o: checkout  ctrl-y: cherry-pick  ctrl-r: revert\n' \
+        --bind 'ctrl-o:execute(git checkout {1})+abort' \
+        --bind 'ctrl-y:execute(git cherry-pick {1})+abort' \
+        --bind 'ctrl-r:execute(git revert {1})+abort' \
+        --bind 'ctrl-d:preview-down,ctrl-u:preview-up' \
+        --prompt '🪵  '
+}
+
+__fzf-git-branch() {
+    __git_check || return
+
+    local flags="-a"
+    [[ "$1" == "--local" ]] && flags=""
+
+    git branch $flags --sort=-committerdate --sort=-HEAD --format=$'%(HEAD) %(color:yellow)%(refname:short) %(color:green)(%(committerdate:relative))\t%(color:blue)%(subject)%(color:reset)' --color=always |
+        column -ts$'\t' |
+        __fzf_default \
+            --layout reverse \
+            --border-label '🌲 Branches ' \
+            --preview-window down,border-top,40% \
+            --color hl:underline,hl+:underline \
+            --no-hscroll \
+            --preview "git log --oneline --graph --date=short --color=always --pretty='format:%C(auto)%cd %h%d %s' \$(cut -c3- <<< {} | cut -d' ' -f1) --" |
+        sed 's/^\* //' | awk '{print $1}'
+}
+
+fzf-git-delete-branch() {
+    __git_check || return
+
+    local flag="-d"
+    [[ "$1" == "-f" || "$1" == "--force" ]] && flag="-D"
+
+    local branches=()
+    while IFS= read -r branch; do
+        [[ -n "$branch" ]] && branches+=("$branch")
+    done < <(__fzf-git-branch --local)
+
+    [[ ${#branches[@]} -eq 0 ]] && return
+
+    echo "Delete the following branch(es)?"
+    printf '  %s\n' "${branches[@]}"
+    echo -n "[y/N] "
+    read -r reply
+    [[ "$reply" != [yY] ]] && return
+
+    for branch in "${branches[@]}"; do
+        git branch "$flag" "$branch"
+    done
 }
 
 fzf-git-switch() {
-    git rev-parse HEAD > /dev/null 2>&1 || return
-
     local branch
 
-    branch=$(fzf-git-branch)
+    branch=$(__fzf-git-branch)
     if [[ "$branch" = "" ]]; then
         echo "No branch selected."
         return
     fi
 
-    # If branch name starts with 'remotes/' then it is a remote branch. By
-    # using --track and a remote branch name, it is the same as:
-    # git checkout -b branchName --track origin/branchName
-    if [[ "$branch" = 'remotes/'* ]]; then
-        git switch --track $branch
+    # If the branch doesn't exist locally, treat it as a remote branch and
+    # create a local tracking branch (equivalent to git checkout -b <name> --track <remote>/<name>)
+    if git branch --list "$branch" | grep -q .; then
+        git switch "$branch"
     else
-        git switch $branch;
+        git switch --track "$branch";
     fi
+}
+
+fzf_git_tags() {
+  __git_check || return
+
+  git tag --sort -version:refname |
+  __fzf_default --preview-window right,70% \
+    --border-label '📛 Tags ' \
+    --preview "git show --color=always {} | bat" "$@"
 }
 
 # grep for processes
