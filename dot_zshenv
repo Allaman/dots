@@ -49,8 +49,6 @@ _fzf_compgen_dir() {
 }
 # https://github.com/ibhagwan/fzf-lua/issues/332
 export ESCDELAY=1
-# add support for ctrl+o to open selected file
-export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute:nvim {} > /dev/tty'"
 # Preview files
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 # Preview directories with tree
