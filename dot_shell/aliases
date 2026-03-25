@@ -21,9 +21,12 @@ alias -g NUL='> /dev/null 2>&1' # stdout and error
 alias -g JQ='| jq'
 alias -g YQ='| yq'
 alias -g B='| bat'
+alias -g GREP='| grep'
+alias -g RG='| rg'
 
 # named directories
 hash -d dl=$HOME/Downloads
+hash -d bin=$HOME/.local/bin
 
 # Suffix alias
 alias -s txt=bat
@@ -39,16 +42,17 @@ alias -s py=$EDITOR
 alias \
   gst='git status' \
   gs='git status' \
-  gdb='git branch -D' \
+  gdb='fzf-git-delete-branch' \
   gc='git commit' \
   push='git push' \
   pull='git pull' \
   gd='git diff' \
-  gtlist='git describe --tags --abbrev=0' \
-  gll='git log --ext-diff -u' \
+  gtlist='fzf-git-tags' \
+  gll='fzf-git-log' \
   gl='git log --oneline' \
   gco='fzf-git-switch' \
   gcm='git_switch_default' \
+  gcmp='git_switch_default && git pull' \
   gcn='git switch -c' \
   gt='gitui' \
   lg='lazygit' \
@@ -170,6 +174,11 @@ alias envs='printenv | fzf'
 alias docker-stop-all='docker stop $(docker ps -a -q)'
 alias docker-remove-all-container='docker rm $(docker ps -a -q)'
 alias docker-remove-all-images='docker rmi $(docker images -q)'
+
+# Terraform
+alias tfp='terraform plan -out=tfplan'
+alias tfa='terraform apply tfplan && rm tfplan'
+alias tfv='terraform validate'
 
 # Apps
 which duf > /dev/null && alias df='duf'
