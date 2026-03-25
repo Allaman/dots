@@ -12,6 +12,18 @@ export PATH=$PATH:$GOBIN
 source $HOME/.fzf.zsh
 
 export _ZO_DATA_DIR=$HOME/data/.zoxide
+export _ZO_FZF_OPTS="
+  --height 50%
+  --layout reverse
+  --border rounded
+  --no-separator
+  --preview-border line
+  --preview 'eza --tree --level 2 --color=always {2..} 2>/dev/null || ls -la {2..}'
+  --preview-window 'right,50%'
+  --bind 'ctrl-p:toggle-preview'
+  --bind 'ctrl-o:execute(nvim {2..})'
+  --bind 'ctrl-y:execute(echo {2..} | pbcopy)'
+"
 command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
 
 command -v atuin >/dev/null 2>&1 && eval "$(atuin init zsh --disable-up-arrow)"
