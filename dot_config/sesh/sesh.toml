@@ -1,0 +1,15 @@
+#:schema https://github.com/joshmedeski/sesh/raw/main/sesh.schema.json
+
+blacklist = ["~/.config"]
+
+# Experimental
+cache = true
+
+dir_length = 2
+
+sort_order = ["tmux", "zoxide", "config"]
+
+[[session]]
+name = "Chezmoi"
+path = "~/.local/share/chezmoi/"
+startup_command = "nvim"
