@@ -355,8 +355,7 @@ fzf-git-log() {
 
   local commits
   
-  # Format: short hash + decorations + subject + relative date + author
-  git log --oneline --decorate --color=always "$@" \
+  git log --color=always --format="%C(auto)%h %d %s %C(dim)(%an, %ar)%C(reset)" "$@" \
     | __fzf_default \
         --reverse \
         --preview 'git show --stat --color=always {1}' \
