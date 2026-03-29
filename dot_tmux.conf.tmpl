@@ -82,6 +82,9 @@ bind-key -T copy-mode-vi TripleClick1Pane send-keys -X select-line \; send-keys 
 # Middle-click: paste from system clipboard
 bind-key -n MouseDown2Pane run "{{ $paste_cmd }} | tmux load-buffer - && tmux paste-buffer -p"
 
+# skip "kill-pane 1? (y/n)" prompt
+bind-key x kill-pane
+
 bind C-c new-session # create new session
 
 unbind-key t
