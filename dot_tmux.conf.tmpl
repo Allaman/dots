@@ -105,6 +105,8 @@ bind-key "f" run-shell "sesh connect \"$(
     --preview-window 'right:55%' \
     --preview 'sesh preview {}'
 )\""
+unbind-key L
+bind-key Tab run-shell "sesh last"
 
 # Split window while keeping the path
 bind-key v split-window -h -c "#{pane_current_path}"
