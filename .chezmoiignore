@@ -7,8 +7,15 @@ styles
 .vimrc
 # Not in use right now
 .config/procs/
-# Not in use in favour of xbindkeysrc
+# Not in use in favour of xbindkeysrc [linux]
 .config/sxhkd
+# Not in use in favour of jurplel/InstantSpaceSwitcher [macOS]
+.yabairc
+.config/sketchybar
+# Not in use in favour of ghostty
+.wezterm.lua
+# Not in use in favour of ghostty
+.config/kitty
 # managed via symlink
 .config/karabiner/karabiner.json
 .lazy-lock.json
@@ -19,8 +26,7 @@ styles
 .config/kitty/macos-launch-services-cmdline
 ~/Library/LaunchAgents/com.michael.sync-mail.plist
 Library
-.config/sketchybar
-.yabairc
+.config/borders
 .skhdrc
 .gnupg
 {{- end }}
@@ -38,6 +44,5 @@ Library
 .xinitrc
 .Xresources
 .xbindkeysrc
-.wezterm.lua
 {{- end }}
 
