@@ -47,7 +47,7 @@ alias \
   push='git push' \
   pull='git pull' \
   gd='git diff' \
-  gtlist='fzf-git-tags' \
+  gtlist='fzf_git_tags' \
   gll='fzf-git-log' \
   gl='git log --oneline' \
   gco='fzf-git-switch' \
