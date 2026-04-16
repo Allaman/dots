@@ -14,7 +14,7 @@
   },
   "bottom_dock_layout": "contained",
   "tab_bar": {
-    "show": false
+    "show": true
   },
   "title_bar": {
     "show_project_items": true,
