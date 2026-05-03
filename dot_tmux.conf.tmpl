@@ -9,6 +9,11 @@ unbind C-b
 set-option -g prefix C-a
 bind-key C-a send-prefix
 
+# Handle modifier keys
+set -g extended-keys on
+set -g extended-keys-format csi-u
+set -as terminal-features ",xterm-ghostty:extkeys"
+
 # Start window/pane numbering at 1
 set -g base-index 1
 set -g pane-base-index 1
