@@ -7,6 +7,12 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "outline_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
   "git": {
     "blame": {
       "show_avatar": false
@@ -28,6 +34,7 @@
     "active_language_button": true
   },
   "project_panel": {
+    "dock": "left",
     "button": true
   },
   "which_key": {
@@ -39,6 +46,7 @@
     "enabled": true,
   },
   "collaboration_panel": {
+    "dock": "left",
     "button": false,
   },
   "toolbar": {
@@ -50,6 +58,7 @@
   "auto_signature_help": true,
   "restore_on_startup": "last_session",
   "agent": {
+    "dock": "right",
     "model_parameters": [],
     "enable_feedback": false,
   },
