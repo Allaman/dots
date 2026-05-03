@@ -14,4 +14,4 @@ bookmark=$(bm --path "$HOME/data/bookmarks.sqlite" ls -c |
     -d '|' |
   awk -F'|' '{print $1}')
 
-bm --path "$HOME/data/bookmarks.sqlite" open --name "$bookmark"
+bm --path "$HOME/data/bookmarks.sqlite" open --name "$bookmark" --wait
