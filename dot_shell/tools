@@ -30,6 +30,9 @@ command -v atuin >/dev/null 2>&1 && eval "$(atuin init zsh --disable-up-arrow)"
 
 eval "$($(brew --prefix)/bin/zsh-patina activate)"
 
+source $HOME/.shell/zsh-autosuggestions/zsh-autosuggestions.zsh
+# ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/config.toml)"
 fi
