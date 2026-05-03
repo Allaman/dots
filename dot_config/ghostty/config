@@ -17,7 +17,7 @@ auto-update = check
 keybind = super+n=text:\x1b[110;3u
 # super+n map to meta+p for tmux
 keybind = super+p=text:\x1b[112;3u
-# for claude new line
-keybind = shift+enter=text:\x1b\r
+# for claude new line (CSI-u Shift+Enter; works through tmux extended-keys)
+keybind = shift+enter=text:\x1b[13;2u
 
 # vim: set commentstring=#\ %s :
