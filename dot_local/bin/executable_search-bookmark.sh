@@ -2,7 +2,7 @@
 
 export PATH="$HOME/.local/bin:$HOME/.local/share/go/bin:$HOME/.fzf/bin:$PATH"
 
-bm --path "$HOME/data/bookmarks.sqlite" ls -c |
+bookmark=$(bm --path "$HOME/data/bookmarks.sqlite" ls -c |
   fzf --header="Bookmark Management" \
     --header-first \
     --ansi \
@@ -12,5 +12,6 @@ bm --path "$HOME/data/bookmarks.sqlite" ls -c |
     --pointer="󰁔" \
     --color 'hl:cyan,hl+:cyan:bold' \
     -d '|' |
-  awk -F'|' '{print $2}' |
-  ccopy
+  awk -F'|' '{print $1}')
+
+bm --path "$HOME/data/bookmarks.sqlite" open --name "$bookmark"
