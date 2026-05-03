@@ -25,9 +25,9 @@ cmd + shift -m : /Applications/Ghostty.app/Contents/MacOS/ghostty --window-heigh
 
 # alt + shift -n : /Applications/kitty.app/Contents/MacOS/kitty -d ~ -T projects -e zsh -ic $HOME/workspace/git.rootknecht.net/scripts/fzf-nova/_projects.sh
 
-cmd - 1 : yabai -m space --focus prev
+cmd - 1 : ISSCli left
 
-cmd - 2 : yabai -m space --focus next
+cmd - 2 : ISSCli right
 
 cmd + shift - 1  : yabai -m window --space prev --focus
 
