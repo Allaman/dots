@@ -2,13 +2,14 @@ title = " "
 theme = "Gruvbox Dark"
 macos-titlebar-style = hidden
 copy-on-select = true
-adjust-cell-height = 20%
-font-family = "JetBrains Mono"
-font-size = 14
+adjust-cell-height = 15%
+font-family = "IBM Plex Mono"
+font-size = 15
 mouse-hide-while-typing = true
 shell-integration = "zsh"
 scrollback-limit = 100000
 window-save-state = never
+maximize = false
 quit-after-last-window-closed = true
 auto-update = check
 
