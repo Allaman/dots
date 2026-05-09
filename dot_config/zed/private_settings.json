@@ -7,6 +7,9 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "terminal": {
+    "font_family": "MonoLisa Variable"
+  },
   "outline_panel": {
     "dock": "left"
   },
