@@ -176,7 +176,7 @@ alias docker-remove-all-container='docker rm $(docker ps -a -q)'
 alias docker-remove-all-images='docker rmi $(docker images -q)'
 
 # Terraform
-alias tfp='terraform plan -out=tfplan'
+alias tfp='terraform plan -out=tfplan -no-color | terraprism'
 alias tfa='terraform apply tfplan && rm tfplan'
 alias tfv='terraform validate'
 
