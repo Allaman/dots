@@ -72,7 +72,7 @@ then
   #   export TERM=xterm-kitty
   # fi
   export PATH="/opt/homebrew/opt/trash-cli/bin:$PATH"
-  export BROWSER="open -a firefox"
+  export BROWSER="open -a Zen"
 fi
 
 export XDG_CONFIG_HOME="$HOME/.config"
