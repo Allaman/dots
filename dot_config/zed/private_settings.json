@@ -7,8 +7,20 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "languages": {
+    "YAML": {
+      "tab_size": 2
+    }
+  },
+  "ui_font_weight": 400.0,
+  "ui_font_family": "MonoLisa Variable",
+  "buffer_font_family": "MonoLisa Variable",
+  "edit_predictions": {
+    "allow_data_collection": "no"
+  },
   "terminal": {
-    "font_family": "MonoLisa Variable"
+    "font_size": 15.0,
+    "font_family": "ZedMono Nerd Font Mono"
   },
   "outline_panel": {
     "dock": "left"
@@ -46,44 +58,44 @@
   },
   "use_smartcase_search": true,
   "inlay_hints": {
-    "enabled": true,
+    "enabled": true
   },
   "collaboration_panel": {
     "dock": "left",
-    "button": false,
+    "button": false
   },
   "toolbar": {
-    "agent_review": true,
+    "agent_review": true
   },
   "gutter": {
-    "line_numbers": false,
+    "line_numbers": false
   },
   "auto_signature_help": true,
-  "restore_on_startup": "last_session",
+  "restore_on_startup": "launchpad",
   "agent": {
     "dock": "right",
     "model_parameters": [],
-    "enable_feedback": false,
+    "enable_feedback": false
   },
   "disable_ai": true,
   "telemetry": {
     "metrics": false,
-    "diagnostics": false,
+    "diagnostics": false
   },
-  "ui_font_size": 16,
+  "ui_font_size": 15.0,
   "buffer_font_size": 15.0,
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "One Dark",
+    "dark": "Tokyo Night"
   },
   "lsp": {
     "terraform-ls": {
       "initialization_options": {
         "experimentalFeatures": {
-          "prefillRequiredFields": true,
-        },
-      },
+          "prefillRequiredFields": true
+        }
+      }
     },
     "gopls": {
       "initialization_options": {
@@ -95,9 +107,31 @@
           "constantValues": true,
           "functionTypeParameters": true,
           "parameterNames": true,
-          "rangeVariableTypes": true,
-        },
-      },
+          "rangeVariableTypes": true
+        }
+      }
     },
-  },
+    "yaml-language-server": {
+      "settings": {
+        "yaml": {
+          "schemas": {
+            "http://json.schemastore.org/github-workflow": ".github/workflows/*",
+            "http://json.schemastore.org/github-action": ".github/action.{yml,yaml}",
+            // "https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json": "azure-pipelines*.{yml,yaml}",
+            "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/tasks": "roles/tasks/*.{yml,yaml}",
+            "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook": "*play*.{yml,yaml}",
+            "http://json.schemastore.org/prettierrc": ".prettierrc.{yml,yaml}",
+            "http://json.schemastore.org/kustomization": "kustomization.{yml,yaml}",
+            "http://json.schemastore.org/chart": "Chart.{yml,yaml}",
+            "https://json.schemastore.org/dependabot-v2": ".github/dependabot.{yml,yaml}",
+            "https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json": "*gitlab-ci*.{yml,yaml}",
+            "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json": "*api*.{yml,yaml}",
+            "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json": "*compose*.{yml,yaml}",
+            "https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json": "*flow*.{yml,yaml}",
+            "https://taskfile.dev/schema.json": "Taskfile.{yml,yaml}"
+          }
+        }
+      }
+    }
+  }
 }
