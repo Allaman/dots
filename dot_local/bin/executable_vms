@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  echo "usage: $(basename "$0") <command> [args]"
+  echo "  start               start VM for current directory (clones from debian-base if needed)"
+  echo "  stop <vm>           stop a running VM"
+  echo "  ssh <vm>            SSH into a running VM"
+  echo "  list                list all VMs"
+  echo "  clone <src> <name>  clone a VM"
+  echo "  delete <vm>         delete a VM"
+  exit 1
+}
+
+[[ $# -lt 1 ]] && usage
+CMD=$1
+shift
+
+current_vm() {
+  echo "$(basename "$(dirname "$PWD")")_$(basename "$PWD")"
+}
+
+vm_exists() {
+  tart list 2>/dev/null | grep -qw "$1"
+}
+
+is_running() {
+  tart list 2>/dev/null | grep -w "$1" | grep -qi "running"
+}
+
+case "$CMD" in
+start)
+  VM=$(current_vm)
+  if ! vm_exists "$VM"; then
+    echo "cloning debian-base as $VM..."
+    tart clone debian-base "$VM"
+  fi
+  if is_running "$VM"; then
+    IP=$(tart ip "$VM" --wait 30)
+    exec ssh -o StrictHostKeyChecking=no admin@"$IP"
+  fi
+  mkdir -p ~/.pi/projects
+  echo "$PWD" >~/.pi/projects/"$VM"
+  nohup tart run --dir=pi:~/.pi/ --dir=project:"$PWD" --no-graphics "$VM" &>/dev/null &
+  echo "started $VM (pid $!)"
+  ;;
+stop)
+  [[ $# -lt 1 ]] && usage
+  tart stop "$1"
+  rm -f ~/.pi/projects/"$1"
+  ;;
+ssh)
+  [[ $# -lt 1 ]] && usage
+  IP=$(tart ip "$1" --wait 30)
+  exec ssh -o StrictHostKeyChecking=no admin@"$IP"
+  ;;
+list)
+  tart list
+  ;;
+clone)
+  [[ $# -lt 2 ]] && usage
+  tart clone "$1" "$2"
+  ;;
+delete)
+  [[ $# -lt 1 ]] && usage
+  tart delete "$1"
+  ;;
+*)
+  usage
+  ;;
+esac
+
+# vim: set filetype=sh :
