@@ -4,6 +4,7 @@ export GOPATH=$HOME/.local/share/go
 export GOBIN=$HOME/.local/share/go/bin
 export PATH=$PATH:$GOBIN
 [ -d $HOME/.cargo/bin ] && export PATH=$PATH:~/.cargo/bin
+[ -d /opt/homebrew/opt/libpq/bin ] && export PATH=$PATH:/opt/homebrew/opt/libpq/bin
 
 [ -d "/Applications/Sublime Text.app/Contents/SharedSupport/bin" ] && export PATH="$PATH:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
 [ -d "/Applications/Sublime Merge.app/Contents/SharedSupport/bin" ] && export PATH="$PATH:/Applications/Sublime Merge.app/Contents/SharedSupport/bin"
