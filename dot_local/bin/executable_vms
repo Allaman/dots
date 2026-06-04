@@ -3,12 +3,13 @@ set -euo pipefail
 
 usage() {
   echo "usage: $(basename "$0") <command> [args]"
-  echo "  start               start VM for current directory (clones from debian-base if needed)"
+  echo "  start               start VM for current directory and SSH in (clones from debian-base if needed)"
   echo "  stop <vm>           stop a running VM"
   echo "  ssh <vm>            SSH into a running VM"
   echo "  list                list all VMs"
   echo "  clone <src> <name>  clone a VM"
   echo "  delete <vm>         delete a VM"
+  echo "  destroy <vm>        stop and delete a VM"
   exit 1
 }
 
@@ -35,14 +36,14 @@ start)
     echo "cloning debian-base as $VM..."
     tart clone debian-base "$VM"
   fi
-  if is_running "$VM"; then
-    IP=$(tart ip "$VM" --wait 30)
-    exec ssh -o StrictHostKeyChecking=no admin@"$IP"
+  if ! is_running "$VM"; then
+    mkdir -p ~/.pi/projects
+    echo "$PWD" >~/.pi/projects/"$VM"
+    nohup tart run --dir=pi:~/.pi/ --dir=project:"$PWD" --no-graphics "$VM" &>/dev/null &
+    echo "started $VM, waiting for SSH..."
   fi
-  mkdir -p ~/.pi/projects
-  echo "$PWD" >~/.pi/projects/"$VM"
-  nohup tart run --dir=pi:~/.pi/ --dir=project:"$PWD" --no-graphics "$VM" &>/dev/null &
-  echo "started $VM (pid $!)"
+  IP=$(tart ip "$VM" --wait 60)
+  exec ssh -o StrictHostKeyChecking=no admin@"$IP"
   ;;
 stop)
   [[ $# -lt 1 ]] && usage
@@ -51,6 +52,10 @@ stop)
   ;;
 ssh)
   [[ $# -lt 1 ]] && usage
+  if ! is_running "$1"; then
+    echo "error: VM '$1' is not running" >&2
+    exit 1
+  fi
   IP=$(tart ip "$1" --wait 30)
   exec ssh -o StrictHostKeyChecking=no admin@"$IP"
   ;;
@@ -63,6 +68,16 @@ clone)
   ;;
 delete)
   [[ $# -lt 1 ]] && usage
+  if is_running "$1"; then
+    echo "error: VM '$1' is running; stop it first or use 'destroy'" >&2
+    exit 1
+  fi
+  tart delete "$1"
+  ;;
+destroy)
+  [[ $# -lt 1 ]] && usage
+  if is_running "$1"; then tart stop "$1"; fi
+  rm -f ~/.pi/projects/"$1"
   tart delete "$1"
   ;;
 *)
