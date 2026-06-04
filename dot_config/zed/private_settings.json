@@ -7,6 +7,80 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "vim_mode": true,
+  "vim": {
+    "use_smartcase_find": true
+  },
+  "agent_servers": {
+    "codex-acp": {
+      "type": "registry"
+    }
+  },
+  "language_models": {
+    "openai_compatible": {
+      "llama-cpp": {
+        "api_url": "http://fwd:8080/v1",
+        "available_models": [
+          {
+            "name": "qwen3-coder",
+            "display_name": "Qwen3 Coder",
+            "max_tokens": 262144,
+            "max_output_tokens": 32768,
+            "max_completion_tokens": 262144,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": true,
+              "prompt_cache_key": false,
+              "chat_completions": true
+            }
+          },
+          {
+            "name": "qwen3.6-35b",
+            "display_name": "Qwen3.6 35B",
+            "max_tokens": 131072,
+            "max_output_tokens": 32768,
+            "max_completion_tokens": 32768,
+            "capabilities": {
+              "tools": true,
+              "images": true,
+              "parallel_tool_calls": true,
+              "prompt_cache_key": false,
+              "chat_completions": true
+            }
+          },
+          {
+            "name": "qwen3.6-27b",
+            "display_name": "Qwen3.6 27B",
+            "max_tokens": 131072,
+            "max_output_tokens": 32768,
+            "max_completion_tokens": 32768,
+            "capabilities": {
+              "tools": true,
+              "images": true,
+              "parallel_tool_calls": true,
+              "prompt_cache_key": false,
+              "chat_completions": true
+            }
+          },
+          {
+            "name": "gpt-oss-120b",
+            "display_name": "GPT-OSS 120B",
+            "max_tokens": 32768,
+            "max_output_tokens": 8192,
+            "max_completion_tokens": 32768,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": true,
+              "prompt_cache_key": false,
+              "chat_completions": true
+            }
+          }
+        ]
+      }
+    }
+  },
   "languages": {
     "YAML": {
       "tab_size": 2
@@ -16,11 +90,15 @@
   "ui_font_family": "MonoLisa Variable",
   "buffer_font_family": "MonoLisa Variable",
   "edit_predictions": {
+    "open_ai_compatible_api": {
+      "model": "",
+      "api_url": "http://fwd:8080/v1"
+    },
     "allow_data_collection": "no"
   },
   "terminal": {
-    "font_size": 15.0,
-    "font_family": "ZedMono Nerd Font Mono"
+    "font_size": 14.0,
+    "font_family": "ZedMono Nerd Font Propo"
   },
   "outline_panel": {
     "dock": "left"
@@ -77,7 +155,7 @@
     "model_parameters": [],
     "enable_feedback": false
   },
-  "disable_ai": true,
+  "disable_ai": false,
   "telemetry": {
     "metrics": false,
     "diagnostics": false
