@@ -202,6 +202,7 @@ which trash > /dev/null && alias rm='trash' # real use with \rm file
 alias lf='yazi' # habits ...
 alias bm='bm --path $HOME/data/bookmarks.sqlite'
 [ -f /Applications/Docker.app/Contents/Resources/bin/docker ] && export PATH=$PATH:/Applications/Docker.app/Contents/Resources/bin
+alias comp='bcompare'
 
 # Kubernetes
 which kubectx > /dev/null && alias kx='kubectx'
