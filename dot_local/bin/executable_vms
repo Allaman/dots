@@ -4,12 +4,12 @@ set -euo pipefail
 usage() {
   echo "usage: $(basename "$0") <command> [args]"
   echo "  start               start VM for current directory and SSH in (clones from debian-base if needed)"
-  echo "  stop <vm>           stop a running VM"
-  echo "  ssh <vm>            SSH into a running VM"
+  echo "  stop [vm...]        stop running VMs (fzf if no args)"
+  echo "  ssh [vm...]         SSH into running VMs (fzf if no args)"
   echo "  list                list all VMs"
   echo "  clone <src> <name>  clone a VM"
-  echo "  delete <vm>         delete a VM"
-  echo "  destroy <vm>        stop and delete a VM"
+  echo "  delete [vm...]      delete VMs (fzf if no args)"
+  echo "  destroy [vm...]     stop and delete VMs (fzf if no args)"
   exit 1
 }
 
@@ -21,19 +21,42 @@ current_vm() {
   echo "$(basename "$(dirname "$PWD")")_$(basename "$PWD")"
 }
 
+fzf_select_vms() {
+  local prompt="$1"
+  local mode="${2:-running}"
+
+  local items
+  case "$mode" in
+  running)
+    items=$(tart list 2>/dev/null | awk 'NR>1 && /running/ {print $2}')
+    ;;
+  all)
+    items=$(tart list 2>/dev/null | awk 'NR>1 {print $2}')
+    ;;
+  esac
+
+  if [[ -z "$items" ]]; then
+    echo "error: no VMs found" >&2
+    return 1
+  fi
+
+  echo "$items" | fzf --height=40% --prompt="$prompt" --multi --cycle --ansi 2>/dev/null
+}
+
 wait_for_ssh() {
   local vm_name="$1"
   local ip="$2"
   local max_attempts="${3:-30}"
   local timeout_msg="${4:-SSH not ready}"
-  
+
   if [[ -z "$ip" ]]; then
     echo "error: no IP address assigned to $vm_name" >&2
     return 1
   fi
-  
+
   echo "waiting for SSH on $ip..."
   local attempt=0
+  # First, wait for port 22 to open (TCP listener exists)
   until nc -z "$ip" 22 2>/dev/null; do
     attempt=$((attempt + 1))
     if [[ $attempt -ge $max_attempts ]]; then
@@ -42,7 +65,19 @@ wait_for_ssh() {
     fi
     sleep 1
   done
-  
+
+  # Port is open, but SSH service might still be initializing.
+  # Try actual SSH connection with a short timeout to verify it's ready.
+  attempt=0
+  while ! ssh -o BatchMode=yes -o ConnectTimeout=2 -o PasswordAuthentication=no admin@"$ip" exit >/dev/null 2>&1; do
+    attempt=$((attempt + 1))
+    if [[ $attempt -ge 5 ]]; then
+      echo "error: SSH connection failed after port 22 opened. $timeout_msg on $ip" >&2
+      return 1
+    fi
+    sleep 1
+  done
+
   if [[ "${VERBOSE:-0}" == "1" ]] || [[ "$CMD" == "start" ]]; then
     echo "SSH available at $ip"
   fi
@@ -70,27 +105,47 @@ start)
     nohup tart run --dir=pi:~/.pi/ --dir=project:"$PWD" --no-graphics "$VM" &>/dev/null &
     echo "started $VM, waiting for SSH..."
   fi
-  IP=$(tart ip "$VM" --wait 60) || { echo "error: failed to get IP for $VM" >&2; exit 1; }
+  IP=$(tart ip "$VM" --wait 60) || {
+    echo "error: failed to get IP for $VM" >&2
+    exit 1
+  }
   if ! wait_for_ssh "$VM" "$IP" 30 "SSH not ready after VM boot"; then
-    echo "tip: check if the VM booted correctly with 'tart console $VM'" >&2
     exit 1
   fi
   exec ssh -o StrictHostKeyChecking=no admin@"$IP"
   ;;
 stop)
-  [[ $# -lt 1 ]] && usage
-  tart stop "$1"
-  rm -f ~/.pi/projects/"$1"
+  if [[ $# -eq 0 ]]; then
+    VM=$(fzf_select_vms "Stop VMs>" running) || exit 1
+    [[ -z "$VM" ]] && {
+      echo "No VM selected" >&2
+      exit 1
+    }
+  else
+    VM="$1"
+  fi
+  tart stop "$VM"
+  rm -f ~/.pi/projects/"$VM"
   ;;
 ssh)
-  [[ $# -lt 1 ]] && usage
-  if ! is_running "$1"; then
-    echo "error: VM '$1' is not running" >&2
+  if [[ $# -eq 0 ]]; then
+    VM=$(fzf_select_vms "SSH to>" running) || exit 1
+    [[ -z "$VM" ]] && {
+      echo "No VM selected" >&2
+      exit 1
+    }
+  else
+    VM="$1"
+  fi
+  if ! is_running "$VM"; then
+    echo "error: VM '$VM' is not running" >&2
     exit 1
   fi
-  IP=$(tart ip "$1" --wait 30) || { echo "error: failed to get IP for $1" >&2; exit 1; }
-  if ! wait_for_ssh "$1" "$IP" 10 "SSH not responding"; then
-    echo "tip: check if the VM is responsive with 'tart console $1'" >&2
+  IP=$(tart ip "$VM" --wait 30) || {
+    echo "error: failed to get IP for $VM" >&2
+    exit 1
+  }
+  if ! wait_for_ssh "$VM" "$IP" 10 "SSH not responding"; then
     exit 1
   fi
   exec ssh -o StrictHostKeyChecking=no admin@"$IP"
@@ -103,18 +158,34 @@ clone)
   tart clone "$1" "$2"
   ;;
 delete)
-  [[ $# -lt 1 ]] && usage
-  if is_running "$1"; then
-    echo "error: VM '$1' is running; stop it first or use 'destroy'" >&2
+  if [[ $# -eq 0 ]]; then
+    VM=$(fzf_select_vms "Delete VMs>" all) || exit 1
+    [[ -z "$VM" ]] && {
+      echo "No VM selected" >&2
+      exit 1
+    }
+  else
+    VM="$1"
+  fi
+  if is_running "$VM"; then
+    echo "error: VM '$VM' is running; stop it first or use 'destroy'" >&2
     exit 1
   fi
-  tart delete "$1"
+  tart delete "$VM"
   ;;
 destroy)
-  [[ $# -lt 1 ]] && usage
-  if is_running "$1"; then tart stop "$1"; fi
-  rm -f ~/.pi/projects/"$1"
-  tart delete "$1"
+  if [[ $# -eq 0 ]]; then
+    VM=$(fzf_select_vms "Destroy VMs>" running) || exit 1
+    [[ -z "$VM" ]] && {
+      echo "No VM selected" >&2
+      exit 1
+    }
+  else
+    VM="$1"
+  fi
+  if is_running "$VM"; then tart stop "$VM"; fi
+  rm -f ~/.pi/projects/"$VM"
+  tart delete "$VM"
   ;;
 *)
   usage
