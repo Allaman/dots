@@ -43,6 +43,7 @@ start)
     echo "started $VM, waiting for SSH..."
   fi
   IP=$(tart ip "$VM" --wait 60)
+  until nc -z "$IP" 22 2>/dev/null; do sleep 1; done
   exec ssh -o StrictHostKeyChecking=no admin@"$IP"
   ;;
 stop)
