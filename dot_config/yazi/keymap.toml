@@ -28,7 +28,7 @@ run = "plugin arrow 1"
 [[mgr.prepend_keymap]]
 on = ["d", "d"]
 run = ['''
-    shell --confirm 'trash-put "$@"'
+    shell --confirm 'trash "$@"'
 ''']
 desc = "Move the files to the trash"
 
