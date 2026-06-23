@@ -56,23 +56,10 @@ wait_for_ssh() {
 
   echo "waiting for SSH on $ip..."
   local attempt=0
-  # First, wait for port 22 to open (TCP listener exists)
   until nc -z "$ip" 22 2>/dev/null; do
     attempt=$((attempt + 1))
     if [[ $attempt -ge $max_attempts ]]; then
       echo "error: connection timeout after ${max_attempts}s. $timeout_msg on $ip" >&2
-      return 1
-    fi
-    sleep 1
-  done
-
-  # Port is open, but SSH service might still be initializing.
-  # Try actual SSH connection with a short timeout to verify it's ready.
-  attempt=0
-  while ! ssh -o BatchMode=yes -o ConnectTimeout=2 -o PasswordAuthentication=no admin@"$ip" exit >/dev/null 2>&1; do
-    attempt=$((attempt + 1))
-    if [[ $attempt -ge 5 ]]; then
-      echo "error: SSH connection failed after port 22 opened. $timeout_msg on $ip" >&2
       return 1
     fi
     sleep 1
@@ -112,7 +99,7 @@ start)
   if ! wait_for_ssh "$VM" "$IP" 30 "SSH not ready after VM boot"; then
     exit 1
   fi
-  exec ssh -o StrictHostKeyChecking=no admin@"$IP"
+  exec ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null admin@"$IP"
   ;;
 stop)
   if [[ $# -eq 0 ]]; then
@@ -148,7 +135,7 @@ ssh)
   if ! wait_for_ssh "$VM" "$IP" 10 "SSH not responding"; then
     exit 1
   fi
-  exec ssh -o StrictHostKeyChecking=no admin@"$IP"
+  exec ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null admin@"$IP"
   ;;
 list)
   tart list
