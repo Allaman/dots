@@ -50,9 +50,23 @@
             }
           },
           {
-            "name": "qwen3.6-27b",
-            "display_name": "Qwen3.6 27B",
-            "max_tokens": 131072,
+            "name": "qwen3.6-27b-q8",
+            "display_name": "Qwen3.6 27B Q8",
+            "max_tokens": 141072,
+            "max_output_tokens": 32768,
+            "max_completion_tokens": 32768,
+            "capabilities": {
+              "tools": true,
+              "images": true,
+              "parallel_tool_calls": true,
+              "prompt_cache_key": false,
+              "chat_completions": true
+            }
+          },
+          {
+            "name": "qwen3.6-27b-q4",
+            "display_name": "Qwen3.6 27B Q4",
+            "max_tokens": 141072,
             "max_output_tokens": 32768,
             "max_completion_tokens": 32768,
             "capabilities": {
