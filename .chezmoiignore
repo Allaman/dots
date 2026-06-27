@@ -20,6 +20,7 @@ styles
 .config/karabiner/karabiner.json
 .lazy-lock.json
 .config/zed/settings.json
+.config/zennotes/config.toml
 
 # only on darwin systems
 {{- if ne .chezmoi.os "darwin" }}
