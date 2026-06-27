@@ -1,6 +1,9 @@
 [mgr]
+linemode = "size_and_mtime" # defined in init.lua
+ratio = [1, 5, 2]
+sort_by = "mtime"
 sort_dir_first = true
-linemode = "size"
+sort_reverse = true
 
 [[plugin.prepend_fetchers]]
 group = "git"
