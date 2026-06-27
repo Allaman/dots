@@ -36,7 +36,7 @@
             }
           },
           {
-            "name": "qwen3.6-35b",
+            "name": "qwen3.6-35b-q8",
             "display_name": "Qwen3.6 35B",
             "max_tokens": 131072,
             "max_output_tokens": 32768,
@@ -96,6 +96,9 @@
     }
   },
   "languages": {
+    "comment": {
+      "line_ending": "enforce_lf"
+    },
     "YAML": {
       "tab_size": 2
     }
@@ -165,6 +168,12 @@
   "auto_signature_help": true,
   "restore_on_startup": "launchpad",
   "agent": {
+    "default_model": {
+      "effort": "medium",
+      "provider": "openai-subscribed",
+      "model": "gpt-5.5",
+      "enable_thinking": true
+    },
     "dock": "right",
     "model_parameters": [],
     "enable_feedback": false
