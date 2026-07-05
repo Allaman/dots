@@ -72,7 +72,7 @@ final_space = true
   overflow = 'hidden'
 
   [[blocks.segments]]
-    template = '{{ if and (gt .SHLVL 2) .Env.TMUX }}{{ .SHLVL }}{{ else if and (gt .SHLVL 1) (not .Env.TMUX) }}{{ .SHLVL }}{{ end }}'
+    template = '{{ if and (gt .SHLVL 2) (or .Env.TMUX .Env.HERDR_ENV) }}{{ .SHLVL }}{{ else if and (gt .SHLVL 1) (not (or .Env.TMUX .Env.HERDR_ENV)) }}{{ .SHLVL }}{{ end }}'
     foreground = 'magenta'
     type = 'text'
     style = 'plain'
