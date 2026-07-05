@@ -1,0 +1,64 @@
+onboarding = false
+[ui]
+prompt_new_tab_name = false
+
+[ui.sound]
+enabled = false
+
+[theme]
+name = "tokyo-night"
+auto_switch = false
+
+[keys]
+prefix = "ctrl+a"
+next_tab = "alt+n"
+previous_tab = "alt+p"
+copy_mode = "prefix+enter"
+navigate_workspace_up = "k"
+navigate_workspace_down = "j"
+# focus_pane_left = "ctrl+h"
+# focus_pane_down = "ctrl+j"
+# focus_pane_up = "ctrl+k"
+# focus_pane_right = "ctrl+l"
+split_horizontal = "prefix+s"
+previous_workspace = "prefix+shift+h"
+next_workspace = "prefix+shift+right"
+
+[[keys.command]]
+key = "prefix+f"
+type = "plugin_action"
+command = "herdr-zoxide.browse"
+description = "Browse zoxide directories"
+
+[[keys.command]]
+key = "ctrl+h"
+type = "plugin_action"
+command = "vim-herdr-navigation.left"
+description = "navigate left (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "plugin_action"
+command = "vim-herdr-navigation.down"
+description = "navigate down (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "plugin_action"
+command = "vim-herdr-navigation.up"
+description = "navigate up (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "plugin_action"
+command = "vim-herdr-navigation.right"
+description = "navigate right (vim/herdr)"
+
+[[keys.command]]
+key = "prefix+space"
+type = "plugin_action"
+command = "rmarganti.herdr-pluck.pluck"
+description = "pluck visible token"
+
+[experimental]
+kitty_graphics = true
