@@ -35,6 +35,8 @@ export LEDGER_FILE=${LEDGER_DIR}main.ledger
 
 export EXCLUDE_STRING=.git/*,node_modules/*,target/*,.idea/*,.vscode/*,.terraform/*,.gem/*,.cache,**/cache/*,**go/pkg/*,lib/*,bin/*,include/*
 
+export export HERDR_NAV_PASSTHROUGH_RE='^(fzf|atuin)$'
+
 # fzf
 # WARNING: fd is filtered by ~/.config/fd/ignore!
 export FZF_COMPLETION_TRIGGER=',,'

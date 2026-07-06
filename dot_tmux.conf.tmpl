@@ -36,7 +36,7 @@ message_fg="#f09479"
 default_fg="#80a0ff"
 set -g status-position top # status line at top
 set -g status-style "fg=$default_fg, bg=default" # status line
-set -g mode-style "fg=$default_fg, bg=default" # choose-session
+set -g mode-style "fg=#1c1c1c, bg=#80a0ff" # copy mode selection + choose-session
 set -g status-left "  " # left status
 set -g status-right "#S " # right status
 setw -g window-status-format " #I:#W" # inactive window
@@ -46,22 +46,21 @@ set -g pane-active-border-style "fg=$message_fg" # pane border
 set -g pane-border-style "fg=$default_fg" # inactive pane border
 
 # copy mode
-bind Enter copy-mode # enter copy mode
-run -b 'tmux bind -t vi-copy Escape cancel 2> /dev/null || true'
-run -b 'tmux bind -T copy-mode-vi Escape send -X cancel 2> /dev/null || true'
-run -b 'tmux bind -t vi-copy v begin-selection 2> /dev/null || true'
-run -b 'tmux bind -T copy-mode-vi v send -X begin-selection 2> /dev/null || true'
-run -b 'tmux bind -t vi-copy C-v rectangle-toggle 2> /dev/null || true'
-run -b 'tmux bind -T copy-mode-vi C-v send -X rectangle-toggle 2> /dev/null || true'
-run -b 'tmux bind -t vi-copy y copy-selection 2> /dev/null || true'
-run -b 'tmux bind -t vi-copy H start-of-line 2> /dev/null || true'
-run -b 'tmux bind -T copy-mode-vi H send -X start-of-line 2> /dev/null || true'
-run -b 'tmux bind -t vi-copy L end-of-line 2> /dev/null || true'
-run -b 'tmux bind -T copy-mode-vi L send -X end-of-line 2> /dev/null || true'
+set -g set-clipboard on # use OSC 52 (works with Ghostty, Kitty, etc.)
+bind Enter copy-mode
+bind-key -T copy-mode-vi Escape send-keys -X cancel
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+bind-key -T copy-mode-vi H send-keys -X start-of-line
+bind-key -T copy-mode-vi L send-keys -X end-of-line
 # y: copy to system clipboard and exit copy mode
 bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "{{ $copy_cmd }}"
 
-# Scroll 1 lines at a time instead of default 5; don't extend dragged selections.
+# Paste
+bind p paste-buffer
+bind P choose-buffer # choose from buffer history
+
+# Scroll 1 line at a time instead of default 5; don't extend dragged selections.
 bind-key -T copy-mode-vi WheelUpPane {
   select-pane
   send-keys -t'{mouse}' -X clear-selection
@@ -73,16 +72,16 @@ bind-key -T copy-mode-vi WheelDownPane {
   send-keys -t'{mouse}' -X -N 1 scroll-down
 }
 
-# Mouse drag end: copy to clipboard, stay in copy mode (viewport doesn't jump)
-bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-no-clear "{{ $copy_cmd }}"
+# Mouse drag end: copy to clipboard and exit copy mode
+bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "{{ $copy_cmd }}"
 
-# Double-click: select word and copy
-bind-key -n DoubleClick1Pane select-pane \; copy-mode -M \; send-keys -X select-word \; send-keys -X copy-pipe-no-clear "{{ $copy_cmd }}"
-bind-key -T copy-mode-vi DoubleClick1Pane send-keys -X select-word \; send-keys -X copy-pipe-no-clear "{{ $copy_cmd }}"
+# Double-click: select word, copy, exit copy mode
+bind-key -n DoubleClick1Pane select-pane \; copy-mode -M \; send-keys -X select-word \; send-keys -X copy-pipe-and-cancel "{{ $copy_cmd }}"
+bind-key -T copy-mode-vi DoubleClick1Pane send-keys -X select-word \; send-keys -X copy-pipe-and-cancel "{{ $copy_cmd }}"
 
-# Triple-click: select line and copy
-bind-key -n TripleClick1Pane select-pane \; copy-mode -M \; send-keys -X select-line \; send-keys -X copy-pipe-no-clear "{{ $copy_cmd }}"
-bind-key -T copy-mode-vi TripleClick1Pane send-keys -X select-line \; send-keys -X copy-pipe-no-clear "{{ $copy_cmd }}"
+# Triple-click: select line, copy, exit copy mode
+bind-key -n TripleClick1Pane select-pane \; copy-mode -M \; send-keys -X select-line \; send-keys -X copy-pipe-and-cancel "{{ $copy_cmd }}"
+bind-key -T copy-mode-vi TripleClick1Pane send-keys -X select-line \; send-keys -X copy-pipe-and-cancel "{{ $copy_cmd }}"
 
 # Middle-click: paste from system clipboard
 bind-key -n MouseDown2Pane run "{{ $paste_cmd }} | tmux load-buffer - && tmux paste-buffer -p"
