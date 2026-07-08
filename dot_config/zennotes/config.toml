@@ -26,7 +26,7 @@ ripgrep_path = ""  # absolute path to ripgrep; empty = look on $PATH
 fzf_path = "/Users/michael/.fzf/bin/fzf"  # absolute path to fzf; empty = look on $PATH
 
 [editor]
-live_preview = true  # hide markdown syntax on inactive lines
+live_preview = false  # hide markdown syntax on inactive lines
 render_tables = true  # render tables as widgets in live preview; off keeps them as plain text
 markdown_snippets = true  # auto-close markdown delimiters while typing
 hide_builtin_templates = false  # hide the shipped templates from the pickers
@@ -34,6 +34,8 @@ tabs_enabled = true  # enable tab-based editing
 wrap_tabs = false  # wrap the tab strip instead of scrolling it
 font_size = 16  # editor + preview font size (px)
 line_height = 1.7  # line-height multiplier
+scroll_off = 4  # vim scrolloff — lines kept above/below the cursor (0 = off)
+time_format = "12h"  # clock format for the @time macro (12h or 24h)
 preview_max_width = 920  # max reading width for the preview (px)
 editor_max_width = 920  # max width of the editor column (px)
 line_number_mode = "off"  # off | absolute | relative
@@ -43,7 +45,8 @@ preview_smooth_scroll = true  # animate half-page scroll in the preview
 pdf_embed_in_edit_mode = "compact"  # compact | full
 
 [appearance]
-theme_family = "tokyo-night"  # apple | gruvbox | catppuccin | github | solarized | one | nord | tokyo-night | kanagawa | black-metal
+pdf_export_use_theme = false  # true | false — export PDFs using the current theme instead of a clean light print theme
+theme_family = "tokyo-night"  # apple | gruvbox | catppuccin | github | solarized | one | nord | tokyo-night | kanagawa | black-metal | custom
 theme_mode = "dark"  # light | dark | auto
 theme_id = "tokyo-night-storm"  # resolved theme id; normally set automatically from family + mode
 dark_sidebar = true  # tint the sidebar darker than the canvas
@@ -59,6 +62,7 @@ mono_font = "MonoLisaCode"  # code / monospace font; empty = system default
 [view]
 note_sort_order = "none"  # none | manual | updated-desc | updated-asc | created-desc | created-asc | name-asc | name-desc
 group_by_kind = true  # group notes by kind in the list
+view_settings_scope = "global"  # apply note/list view settings globally or per vault (global | vault)
 auto_reveal = false  # auto-expand the sidebar to the active note
 quick_note_date_title = false  # title quick notes by date instead of a timestamp
 quick_note_title_prefix = "Quick Note"  # prefix for new quick-note titles; empty = bare timestamp
@@ -94,6 +98,7 @@ kanban_group_by = "status"  # status | priority | folder
 # "global.modePreview" = "Mod+6"  # Switch to preview mode
 # "global.toggleZenMode" = "Mod+."  # Toggle Zen mode
 # "global.closeActiveTab" = "Mod+W"  # Close active tab
+# "global.reopenClosedTab" = "Shift+Mod+T"  # Reopen closed tab
 # "global.toggleWordWrap" = "Alt+Z"  # Toggle word wrap
 # "global.exportNotePdf" = "Shift+Mod+E"  # Export note as PDF
 # "global.zoomIn" = "Mod+="  # Zoom in
@@ -119,6 +124,7 @@ kanban_group_by = "status"  # status | priority | folder
 # "vim.leaderInsertTemplate" = "i"  # Leader: insert template into note
 # "vim.leaderDailyNote" = "d"  # Leader: today's daily note
 # "vim.leaderWeeklyNote" = "w"  # Leader: this week's note
+# "vim.leaderMonthlyNote" = "m"  # Leader: this month's note
 # "vim.leaderCalendar" = "c"  # Leader: toggle calendar
 # "vim.panePrefix" = "Ctrl+W"  # Pane command prefix
 # "vim.paneFocusLeft" = "h"  # Pane: focus left
@@ -174,3 +180,11 @@ kanban_group_by = "status"  # status | priority | folder
 # Kanban column title overrides, keyed by "<groupBy>:<columnId>".
 # Example: "status:todo" = "To Do"
 [kanban_column_titles]
+
+# Enabled CSS overrides — list the filenames you want active.
+# Example: "focus.css" = "on"
+[overrides]
+
+# Visual color tweaks from Settings → Appearance (token slug = color).
+# Example: "accent" = "#ff3b30"
+[tweaks]
