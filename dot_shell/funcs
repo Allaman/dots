@@ -394,7 +394,7 @@ fzf-git-delete-branch() {
     local branches=()
     while IFS= read -r branch; do
         [[ -n "$branch" ]] && branches+=("$branch")
-    done < <(__fzf-git-branch --local)
+    done <<< "$(__fzf-git-branch --local)"
 
     [[ ${#branches[@]} -eq 0 ]] && return
 
