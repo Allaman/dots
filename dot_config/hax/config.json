@@ -1,0 +1,8 @@
+{
+  "providers": {
+    "llamacpp": {
+      "display_name": "FWD",
+      "base_url": "http://fwd:8080/"
+    }
+  }
+}
