@@ -25,6 +25,7 @@ notify() {
 # Wait for network
 while ! ping -c 1 -W 1 8.8.8.8 &>/dev/null; do
   sleep 5
+  echo waiting for network
 done
 
 SYNC_INTERVAL=3600
