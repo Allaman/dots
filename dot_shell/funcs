@@ -341,6 +341,7 @@ __fzf_default() {
       --preview-window 'right,50%' --preview-border line \
       --bind 'ctrl-f:preview-down,ctrl-b:preview-up' \
       --bind 'ctrl-p:toggle-preview' \
+      --color 'bg+:-1,fg+:-1' \
       --ansi "$@"
 }
 
