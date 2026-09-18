@@ -3,6 +3,8 @@
 # Experimental
 cache = true
 
+# https://github.com/joshmedeski/sesh/pull/391
+git_dir_length = 2
 dir_length = 2
 
 sort_order = ["tmux", "zoxide", "config"]
