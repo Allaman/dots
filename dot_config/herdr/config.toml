@@ -2,6 +2,7 @@ onboarding = false
 [ui]
 prompt_new_tab_name = false
 pane_scrollbars = false
+pane_borders = "always"
 
 [ui.sound]
 enabled = false
@@ -60,6 +61,3 @@ key = "prefix+space"
 type = "plugin_action"
 command = "rmarganti.herdr-pluck.pluck"
 description = "pluck visible token"
-
-[experimental]
-kitty_graphics = true
