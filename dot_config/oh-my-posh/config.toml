@@ -36,7 +36,7 @@ final_space = true
     style = 'plain'
 
   [[blocks.segments]]
-    template = " {{ if not .Segments.Jujutsu }}{{ .UpstreamIcon }}{{ .HEAD }}{{ if .Working.Changed }}  <cyan>{{ .Working.String }}{{ end }}<cyan>{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}<magenta>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}<magenta>{{end}}"
+    template = " {{ if not .Segments.Jujutsu }}{{ .UpstreamIcon }} {{ .HEAD }}{{ if .Working.Changed }}  <cyan>{{ .Working.String }}{{ end }}<cyan>{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}<magenta>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}<magenta>{{end}}"
     foreground = 'grey'
     background = 'transparent'
     type = 'git'
