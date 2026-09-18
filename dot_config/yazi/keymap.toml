@@ -24,13 +24,11 @@ run = "plugin arrow -1"
 on = ["j"]
 run = "plugin arrow 1"
 
-# Use trash-cli to trash file
-[[mgr.prepend_keymap]]
-on = ["d", "d"]
-run = ['''
-    shell --confirm 'trash "$@"'
-''']
-desc = "Move the files to the trash"
+# 
+# [[mgr.prepend_keymap]]
+# on = ["d", "d"]
+# run = ""
+# desc = "Move the files to the trash"
 
 [[mgr.prepend_keymap]]
 on = ["<C-f>"]
