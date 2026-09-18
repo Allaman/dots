@@ -4,3 +4,4 @@
 *.pem
 *.key
 rewrite.sh
+secret.md
