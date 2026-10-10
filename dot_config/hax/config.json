@@ -3,6 +3,10 @@
     "llamacpp": {
       "display_name": "FWD",
       "base_url": "http://fwd:8080/"
+    },
+    "halogen": {
+      "display_name": "HALOGEN",
+      "base_url": "http://fwd:8731/v1"
     }
   }
 }
