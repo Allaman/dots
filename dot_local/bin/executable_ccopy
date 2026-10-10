@@ -3,5 +3,5 @@
 if [[ "$OSTYPE" =~ "darwin"* ]]; then
 	pbcopy
 else
-	xclip
+	xclip -selection clipboard
 fi
