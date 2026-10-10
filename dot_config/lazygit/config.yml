@@ -1,16 +1,30 @@
 ---
 gui:
   showRandomTip: false
-  commandLogSize: 4
+  showCommandLog: false
+  # commandLogSize: 4
+  sidePanels:
+    - [status]
+    - [files, worktrees, submodules]
+    - [commits, reflog]
+    - [branches, remotes, tags]
+  screenMode: half
+  nerdFontsVersion: "3"
 git:
-  pagers:
+  autoFetch: false
+  autoRefresh: false
+  diffRenderers:
     - pater: delta --dark --paging=never
       autoFetch: false
+      type: rawGit
+  disableForcePushing: true
+  log:
+    showGraph: never
 os:
   # Command for editing a file. Should contain "{{filename}}".
   edit: "nvim {{filename}}"
   editAtLine: "nvim {{filename}} -c {{line}}"
   open: "nvim {{filename}}"
-  copyToClipboardCmd: ccopy
+  copyToClipboardCmd: printf "%s" {{text}} | ccopy
   readFromClipboardCmd: cpaste
 notARepository: quit
