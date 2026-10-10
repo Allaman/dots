@@ -12,13 +12,12 @@ bind-key C-a send-prefix
 # Handle modifier keys
 set -g extended-keys on
 set -g extended-keys-format csi-u
-set -as terminal-features ",xterm-ghostty:extkeys"
+set -s terminal-features[10] "xterm-ghostty:extkeys"
 set -g detach-on-destroy off  # don't exit from tmux when closing a session
 
 # Start window/pane numbering at 1
 set -g base-index 1
 set -g pane-base-index 1
-set-window-option -g pane-base-index 1
 
 set -g renumber-windows on # renumber windows when a window is closed
 setw -g automatic-rename on # rename window to reflect current program
@@ -26,18 +25,20 @@ setw -g automatic-rename on # rename window to reflect current program
 set -sg escape-time 0 # No delay for escape key press
 set -sg repeat-time 300 # increase repeat timeout
 
-set -g mouse on # Enable mouse mode
-
 set-option -g focus-events on # Recommended by Neovim
 
 set -g status-keys vi
+setw -g mode-keys vi
 set -g history-limit 100000
 
+set -g theme terminal # keep pre-3.8 colours
 message_fg="#f09479"
 default_fg="#80a0ff"
 set -g status-position top # status line at top
 set -g status-style "fg=$default_fg, bg=default" # status line
-set -g mode-style "fg=#1c1c1c, bg=#80a0ff" # copy mode selection + choose-session
+set -g mode-style "fg=#1c1c1c, bg=#80a0ff" # copy mode selection
+set -g tree-mode-selection-style "fg=#1c1c1c, bg=#80a0ff" # choose-session/choose-tree
+set -g copy-mode-current-line-style "bg=#303030"
 set -g status-left "  " # left status
 set -g status-right "#S " # right status
 setw -g window-status-format " #I:#W" # inactive window
@@ -45,6 +46,7 @@ setw -g window-status-current-format "#[bold,underscore]  #I:#W" # active win
 set -g message-style "fg=$message_fg, bg=default" # message style
 set -g pane-active-border-style "fg=$message_fg" # pane border
 set -g pane-border-style "fg=$default_fg" # inactive pane border
+set -g pane-border-status top-floating # titles on floating panes only
 
 # copy mode
 set -g set-clipboard on # use OSC 52 (works with Ghostty, Kitty, etc.)
@@ -77,27 +79,25 @@ bind-key -T copy-mode-vi WheelDownPane {
 bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "{{ $copy_cmd }}"
 
 # Double-click: select word, copy, exit copy mode
-bind-key -n DoubleClick1Pane select-pane \; copy-mode -M \; send-keys -X select-word \; send-keys -X copy-pipe-and-cancel "{{ $copy_cmd }}"
+bind-key -n DoubleClick1Pane select-pane \; if -F '#{||:#{pane_in_mode},#{mouse_any_flag}}' { send -M } { copy-mode -M ; send-keys -X select-word ; send-keys -X copy-pipe-and-cancel "{{ $copy_cmd }}" }
 bind-key -T copy-mode-vi DoubleClick1Pane send-keys -X select-word \; send-keys -X copy-pipe-and-cancel "{{ $copy_cmd }}"
 
 # Triple-click: select line, copy, exit copy mode
-bind-key -n TripleClick1Pane select-pane \; copy-mode -M \; send-keys -X select-line \; send-keys -X copy-pipe-and-cancel "{{ $copy_cmd }}"
+bind-key -n TripleClick1Pane select-pane \; if -F '#{||:#{pane_in_mode},#{mouse_any_flag}}' { send -M } { copy-mode -M ; send-keys -X select-line ; send-keys -X copy-pipe-and-cancel "{{ $copy_cmd }}" }
 bind-key -T copy-mode-vi TripleClick1Pane send-keys -X select-line \; send-keys -X copy-pipe-and-cancel "{{ $copy_cmd }}"
 
 # Middle-click: paste from system clipboard
-bind-key -n MouseDown2Pane run "{{ $paste_cmd }} | tmux load-buffer - && tmux paste-buffer -p"
+bind-key -n MouseDown2Pane if -F '#{||:#{pane_in_mode},#{mouse_any_flag}}' { send -M } { run "{{ $paste_cmd }} | tmux load-buffer - && tmux paste-buffer -p" }
 
 # skip "kill-pane 1? (y/n)" prompt
 bind-key x kill-pane
 
 bind C-c new-session # create new session
 
-unbind-key t
-bind -r t choose-session # chosse session
+bind t choose-session # chosse session
 
-unbind-key f
 bind-key "f" run-shell "sesh connect \"$(
-  sesh list --icons | fzf-tmux -p 80%,70% \
+  sesh list --icons | fzf-tmux -p 90%,90% \
     --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
     --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
     --bind 'tab:up,btab:down' \
@@ -110,7 +110,6 @@ bind-key "f" run-shell "sesh connect \"$(
     --preview-window 'right:55%' \
     --preview 'sesh preview {}'
 )\""
-unbind-key L
 bind-key Tab run-shell "sesh last"
 
 # Split window while keeping the path
@@ -146,7 +145,7 @@ bind < swap-pane -U
 bind -n M-p previous-window
 bind -n M-n next-window
 
-bind-key G run-shell 'tmux_popup gitui'
+bind-key G new-pane -O -C -x90% -y90% -X5% -Y5% -c "#{pane_current_path}" lazygit
 
 # Reload tmux config
 bind r source-file ~/.tmux.conf \; display '~/.tmux.conf sourced'
@@ -157,7 +156,6 @@ set -g @fingers-keyboard-layout "qwertz"
 
 # List of plugins
 set -g @plugin 'Morantron/tmux-fingers'
-set -g @plugin 'omerxx/tmux-floax'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
