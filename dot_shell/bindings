@@ -7,6 +7,8 @@ zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey '^P' history-beginning-search-backward-end           # CTRL+p
 bindkey '^N' history-beginning-search-forward-end            # CTRL+n
+bindkey '^[[5~' history-beginning-search-backward-end        # PageUp
+bindkey '^[[6~' history-beginning-search-forward-end         # PageDown
 
 # Use autosuggestion
 bindkey '^ ' autosuggest-accept
