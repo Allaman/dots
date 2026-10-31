@@ -1,13 +1,12 @@
 title = " "
 theme = "tokyonight-night"
 macos-titlebar-style = hidden
-copy-on-select = true
+copy-on-select = both
 adjust-cell-height = 15%
 font-family = "MonoLisaCode"
 font-size = 14
 mouse-hide-while-typing = true
 shell-integration = "zsh"
-scrollback-limit = 100000
 window-save-state = never
 maximize = false
 quit-after-last-window-closed = true
