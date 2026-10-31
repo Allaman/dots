@@ -1,0 +1,10 @@
+{
+  "zoom": 1,
+  "sounds": {
+    "enabled": false
+  },
+  "minimum_contrast": 1,
+  "theme": "tokyo-night",
+  "font": "MonoLisaCode",
+  "ui_font": "MonoLisaText"
+}
